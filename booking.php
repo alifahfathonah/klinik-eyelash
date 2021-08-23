@@ -136,7 +136,7 @@ include 'views/header.php';
                         </div>    
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Tanggal Booking</label>
+                                <label>Tanggal Pasang</label>
                                 <!-- <?php 
                                     $date = date("Y-m-d");
                                     $tgl_booking = date('d F Y', strtotime($date));
