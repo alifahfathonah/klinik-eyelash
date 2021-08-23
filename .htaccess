@@ -25,5 +25,5 @@
 
     # DirectoryIndex home.php
 
-RewriteCond %{HTTP_HOST} ^klinik-eyelash\.sites.id$
+RewriteCond %{HTTP_HOST} ^kuenastar\.sites.id$
 
