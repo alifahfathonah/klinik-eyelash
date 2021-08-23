@@ -63,6 +63,11 @@ if(isset($_GET['search'])){
 }
 
 ?>
+<style>
+    .dt-responsive {
+        overflow: hidden;
+    }
+</style>
 <body class="">
 
     <?php  
@@ -164,7 +169,7 @@ if(isset($_GET['search'])){
                 <div class="col-lg-3 col-md-3">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Buah Batuuu</h5>
+                            <h5>Buah Batu 2</h5>
                         </div>
                         <div class="card-body">
                             <div class="row align-items-center">
@@ -739,7 +744,7 @@ if(isset($_GET['search'])){
             <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Buah Batu</h5>
+                        <h5>Buah Batu 3</h5>
                     </div>
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -1556,7 +1561,7 @@ if(isset($_GET['search'])){
             <div class="col-lg-3 col-md-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Buah Batu</h5>
+                        <h5>Buah Batu 1</h5>
                     </div>
                     <div class="card-body">
                         <div class="row align-items-center">
