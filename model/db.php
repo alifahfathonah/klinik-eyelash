@@ -1,6 +1,6 @@
 <?php
 
-$host   = 'klinik-eyelash.sites.id:3306';
+$host   = 'localhost';
 $user   = 'sitesidadmin_klinik';
 $pass   = 'Admin1234@yx##';
 $db     = 'sitesidadmin_klinik';
