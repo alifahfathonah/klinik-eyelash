@@ -528,6 +528,26 @@ $(document).ready(function() {
 </script>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+      $('#start_jam').change(function(){
+          var data_start_jam = document.getElementById("start_jam").value;
+
+          $.ajax({
+              type: 'POST',
+              url: 'functions/hitung-jam.php',
+              data: {
+                'start_jam': data_start_jam,
+              },
+
+              success: function(response){
+                  $('#jam_ends').html(response);
+              }
+          });
+      })
+  });
+</script>
+
+<script type="text/javascript">
 $(document).ready(function() {
     $('#produk').keyup(function(){
     var jam = $('#produk').val();

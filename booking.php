@@ -154,13 +154,14 @@ include 'views/header.php';
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Jam</label>
-                                <input type="text" name="start_jam" class="form-control hour" id="start_jam">
+                                <input type="time" name="start_jam" class="form-control hour" id="start_jam">
                             </div>
                         </div>    
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Sampai Jam</label>
-                                <input type="text" name="ends_jam" class="form-control hour" id="ends_jam">
+                                <!-- <input type="time" name="ends_jam" class="form-control hour" id="ends_jam"> -->
+                                <div id="jam_ends"></div>
                             </div>
                         </div>
                         <div class="col">
@@ -294,13 +295,13 @@ include 'views/header.php';
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Jam</label>
-                                <input type="text" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam">
+                                <input type="time" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam">
                             </div>
                         </div>    
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Sampai Jam</label>
-                                <input type="text" name="ends_jam" class="form-control hour" id="ends_jam" placeholder="jam">
+                                <input type="time" name="ends_jam" class="form-control hour" id="ends_jam" placeholder="jam">
                             </div>
                         </div>
                         <div class="col-sm-4">

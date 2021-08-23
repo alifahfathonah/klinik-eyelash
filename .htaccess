@@ -5,8 +5,8 @@
 
     RewriteEngine on
     RewriteRule ^sitemap.xml$  /sitemap.php [L]
-	RewriteCond %{HTTPS} !=on [NC]
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+	# RewriteCond %{HTTPS} !=on [NC]
+	# RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
 </IfModule>
 
 # Redirect Trailing Slashes If Not A Folder...
