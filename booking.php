@@ -131,7 +131,7 @@ include 'views/header.php';
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Tanggal Lahir</label>
-                                <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir" required="">
+                                <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir">
                             </div>
                         </div>    
                         <div class="col-sm-6">
