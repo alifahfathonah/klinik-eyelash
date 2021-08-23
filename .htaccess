@@ -1,14 +1,3 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
-
-    RewriteEngine on
-    RewriteRule ^sitemap.xml$  /sitemap.php [L]
-	RewriteCond %{HTTPS} !=on [NC]
-	RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
-</IfModule>
-
 # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
@@ -24,6 +13,3 @@
     RewriteRule ^ index.php [L]
 
     # DirectoryIndex home.php
-
-RewriteCond %{HTTP_HOST} ^klinik-eyelash.sites.id$
-
