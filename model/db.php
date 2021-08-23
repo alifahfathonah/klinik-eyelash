@@ -1,9 +1,10 @@
 <?php
 
-$host   = 'localhost';
+$host   = 'onyx.cloudns.io';
 $user   = 'sitesidadmin_klinik';
 $pass   = 'Admin1234@yx##';
 $db     = 'sitesidadmin_klinik';
+
 // Admin1234@yx##
 // db : sisiranb_batununggal
 
