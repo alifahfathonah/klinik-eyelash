@@ -509,11 +509,16 @@ $(document).ready(function() {
   $(document).ready(function(){
       $('#produk').change(function(){
           var id_produk = $(this).val();
+          var data_start = document.getElementById("start").value;
 
           $.ajax({
               type: 'POST',
               url: 'functions/cari-retouch.php',
-              data: 'id_produk='+id_produk,
+              data: {
+                'id_produk': id_produk,
+                'start': data_start
+              },
+
               success: function(response){
                   $('#tgl_retouch').html(response);
               }

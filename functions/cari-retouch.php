@@ -4,12 +4,13 @@
 include ("../model/db.php");
 
 $id_produk = $_POST['id_produk'];
+$start = $_POST['start'];
 
 $query = mysqli_query($link,"SELECT * FROM tbl_produk WHERE id_produk = $id_produk ");
 $hasil = mysqli_fetch_array($query);
 
-$booking = date("Y-m-d");
-$tujuh_hari = mktime(0,0,0,date("n"),date("j")+$hasil['waktu_pemasangan'],date("Y"));
+$date = strtotime($start);
+$tujuh_hari = strtotime("+7 day", $date);
 $retouch = date("Y-m-d", $tujuh_hari);
 // $retouch = date('d F Y', strtotime($kembali));
 
