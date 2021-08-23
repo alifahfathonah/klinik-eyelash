@@ -147,7 +147,7 @@ include 'views/header.php';
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Tgl Retouch</label>
-                                <div id="tgl_retouch"></div>
+                                <input type="date" name="tgl_retouch" class="form-control" id="start" placeholder="Title">
                             </select>
                             </div>
                         </div>
