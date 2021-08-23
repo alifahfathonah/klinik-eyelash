@@ -138,10 +138,10 @@ include 'views/header.php';
                             <div class="form-group">
                                 <label>Tanggal Pasang</label>
                                 <!-- <?php 
-                                    $date = date("Y-m-d");
-                                    $tgl_booking = date('d F Y', strtotime($date));
+                                    // $date = date("Y-m-d");
+                                    // $tgl_booking = date('d F Y', strtotime($date));
                                 ?>    -->
-                                <input type="date" name="start" class="form-control" id="start" placeholder="Title" required="">
+                                <input type="date" name="start" class="form-control" id="start" placeholder="Title" disabled="">
                             </div>
                         </div>    
                         <div class="col-sm-6">
