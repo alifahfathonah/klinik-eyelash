@@ -181,9 +181,12 @@ include 'views/header.php';
                                 <select name="id_cabang" class="form-control" required="">
                                   <option value=""></option>
                                     <?php  
-                                    $query1 = mysqli_query($link,"SELECT a.* FROM tbl_cabang a ");
-                                    foreach ($query1 as $d ) { ?>
-                                        <option value="<?php echo $d['id_cabang'] ?>">
+                                    $cabang = ucwords($_GET['cabang']);
+                                    $query1 = mysqli_query($link,"SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
+                                    foreach ($query1 as $d ) { 
+                                    ?>
+                                    
+                                        <option value="<?php echo $d['id_cabang'] ?>" <?php if($d['nama_cabang'] == "$cabang"){ echo "selected";}?>>
                                             <?php echo $d['nama_cabang'] ?></option>
                                     <?php } ?>
                                 </select>
