@@ -852,7 +852,7 @@ if (isset($_GET['search'])) {
                                                                                         </div>
                                                                                         <div class="col-sm-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Tanggal Pasang</label>
+                                                                                                <label>Tanggal Pasang </label>
                                                                                                 <?php if (isset($cari)) { ?>
                                                                                                     <input type="date" name="start" class="form-control" id="start" placeholder="Title" required="" value="<?php echo $cari ?>">
                                                                                                 <?php } else { ?>
