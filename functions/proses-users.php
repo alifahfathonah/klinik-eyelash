@@ -8,6 +8,8 @@ session_start();
 if(isset($_POST['submit']) ){
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $hari_libur = $_POST['hari_libur'];
+    $id_cabang = $_POST['id_cabang'];
     $level = $_POST['level'];
     
     // trim - remove spasi
@@ -47,6 +49,8 @@ if(isset($_POST['edit']) ){
     $id_users = $_POST['id_users'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $hari_libur = $_POST['hari_libur'];
+    $id_cabang = $_POST['id_cabang'];
     $level = $_POST['level'];
     
     // trim - remove spasi
@@ -85,10 +89,11 @@ if(isset($_POST['edit']) ){
 if (isset($_POST['info_karyawan'])) {
     $id_users = $_POST['id_users'];
     $username = $_POST['username'];
-    $status_kerja = $_POST['status_kerja'];
-    $tanggal = $_POST['tanggal'];
+    $hari_libur = $_POST['hari_libur'];
+    $id_cabang = $_POST['id_cabang'];
+    $tanggal = date('Y-m-d');
 
-    $sql = "UPDATE tbl_status_kerja SET status_kerja='$status_kerja', tanggal = '$tanggal' WHERE id_users = $id_users";
+    $sql = "UPDATE tbl_status_kerja SET hari_libur='$hari_libur', cabang = '$id_cabang', tanggal = '$tanggal' WHERE id_users = $id_users";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak
@@ -101,7 +106,7 @@ if (isset($_POST['info_karyawan'])) {
     }else{
       // Jika Gagal, Lakukan :  
       $_SESSION['status'] = "Gagal";
-      $_SESSION['status_text'] = "Informasi karyawan berhasil di rubah";
+      $_SESSION['status_text'] = "Informasi karyawan gagal di rubah";
       $_SESSION['status_code'] = "error";
       header("location: ../informasi-karyawan");   
     }

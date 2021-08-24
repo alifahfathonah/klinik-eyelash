@@ -10,20 +10,33 @@ $data = mysqli_fetch_array($query);
 
 $tanggal_sekarang = date('Y-m-d');
 $tgl_set = $data['tanggal'];
+$daftar_hari = array(
+	'Sunday' => 'Minggu',
+	'Monday' => 'Senin',
+	'Tuesday' => 'Selasa',
+	'Wednesday' => 'Rabu',
+	'Thursday' => 'Kamis',
+	'Friday' => 'Jumat',
+	'Saturday' => 'Sabtu'
+   );
+   $date=date('Y/m/d');
+   $namahari = date('l', strtotime($date));
+   
+//    echo $daftar_hari[$namahari];
 // $jangka_waktu = strtotime('+7 days', strtotime($tgl_set));
-$jangka_waktu = date('Y-m-d', strtotime('+7 days', strtotime($tgl_set)));
-$tgl_exp=date('Y-m-d',strtotime($jangka_waktu));
+// $jangka_waktu = date('Y-m-d', strtotime('+7 days', strtotime($tgl_set)));
+// $tgl_exp=date('Y-m-d',strtotime($jangka_waktu));
 
-$libur = 2;
-$masuk = 1;
+// $libur = 2;
+// $masuk = 1;
 
-if ($tgl_exp == $tanggal_sekarang) {
-	$sql = "UPDATE tbl_status_kerja SET status_kerja='$libur', tanggal = '$tgl_exp' WHERE tanggal = '$tgl_set'";
-	$result = mysqli_query($link, $sql);
-}else{
-	$sql = "UPDATE tbl_status_kerja SET status_kerja='$masuk' WHERE tanggal = '$tgl_set'";
-	$result = mysqli_query($link, $sql);
-}
+// if ($tgl_exp == $tanggal_sekarang) {
+// 	$sql = "UPDATE tbl_status_kerja SET status_kerja='$libur', tanggal = '$tgl_exp' WHERE tanggal = '$tgl_set'";
+// 	$result = mysqli_query($link, $sql);
+// }else{
+// 	$sql = "UPDATE tbl_status_kerja SET status_kerja='$masuk' WHERE tanggal = '$tgl_set'";
+// 	$result = mysqli_query($link, $sql);
+// }
 
 include 'views/header.php';
 ?>
@@ -68,34 +81,71 @@ include 'views/header.php';
                                 <button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Tambah Users<span class="ripple ripple-animate"></span></button>
                             </div>
                         </div>
+						<!-- <div class="row align-items-center m-l-0">
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-header">
+										<strong>Buah Batu</strong>
+									</div>
+									<div class="card-body">
+										Test
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-header">
+										<strong>Buah Batu</strong>
+									</div>
+									<div class="card-body">
+										Test
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4 mb-4">
+								<div class="card">
+									<div class="card-header">
+										<strong>Buah Batu</strong>
+									</div>
+									<div class="card-body">
+										Test
+									</div>
+								</div>
+							</div>
+						</div> -->
 						<div class="dt-responsive table-responsive">
 							<table id="user-list-table" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
 										<th>Nama</th>
-										<th>Status Kerja</th>
+										<th>Hari Libur</th>
+										<th>Cabang</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php  
 									$no = 1;
-									$query = mysqli_query($link,"SELECT a.*, b.username
+									$query = mysqli_query($link,"SELECT a.*, b.username, c.*
                                         FROM tbl_status_kerja a 
-                                        LEFT JOIN users b ON a.id_users = b.id_users 
+                                        LEFT JOIN users b ON a.id_users = b.id_users LEFT JOIN tbl_cabang c ON a.cabang = c.id_cabang 
                                         ORDER BY id_kerja ASC");
+									// $data_cabang = mysqli_fetch_array($query_cabang); 
                                     foreach ($query as $data) { 
 									?>
 									<tr>
 										<td><?php echo $no++; ?></td>
 										<td><?php echo $data['username'] ?></td>
 										<td>
-											<?php if ($data['status_kerja'] == 1) { ?>
+											<?php if ($data['hari_libur'] != $daftar_hari[$namahari]) { ?>
                                                 <button class="btn btn-success btn-sm"> Masuk </button>
                                             <?php }else{ ?>
                                                 <button class="btn btn-danger btn-sm"> Libur </button>
                                             <?php } ?>
+										</td>
+										<td>
+											<?= $data['nama_cabang']; ?>
 										</td>
 
 										<td>
@@ -130,26 +180,29 @@ include 'views/header.php';
 								                        </div>
 								                        <div class="col">
 								                            <div class="form-group">
-                                                                            <label class="floating-label" for="Sex">Status Kerja</label>
-                                                                            <select name="status_kerja" class="form-control" id="level" placeholder="Status">
+                                                                            <label class="floating-label" for="hari_libur">Hari Libur</label>
+                                                                            <select name="hari_libur" class="form-control" id="hari_libur" placeholder="Hari Libur">
                                                                               <option value=""></option>
-                                                                              <option <?php if ($data['status_kerja'] == "1") {?>
-                                                                                selected="selected" value="1">Masuk</option>
-                                                                                <?php }else{
-                                                                                    echo '<option value="1">Masuk</option>';
-                                                                                } ?>
-                                                                            <option <?php if ($data['status_kerja'] == "2") {?>
-                                                                                selected="selected" value="2">Libur</option> 
-                                                                                <?php }else{
-                                                                                echo '<option value="2">Libur</option>';
-                                                                                } ?>
+                                                                              <option value="Senin" <?php if ($data['hari_libur'] === "Senin") { echo "selected"; } ?>>Senin</option>
+                                                                              <option value="Selasa" <?php if ($data['hari_libur'] === "Selasa") { echo "selected"; } ?>>Selasa</option>
+                                                                              <option value="Rabu" <?php if ($data['hari_libur'] === "Rabu") { echo "selected"; } ?>>Rabu</option>
+                                                                              <option value="Kamis" <?php if ($data['hari_libur'] === "Kamis") { echo "selected"; } ?>>Kamis</option>
+                                                                              <option value="Jumat" <?php if ($data['hari_libur'] === "Jumat") { echo "selected"; } ?>>Jum'at</option>
+                                                                              <option value="Sabtu" <?php if ($data['hari_libur'] === "Sabtu") { echo "selected"; } ?>>Sabtu</option>
+                                                                              <option value="Minggu" <?php if ($data['hari_libur'] === "Minggu") { echo "selected"; } ?>>Minggu</option>
                                                                             </select>
                                                                         </div>
 								                        </div>
 								                        <div class="col">
 								                            <div class="form-group">
-								                                <label class="floating-label" for="Name">Tanggal</label>
-								                                <input type="date" name="tanggal" value="<?php echo $data['tanggal'] ?>" class="form-control" id="Name">
+								                                <label class="floating-label" for="id_cabang">Cabang</label>
+																<select name="id_cabang" class="form-control" id="id_cabang" placeholder="Pilihan Cabang">
+																	<option value=""></option>
+																	<option value="1" <?php if ($data['nama_cabang'] == 'Buah Batu') { echo 'selected'; } ?>>Buah Batu</option>
+																	<option value="2" <?php if ($data['nama_cabang'] == 'Cimbuleuit') { echo 'selected'; } ?>>Cimbuleuit</option>
+																	<option value="4" <?php if ($data['nama_cabang'] == 'Ujung Berung') { echo 'selected'; } ?>>Ujung Berung</option>
+                                                                </select>
+								                                <!-- <input type="date" name="tanggal" value="<?php //echo $data['tanggal'] ?>" class="form-control" id="Name"> -->
 								                            </div>
 								                        </div>       
 								                        <div class="col-sm-12">
@@ -168,7 +221,8 @@ include 'views/header.php';
 									<tr>
 										<th>No</th>
 										<th>Username</th>
-										<th>Level</th>
+										<th>Hari Libur</th>
+										<th>Cabang</th>
 										<th></th>
 									</tr>
 								</tfoot>
