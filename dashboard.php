@@ -809,13 +809,11 @@ if (isset($_GET['search'])) {
                                                                                         <div class="col">
                                                                                             <div class="form-group">
                                                                                                 <label>Nama Produk</label>
-                                                                                                <select name="id_produk" class="form-control" id="produk" onchange="changeValue(this.value)" required="">
+                                                                                                <select name="id_produk" class="form-control" id="produk-<?php echo $data['id_slot'] ?>" onchange="changeValue(this.value, <?php echo $data['id_slot'] ?>)" required="">
                                                                                                     <option value=""></option>
-                                                                                                    <?php if (mysqli_num_rows($barang)) { ?>
-                                                                                                        <?php while ($row_brgg = mysqli_fetch_array($barang)) { ?>
-                                                                                                            <option value="<?php echo $row_brgg["id_produk"] ?>"> <?php echo $row_brgg["nama_produk"] ?> </option>
-                                                                                                        <?php $jsArrayy .= "hrg_brgg['" . $row_brgg['id_produk'] . "'] = {hrg:'" . addslashes($row_brgg['harga']) . "'};\n";
-                                                                                                        } ?>
+                                                                                                    <?php $query_produk = mysqli_query($link, "SELECT * FROM tbl_produk");
+                                                                                                    foreach ($query_produk as $qp) { ?>
+                                                                                                        <option value="<?= $qp['id_produk'] ?>"><?= $qp['nama_produk'] ?></option>
                                                                                                     <?php } ?>
                                                                                                 </select>
                                                                                             </div>
@@ -823,7 +821,8 @@ if (isset($_GET['search'])) {
                                                                                         <div class="col">
                                                                                             <div class="form-group">
                                                                                                 <label>Harga Produk</label>
-                                                                                                <input type="text" name="harga" class="form-control" id="hrg" placeholder="Harga Otomatis Terisi" required="">
+                                                                                                <?php  ?>
+                                                                                                <input type="text" name="harga" class="form-control" id="hrg-<?php echo $data['id_slot'] ?>" placeholder="Harga Otomatis Terisi" required="">
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -853,7 +852,7 @@ if (isset($_GET['search'])) {
                                                                                         </div>
                                                                                         <div class="col-sm-6">
                                                                                             <div class="form-group">
-                                                                                                <label>Tanggal Booking</label>
+                                                                                                <label>Tanggal Pasang</label>
                                                                                                 <?php if (isset($cari)) { ?>
                                                                                                     <input type="date" name="start" class="form-control" id="start" placeholder="Title" required="" value="<?php echo $cari ?>">
                                                                                                 <?php } else { ?>
@@ -864,7 +863,8 @@ if (isset($_GET['search'])) {
                                                                                         <div class="col-sm-6">
                                                                                             <div class="form-group">
                                                                                                 <label>Tgl Retouch</label>
-                                                                                                <div id="tgl_retouch"></div>
+                                                                                                <input type="hidden" name="id_slot" class="form-control" id="id_slot" placeholder="Title" value="<?php echo $data['id_slot'] ?>">
+                                                                                                <div id="tgl_retouch-<?php echo $data['id_slot'] ?>"></div>
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
