@@ -8,11 +8,11 @@ $db     = 'sitesidadmin_klinik';
 // Admin1234@yx##
 // db : sisiranb_batununggal
 
-$link   = mysqli_connect($host,$user,$pass,$db);
+$link   = mysqli_connect($host, $user, $pass, $db);
 
 // check koneksi
-if(!$link){
-    die("Connection Failed: ".mysqli_connect_error());
+if (!$link) {
+    die("Connection Failed: " . mysqli_connect_error());
     // printf("Connection failed: %s\n", mysqli_connect_error());
     // exit();
 }

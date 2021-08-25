@@ -207,12 +207,12 @@ if (isset($_GET['search'])) {
                                                                 <?php
                                                                 if ($data['id_jabatan'] == 1 && $data['id_cabang'] == 1) { ?>
                                                                     <?php if ($cari != $data['start']) { ?>
-                                                                        <td style="color:red"><a href="" data-toggle="modal" data-target="#ModalAdd<?php echo $data['id_slot'] ?>" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                        <td style="color:red"><a href="" data-toggle="modal" data-target="#ModalAdd" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
                                                                         <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } ?>
                                                                 <?php } else { ?>
-                                                                    <td style="color:red"><a href="" data-toggle="modal" data-target="#ModalAdd<?php echo $data['id_slot'] ?>" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                    <td style="color:red"><a href="" data-toggle="modal" data-target="#ModalAdd" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } ?>
                                                             </tr>
 

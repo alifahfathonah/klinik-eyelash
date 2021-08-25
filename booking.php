@@ -307,19 +307,25 @@ include 'views/header.php';
                                     <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir" required="">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Jam</label>
                                     <input type="time" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Sampai Jam</label>
                                     <input type="time" name="ends_jam" class="form-control hour" id="ends_jam" placeholder="jam">
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tanggal Pasang</label>
+                                    <input type="date" name="tgl_pasang" class="form-control" id="tgl_pasang" placeholder="Title" readonly>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Tanggal Retouch</label>
                                     <input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title">

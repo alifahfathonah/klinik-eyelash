@@ -438,6 +438,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
             ends_jam: '<?php echo $event['ends_jam']; ?>',
             starts: '<?php echo $event['start']; ?>',
             ends: '<?php echo $event['ends']; ?>',
+            tgl_pasang: '<?php echo $event['tgl_pasang']; ?>',
             tgl_retouch: '<?php echo $event['tgl_retouch']; ?>',
             tgl_lahir: '<?php echo $event['tgl_lahir']; ?>',
           },
