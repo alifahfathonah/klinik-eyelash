@@ -510,7 +510,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#produk-' + document.getElementById("id_slot").value).change(function() {
+    $('#produk').change(function() {
       var id_produk = $(this).val();
       var data_start = document.getElementById("start").value;
 
@@ -523,7 +523,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
         },
 
         success: function(response) {
-          $('#tgl_retouch-' + document.getElementById("id_slot").value).html(response);
+          $('#tgl_retouch').html(response);
         }
       });
     })
