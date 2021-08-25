@@ -24,12 +24,21 @@ include 'views/header.php';
 
 ?>
 
-<body class="">
+<script>
+    function loadPopup() {
+        $('#ModalAdd').modal('show');
+    }
+</script>
+
+<body onload="<?php if ($_GET['popup'] == 1) {
+                    echo "loadPopup()";
+                } ?>">
 
     <?php
     include 'views/navbar.php';
     include 'views/notifications.php';
     ?>
+
 
     <!-- [ Main Content ] start -->
     <div class="pcoded-main-container">
@@ -142,7 +151,7 @@ include 'views/header.php';
                                             // $date = date("Y-m-d");
                                             // $tgl_booking = date('d F Y', strtotime($date));
                                             ?>    -->
-                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" disabled="">
+                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $_GET['tanggal'] ?>" disabled="">
                                 </div>
                             </div>
                             <div class="col-sm-6">

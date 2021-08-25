@@ -783,14 +783,14 @@ if (isset($_GET['search'])) {
                                                         ?>
                                                                 <tr>
                                                                     <?php if ($tgl != $data['start']) { ?>
-                                                                        <td style="color:red"><a href="#" data-toggle="modal" data-target="#ModalAdd<?php echo $data['id_slot'] ?>" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                        <td style="color:red"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
                                                                         <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php }
                                                                 } ?>
                                                                 </tr>
 
-                                                                <div class="modal fade" id="ModalAdd<?php echo $data['id_slot'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+                                                                <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                                                                     <div class="modal-dialog modal-xl">
                                                                         <div class="modal-content">
                                                                             <div class="modal-header">
