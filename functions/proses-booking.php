@@ -29,8 +29,8 @@ if (isset($_POST['submit'])) {
   $data = mysqli_fetch_array($cekdulu);
   // var_dump($data['start']);die();
 
-  var_dump($start == $data['start'] && $start_jam != $data['start_jam'] && $ends_jam != $data['ends_jam']);
-  die;
+  // var_dump($start == $data['start'] && $start_jam != $data['start_jam'] && $ends_jam != $data['ends_jam']);
+  // die;
 
   if ($start == $data['start'] && $start_jam != $data['start_jam'] && $ends_jam != $data['ends_jam']) {
     $query = "INSERT INTO events(nama, no_telp, start, start_jam, ends, ends_jam, sumber, id_produk, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, status) values ('$nama', '$no_telp', '$start', '$start_jam', '$end', '$ends_jam', '$sumber', '$id_produk', '$id_cabang', '$harga', '$id_tipe', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', tgl_lahir = '$tgl_lahir', '$status')";
