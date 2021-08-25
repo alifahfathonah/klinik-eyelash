@@ -81,38 +81,6 @@ include 'views/header.php';
                                 <button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Tambah Users<span class="ripple ripple-animate"></span></button>
                             </div>
                         </div>
-						<!-- <div class="row align-items-center m-l-0">
-							<div class="col-md-4 mb-4">
-								<div class="card">
-									<div class="card-header">
-										<strong>Buah Batu</strong>
-									</div>
-									<div class="card-body">
-										Test
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
-									<div class="card-header">
-										<strong>Buah Batu</strong>
-									</div>
-									<div class="card-body">
-										Test
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 mb-4">
-								<div class="card">
-									<div class="card-header">
-										<strong>Buah Batu</strong>
-									</div>
-									<div class="card-body">
-										Test
-									</div>
-								</div>
-							</div>
-						</div> -->
 						<div class="dt-responsive table-responsive">
 							<table id="user-list-table" class="table nowrap">
 								<thead>
