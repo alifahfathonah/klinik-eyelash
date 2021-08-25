@@ -1303,350 +1303,116 @@ if (isset($_GET['search'])) {
                         </h6>
                     </a>
 
-                    <?php
-                        $query_karyawan = mysqli_query("SELECT * FROM tbl_status_kerja JOIN users ON users.id_users = tbl_status_kerja = id_users");
-                    ?>
                     <div class="collapse show" id="collapseCardKaryawan">
-                        <div class="row align-items-center" style="padding: 25px !important;">
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong>Buah Batu</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        Test
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong>Buah Batu</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        Test
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-4">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <strong>Buah Batu</strong>
-                                    </div>
-                                    <div class="card-body">
-                                        Test
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
-                if (isset($_GET['search'])) {
-                    $cari = $_GET['search'];
-                    ?>
-                    <div class="card shadow mb-4">
-                        <a href="#collapseCardKaryawan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKaryawan">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                Informasi Karyawan Masuk
-                            </h6>
-                        </a>
-
-                        <div class="collapse show" id="collapseCardKaryawan">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="card user-profile-list">
+                        <div class="row" style="padding: 25px !important;">
+                            <?php
+                            $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang");
+                            foreach ($cabang_query as $cq) {
+                                $id_cbg = $cq['id_cabang'];
+                                $nama_cbg = $cq['nama_cabang'];
+                                ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong><?= $nama_cbg ?></strong>
+                                        </div>
                                         <div class="card-body">
-                                            <div class="row align-items-center m-l-0">
-                                                <div class="col-sm-6">
-                                                </div>
-                                            </div>
-                                            <div class="dt-responsive table-responsive">
-                                                <table id="user-list-table-status" class="table nowrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No</th>
-                                                            <th>Nama</th>
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $query = mysqli_query($link, "SELECT a.* FROM tbl_status_kerja a");
-                                                        $data_karyawan = mysqli_fetch_array($query);
-
-                                                        $tgl_set = $data_karyawan['tanggal'];
-                                                        $jangka_waktu = date('Y-m-d', strtotime('+7 days', strtotime($tgl_set)));
-                                                        $tgl_exp = date('Y-m-d', strtotime($jangka_waktu));
-
-                                                        if ($tgl_exp != $cari) {
-                                                            $no = 1;
-                                                            $query = mysqli_query($link, "SELECT a.*, b.username
-                                                                FROM tbl_status_kerja a
-                                                                LEFT JOIN users b ON a.id_users = b.id_users
-                                                                WHERE b.level = 2
-                                                                AND a.status_kerja = 1");
-                                                            foreach ($query as $data) {
-                                                                ?>
-                                                                <tr>
-                                                                    <td><?php echo $no++; ?></td>
-                                                                    <td><?php echo $data['username'] ?></td>
-                                                                    <td>
-                                                                        <?php if ($data['status_kerja'] == 1) { ?>
-                                                                            <button class="btn btn-success btn-sm"> Masuk </button>
-                                                                        <?php } else { ?>
-                                                                            <button class="btn btn-danger btn-sm"> Libur </button>
-                                                                        <?php } ?>
-                                                                    </td>
-                                                                </tr>
-                                                            <?php } ?>
-
-                                                            <div class="modal fade" id="modal-edit-<?php echo $data['id_users'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-xl">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title">Pemasang</h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                <span aria-hidden="true">&times;</span>
-                                                                            </button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <form action="functions/proses-users" method="post">
-                                                                                <div class="row">
-                                                                                    <div class="col-12 mb-3">
-                                                                                        <h5>Informasi Karyawan Masuk</h5>
-                                                                                    </div>
-                                                                                    <input type="hidden" name="id_users" value="<?php echo $data['id_users'] ?>">
-                                                                                    <div class="col">
-                                                                                        <div class="form-group">
-                                                                                            <label class="floating-label" for="Name">Nama</label>
-                                                                                            <input type="text" name="username" value="<?php echo $data['username'] ?>" class="form-control" id="Name" placeholder="" readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col">
-                                                                                        <div class="form-group">
-                                                                                            <label class="floating-label" for="Sex">Level</label>
-                                                                                            <select name="status_kerja" class="form-control" id="level" placeholder="Status">
-                                                                                                <option value=""></option>
-                                                                                                <option <?php if ($data['status_kerja'] == "1") { ?> selected="selected" value="1">Masuk</option>
-                                                                                            <?php } else {
-                                                                                                echo '<option value="1">Masuk</option>';
-                                                                                            } ?>
-                                                                                            <option <?php if ($data['status_kerja'] == "2") { ?> selected="selected" value="2">Libur</option>
-                                                                                        <?php } else {
-                                                                                            echo '<option value="2">Libur</option>';
-                                                                                        } ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-12">
-                                                                                <button type="submit" name="info_karyawan" class="btn btn-primary">Edit</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <ul style="list-style: none;">
+                                                <?php
+                                                $tanggal_sekarang = date('Y-m-d');
+                                                // $tgl_set = $data['tanggal'];
+                                                $daftar_hari = array(
+                                                    'Sunday' => 'Minggu',
+                                                    'Monday' => 'Senin',
+                                                    'Tuesday' => 'Selasa',
+                                                    'Wednesday' => 'Rabu',
+                                                    'Thursday' => 'Kamis',
+                                                    'Friday' => 'Jumat',
+                                                    'Saturday' => 'Sabtu'
+                                                );
+                                                $date=date('Y/m/d');
+                                                $namahari = date('l', strtotime($date)); 
+                                                $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg");
+                                                foreach ($user_query as $karyawan) { ?>
+                                                    <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]){ echo 'background-color: red; color: #ffffff;'; } else { echo 'background-color: green; color: #ffffff'; } ?>"><?= $karyawan['username'] ?></li>
                                                 <?php } ?>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } else { ?>
-            <div class="card shadow mb-4">
-                <a href="#collapseCardKaryawan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKaryawan">
-                    <h6 class="m-0 font-weight-bold text-primary">
-                        Informasi Karyawan Masuk semua
-                    </h6>
-                </a>
-
-                <div class="collapse show" id="collapseCardKaryawan">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="card user-profile-list">
-                                <div class="card-body">
-                                    <div class="row align-items-center m-l-0">
-                                        <div class="col-sm-6">
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="dt-responsive table-responsive">
-                                        <table id="user-list-table-status" class="table nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>No</th>
-                                                    <th>Nama</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                $no = 1;
-                                                $query = mysqli_query($link, "SELECT a.*, b.username
-                                                    FROM tbl_status_kerja a
-                                                    LEFT JOIN users b ON a.id_users = b.id_users
-                                                    WHERE b.level = 2
-                                                    AND a.status_kerja = 1");
-                                                foreach ($query as $data) {
-                                                    ?>
-                                                    <tr>
-                                                        <td><?php echo $no++; ?></td>
-                                                        <td><?php echo $data['username'] ?></td>
-                                                        <td>
-                                                            <?php if ($data['status_kerja'] == 1) { ?>
-                                                                <button class="btn btn-success btn-sm"> Masuk </button>
-                                                            <?php } else { ?>
-                                                                <button class="btn btn-danger btn-sm"> Libur </button>
-                                                            <?php } ?>
-                                                        </td>
-                                                    </tr>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
 
-                                                    <div class="modal fade" id="modal-edit-<?php echo $data['id_users'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-xl">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Pemasang</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <form action="functions/proses-users" method="post">
-                                                                        <div class="row">
-                                                                            <div class="col-12 mb-3">
-                                                                                <h5>Informasi Karyawan Masuk</h5>
-                                                                            </div>
-                                                                            <input type="hidden" name="id_users" value="<?php echo $data['id_users'] ?>">
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="floating-label" for="Name">Nama</label>
-                                                                                    <input type="text" name="username" value="<?php echo $data['username'] ?>" class="form-control" id="Name" placeholder="" readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="floating-label" for="Sex">Level</label>
-                                                                                    <select name="status_kerja" class="form-control" id="level" placeholder="Status">
-                                                                                        <option value=""></option>
-                                                                                        <option <?php if ($data['status_kerja'] == "1") { ?> selected="selected" value="1">Masuk</option>
-                                                                                    <?php } else {
-                                                                                        echo '<option value="1">Masuk</option>';
-                                                                                    } ?>
-                                                                                    <option <?php if ($data['status_kerja'] == "2") { ?> selected="selected" value="2">Libur</option>
-                                                                                <?php } else {
-                                                                                    echo '<option value="2">Libur</option>';
-                                                                                } ?>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-12">
-                                                                        <button type="submit" name="info_karyawan" class="btn btn-primary">Edit</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Input Data Customer</h5>
+                            </div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-tanya">Tanya Tanya ?</button>
+                                <a href="booking" class="btn btn-info">Booking Sekarang</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-<?php } ?>
 
-<div class="row">
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header">
-                <h5>Input Data Customer</h5>
-            </div>
-            <div class="card-body">
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-tanya">Tanya Tanya ?</button>
-                <a href="booking" class="btn btn-info">Booking Sekarang</a>
-            </div>
-        </div>
-    </div>
-</div>
+                <?php
 
-<?php
+                if (isset($_GET['search_cabang'])) {
+                    $jur = "";
+                    foreach ($_POST['cabang'] as $value) {
+                        $jur .= "'$value'" . ",";
+                    }
+                    $jur = substr($jur, 0, -1);
 
-if (isset($_GET['search_cabang'])) {
-    $jur = "";
-    foreach ($_POST['cabang'] as $value) {
-        $jur .= "'$value'" . ",";
-    }
-    $jur = substr($jur, 0, -1);
+                    $sql = "SELECT * FROM tbl_slot WHERE id_cabang in ($jur) order by id_cabang asc";
 
-    $sql = "SELECT * FROM tbl_slot WHERE id_cabang in ($jur) order by id_cabang asc";
+                    $hasil = mysqli_query($link, $sql);
+                    $no = 0;
+                    while ($data = mysqli_fetch_array($hasil)) {
+                        $no++;
+                    }
+                    ?>
 
-    $hasil = mysqli_query($link, $sql);
-    $no = 0;
-    while ($data = mysqli_fetch_array($hasil)) {
-        $no++;
-    }
-    ?>
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Buah Batu 1</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-lg-6">
+                                            <div class="card-header">
+                                                <h5>Senior</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="dt-responsive table-responsive">
+                                                    <table id="user-list-tableee" class="table nowrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Jam</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
 
-    <div class="row">
-        <div class="col-lg-3 col-md-3">
-            <div class="card">
-                <div class="card-header">
-                    <h5>Buah Batu 1</h5>
-                </div>
-                <div class="card-body">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="card-header">
-                                <h5>Senior</h5>
-                            </div>
-                            <div class="card-body">
-                                <div class="dt-responsive table-responsive">
-                                    <table id="user-list-tableee" class="table nowrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Jam</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <tr>
-                                                <td><?php echo $no; ?></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                            <tr>
+                                                                <td><?php echo $no; ?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php } ?>
+                <?php } ?>
 
             <!-- <div class="row">
             <div class="col-xl-12">

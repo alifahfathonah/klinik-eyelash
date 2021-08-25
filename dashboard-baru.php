@@ -120,7 +120,7 @@ if (isset($_GET['search'])) {
                                         if (!empty($cari)) {
                                             $cari = date('d F Y', strtotime($cari));
                                             $cari10 = date('d F Y', strtotime($cari10));
-                                        ?>
+                                            ?>
                                             <strong>
                                                 <p>Tanggal : <?php echo $cari ?></p>
                                             </strong>
@@ -172,7 +172,7 @@ if (isset($_GET['search'])) {
                     $nama_cbg = $cq['nama_cabang'];
 
                     //echo $id_cbg . $nama_cbg;
-                ?>
+                    ?>
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
@@ -197,21 +197,21 @@ if (isset($_GET['search'])) {
                                                             $no = 1;
                                                             $tgl = date('Y-m-d');
                                                             $query = mysqli_query($link, "SELECT DISTINCT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.start
-                                                    FROM tbl_slot a 
-                                                    LEFT JOIN events b ON a.id_slot = b.id_slot
-                                                    WHERE a.id_cabang = $id_cbg
-                                                    AND a.id_jabatan = 1
-                                                    ORDER BY a.jam ASC");
+                                                                FROM tbl_slot a 
+                                                                LEFT JOIN events b ON a.id_slot = b.id_slot
+                                                                WHERE a.id_cabang = $id_cbg
+                                                                AND a.id_jabatan = 1
+                                                                ORDER BY a.jam ASC");
                                                             foreach ($query as $data) {
                                                                 $id_cabang = $data['id_cabang'];
                                                                 $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
                                                                 foreach ($query_cabang as $qc) {
-                                                            ?>
+                                                                    ?>
                                                                     <?php if ($tgl != $data['start']) { ?>
                                                                         <td style="color:red"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
                                                                         <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
-                                                                <?php }
+                                                                    <?php }
                                                                 } ?>
 
                                                             <?php } ?>
@@ -238,13 +238,13 @@ if (isset($_GET['search'])) {
                                                             $no = 1;
                                                             $tgl = date('Y-m-d');
                                                             $query = mysqli_query($link, "SELECT a.jam, b.start_jam
-                                                    FROM tbl_slot a 
-                                                    LEFT JOIN events b ON a.id_slot = b.id_slot
-                                                    WHERE a.id_cabang = $id_cabang
-                                                    AND a.id_jabatan = 2
-                                                    ORDER BY a.jam ASC");
+                                                                FROM tbl_slot a 
+                                                                LEFT JOIN events b ON a.id_slot = b.id_slot
+                                                                WHERE a.id_cabang = $id_cabang
+                                                                AND a.id_jabatan = 2
+                                                                ORDER BY a.jam ASC");
                                                             foreach ($query as $data) {
-                                                            ?>
+                                                                ?>
                                                                 <?php if ($data['jam'] == $data['start_jam']) { ?>
                                                                     <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } else { ?>
@@ -262,7 +262,7 @@ if (isset($_GET['search'])) {
                         </div>
                     </div>
 
-                <?php
+                    <?php
                 }
                 include 'views/footer.php';
                 ?>
