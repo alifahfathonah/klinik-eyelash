@@ -494,8 +494,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   <?php echo $jsArrayy; ?>
 
-  function changeValue(id_produk, id_slot) {
-    var harga = document.getElementById("hrg-" + id_slot).value = hrg_brgg[id_produk].hrg;
+  function changeValue(id_produk) {
+    var harga = document.getElementById("hrg").value = hrg_brgg[id_produk].hrg;
     console.log(harga);
   };
 </script>
