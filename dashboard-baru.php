@@ -262,56 +262,55 @@ if (isset($_GET['search'])) {
                         </div>
                     </div>
 
-                    <div class="card shadow mb-4">
-                        <a href="#collapseCardKaryawan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKaryawan">
-                            <h6 class="m-0 font-weight-bold text-primary">
-                                Informasi Karyawan Masuk
-                            </h6>
-                        </a>
+                <?php } ?>
+            </div>
+                <div class="card shadow mb-4">
+                    <a href="#collapseCardKaryawan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKaryawan">
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Informasi Karyawan Masuk
+                        </h6>
+                    </a>
 
-                        <div class="collapse show" id="collapseCardKaryawan">
-                            <div class="row" style="padding: 25px !important;">
-                                <?php
-                                $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang");
-                                foreach ($cabang_query as $cq) {
-                                    $id_cbg = $cq['id_cabang'];
-                                    $nama_cbg = $cq['nama_cabang'];
-                                    ?>
-                                    <div class="col-md-4 mb-4">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <strong><?= $nama_cbg ?></strong>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul style="list-style: none;">
-                                                    <?php
-                                                    $tanggal_sekarang = date('Y-m-d');
+                    <div class="collapse show" id="collapseCardKaryawan">
+                        <div class="row" style="padding: 25px !important;">
+                            <?php
+                            $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang");
+                            foreach ($cabang_query as $cq) {
+                                $id_cbg = $cq['id_cabang'];
+                                $nama_cbg = $cq['nama_cabang'];
+                                ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <strong><?= $nama_cbg ?></strong>
+                                        </div>
+                                        <div class="card-body">
+                                            <ul style="list-style: none;">
+                                                <?php
+                                                $tanggal_sekarang = date('Y-m-d');
                                                 // $tgl_set = $data['tanggal'];
-                                                    $daftar_hari = array(
-                                                        'Sunday' => 'Minggu',
-                                                        'Monday' => 'Senin',
-                                                        'Tuesday' => 'Selasa',
-                                                        'Wednesday' => 'Rabu',
-                                                        'Thursday' => 'Kamis',
-                                                        'Friday' => 'Jumat',
-                                                        'Saturday' => 'Sabtu'
-                                                    );
-                                                    $date=date('Y/m/d');
-                                                    $namahari = date('l', strtotime($date)); 
-                                                    $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg");
-                                                    foreach ($user_query as $karyawan) { ?>
-                                                        <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]){ echo 'background-color: red; color: #ffffff;'; } else { echo 'background-color: green; color: #ffffff'; } ?>"><?= $karyawan['username'] ?></li>
-                                                    <?php } ?>
-                                                </ul>
-                                            </div>
+                                                $daftar_hari = array(
+                                                    'Sunday' => 'Minggu',
+                                                    'Monday' => 'Senin',
+                                                    'Tuesday' => 'Selasa',
+                                                    'Wednesday' => 'Rabu',
+                                                    'Thursday' => 'Kamis',
+                                                    'Friday' => 'Jumat',
+                                                    'Saturday' => 'Sabtu'
+                                                );
+                                                $date=date('Y/m/d');
+                                                $namahari = date('l', strtotime($date)); 
+                                                $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg");
+                                                foreach ($user_query as $karyawan) { ?>
+                                                    <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]){ echo 'background-color: red; color: #ffffff;'; } else { echo 'background-color: green; color: #ffffff'; } ?>"><?= $karyawan['username'] ?></li>
+                                                <?php } ?>
+                                            </ul>
                                         </div>
                                     </div>
-                                <?php } ?>
-                            </div>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
-
-                    <?php
-                }
-                include 'views/footer.php';
+                </div>
+                <?php include 'views/footer.php';
                 ?>
