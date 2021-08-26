@@ -58,6 +58,7 @@ if (isset($_POST['id_users'])) {
 	$result = mysqli_query($link, "DELETE FROM users WHERE id_users = $id_users");
 
 	if($result){
+		$delete_sk = mysqli_query($link, "DELETE FROM tbl_status_kerja WHERE id_users = $id_users");
 		header("location: ../users"); 
 	}else{
 		header("location: ../users"); 

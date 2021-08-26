@@ -17,7 +17,7 @@ if(isset($_POST['submit']) ){
 
         if(register_cek_username($username)){
 
-            if(register_user($username, $password, $level)){
+            if(register_user($username, $password, $level, $hari_libur, $id_cabang)){
                 $_SESSION['status'] = "Berhasil";
                 $_SESSION['status_text'] = "Users Berhasil Di Tambahkan";
                 $_SESSION['status_code'] = "success";
@@ -58,7 +58,7 @@ if(isset($_POST['edit']) ){
 
         if(register_cek_username($username)){
 
-            if(register_user_edit($id_users,$username, $password, $level)){
+            if(register_user_edit($id_users,$username, $password, $level, $hari_libur, $id_cabang)){
                 $_SESSION['status'] = "Berhasil";
                 $_SESSION['status_text'] = "Users Berhasil Di Edit";
                 $_SESSION['status_code'] = "success";
