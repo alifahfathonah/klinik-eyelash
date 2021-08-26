@@ -311,6 +311,7 @@ if (isset($_GET['search'])) {
                             <?php } ?>
                         </div>
                     </div>
+                    <div style="padding: 10px 0;">* Keterangan : Merah = Libur, Hijau = Masuk</div>
                 </div>
                 <?php include 'views/footer.php';
                 ?>
