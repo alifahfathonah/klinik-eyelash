@@ -151,16 +151,19 @@ include 'views/header.php';
                                             // $date = date("Y-m-d");
                                             // $tgl_booking = date('d F Y', strtotime($date));
                                             ?>    -->
-                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $_GET['tanggal'] ?>" disabled="">
+                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $_GET['tanggal']; ?>" disabled="">
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class=" col-sm-6">
                                 <div class="form-group">
                                     <label>Tgl Retouch</label>
                                     <div id="tgl_retouch"></div>
                                     </select>
                                 </div>
                             </div>
+
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" readonly="">
+
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Jam</label>
