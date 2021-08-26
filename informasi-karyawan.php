@@ -168,7 +168,7 @@ include 'views/header.php';
 																	<option value=""></option>
 																	<option value="1" <?php if ($data['nama_cabang'] == 'Buah Batu') { echo 'selected'; } ?>>Buah Batu</option>
 																	<option value="2" <?php if ($data['nama_cabang'] == 'Cimbuleuit') { echo 'selected'; } ?>>Cimbuleuit</option>
-																	<option value="4" <?php if ($data['nama_cabang'] == 'Ujung Berung') { echo 'selected'; } ?>>Ujung Berung</option>
+																	<option value="3" <?php if ($data['nama_cabang'] == 'Ujung Berung') { echo 'selected'; } ?>>Ujung Berung</option>
                                                                 </select>
 								                                <!-- <input type="date" name="tanggal" value="<?php //echo $data['tanggal'] ?>" class="form-control" id="Name"> -->
 								                            </div>
