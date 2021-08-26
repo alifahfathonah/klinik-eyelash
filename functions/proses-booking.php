@@ -24,14 +24,38 @@ if (isset($_POST['submit'])) {
   $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
   $username = mysqli_fetch_array($query);
 
-  $cekdulu =  mysqli_query($link, "SELECT * FROM events WHERE start = '$tgl_pasang' ");
+  $cekdulu =  mysqli_query($link, "SELECT * FROM events WHERE start = '$tgl_pasang' AND id_users= '$id_users' AND id_cabang= '$id_cabang' ");
   $data = mysqli_fetch_array($cekdulu);
   // var_dump($data['start']);die();
 
-  // echo $start_jam . " != " . $data['start_jam'] . " && " . $ends_jam . " != " . $data['ends_jam'] . " && " . $id_cabang . " != " . $data['id_cabang'];
+  if (empty($data['start_jam'])) {
+    $data['start_jam'] = "0";
+  } else {
+    $data['start_jam'];
+  }
+
+  if (empty($data['ends_jam'])) {
+    $data['ends_jam'] = "0";
+  } else {
+    $data['ends_jam'];
+  }
+
+  if (empty($data['id_cabang'])) {
+    $data['id_cabang'] = "0";
+  } else {
+    $data['id_cabang'];
+  }
+
+  if (empty($data['id_users'])) {
+    $data['id_users'] = "0";
+  } else {
+    $data['id_users'];
+  }
+
+  // echo $id_users . " != " . $data['id_users'] . " && " . $start_jam . " != " . $data['start_jam'] . " && " . $id_cabang . " != " . $data['id_cabang'];
   // die();
 
-  if (strval($start_jam) != strval($data['start_jam']) && strval($ends_jam) != strval($data['ends_jam']) && strval($id_cabang) != strval($data['id_cabang'])) {
+  if ($id_users != $data['id_users'] && $start_jam != $data['start_jam'] && $id_cabang != $data['id_cabang']) {
     $query = "INSERT INTO events(nama, no_telp, start, start_jam, ends, ends_jam, sumber, id_produk, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, tgl_lahir, status) values ('$nama', '$no_telp', '$tgl_pasang', '$start_jam', '', '$ends_jam', '$sumber', '$id_produk', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$tgl_lahir', '$status')";
     $result = mysqli_query($link, $query);
     $id = mysqli_insert_id($link);

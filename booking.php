@@ -162,7 +162,11 @@ include 'views/header.php';
                                 </div>
                             </div>
 
-                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" readonly="">
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
+                                                                                                                        # tanggal kosong
+                                                                                                                    } else {
+                                                                                                                        echo "value=" . $_GET['tanggal'];
+                                                                                                                    } ?> readonly="">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
