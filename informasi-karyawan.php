@@ -78,7 +78,7 @@ include 'views/header.php';
 								<div class="col-sm-6">
 								</div>
 								<div class="col-sm-6 text-right mb-4">
-									<button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Tambah Users<span class="ripple ripple-animate"></span></button>
+									<!-- <button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-report"><i class="feather icon-plus"></i> Tambah Users<span class="ripple ripple-animate"></span></button> -->
 								</div>
 							</div>
 							<div class="dt-responsive table-responsive">
@@ -95,10 +95,10 @@ include 'views/header.php';
 									<tbody>
 										<?php  
 										$no = 1;
-										$query = mysqli_query($link,"SELECT a.*, b.username, c.*
+										$query = mysqli_query($link,"SELECT a.*, b.username, b.level, c.*
 											FROM tbl_status_kerja a 
 											LEFT JOIN users b ON a.id_users = b.id_users LEFT JOIN tbl_cabang c ON a.cabang = c.id_cabang 
-											ORDER BY id_kerja ASC");
+											WHERE b.level = '2' ORDER BY id_kerja ASC");
 									// $data_cabang = mysqli_fetch_array($query_cabang); 
 										foreach ($query as $data) { 
 											?>

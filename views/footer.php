@@ -552,6 +552,26 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#level').change(function() {
+      var level = $(this).val();
+      var hari_libur = document.getElementById("hari_libur").val;
+      var id_cabang = document.getElementById("id_cabang").val;
+      if ( level == '1') {
+        id_cabang.hide();
+        hari_libur.hide();
+      } else if {
+        id_cabang.show();
+        hari_libur.show();
+      } else {
+        id_cabang.hide();
+        hari_libur.hide();
+      }
+    })
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
     $('#produk').keyup(function() {
       var jam = $('#produk').val();
 
