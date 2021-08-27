@@ -175,37 +175,66 @@ include 'views/header.php';
             <div class="modal-body">
                 <form action="functions/proses-users" method="post">
                     <div class="row">
-                        <div class="col-12 mb-3">
-                            <h5>Informasi Users</h5>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="floating-label" for="Name">Username</label>
-                                <input type="text" name="username" class="form-control" id="Name" placeholder="">
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group fill">
-                                <label class="floating-label" for="Email">Password</label>
-                                <input type="password" name="password" class="form-control" id="password" placeholder="">
-                            </div>
-                        </div>
-                        
-                        <div class="col">
-                            <div class="form-group">
-                                <label class="floating-label" for="Sex">Level</label>
-                                <select name="level" class="form-control" id="Sex">
-                                    <option value=""></option>
-                                    <option value="1">Admin</option>
-                                    <option value="2">Pemasang</option>
-                                </select>
-                            </div>
-                        </div>
+							<div class="col-12 mb-3">
+								<h5>Informasi Users</h5>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label class="floating-label" for="Name">Username</label>
+									<input type="text" name="username" class="form-control" id="Name" placeholder="">
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group fill">
+									<label class="floating-label" for="Email">Password</label>
+									<input type="password" name="password" class="form-control" id="password" placeholder="">
+								</div>
+							</div>
 
-                        <div class="col-sm-12">
-                            <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                    </div>
+							<div class="col">
+								<div class="form-group">
+									<label class="floating-label" for="level">Level</label>
+									<select name="level" class="form-control" id="level" onchange="">
+										<option value=""></option>
+										<option value="1">Admin</option>
+										<option value="2">Pemasang</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col">
+								<div class="form-group">
+									<label class="floating-label" for="hari_libur">Hari Libur</label>
+									<select name="hari_libur" class="form-control" id="hari_libur" placeholder="Hari Libur">
+										<option value=""></option>
+										<option value="Senin">Senin</option>
+										<option value="Selasa">Selasa</option>
+										<option value="Rabu">Rabu</option>
+										<option value="Kamis">Kamis</option>
+										<option value="Jumat">Jum'at</option>
+										<option value="Sabtu">Sabtu</option>
+										<option value="Minggu">Minggu</option>
+									</select>
+								</div>
+							</div>
+							<div class="col">
+								<div class="form-group">
+									<label class="floating-label" for="id_cabang">Cabang</label>
+									<select name="id_cabang" class="form-control" id="id_cabang" placeholder="Pilihan Cabang">
+										<option value=""></option>
+										<?php $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang");
+										foreach ($query_cabang as $cabang) { ?>
+											<option value="<?= $cabang['id_cabang']; ?>"><?= $cabang['nama_cabang']; ?></option>
+										<?php } ?>
+									</select>
+									<!-- <input type="date" name="tanggal" value="<?php //echo $data['tanggal'] ?>" class="form-control" id="Name"> -->
+								</div>
+							</div>
+
+							<div class="col-sm-12">
+								<button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+							</div>
+						</div>
                 </form>
             </div>
         </div>
