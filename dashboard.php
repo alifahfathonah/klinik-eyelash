@@ -175,7 +175,7 @@ if (isset($_GET['search'])) {
                 ?>
                     <div class="col-lg-4">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header text-center">
                                 <h5><?= $nama_cbg ?></h5>
                             </div>
                             <div class="card-body">
@@ -207,9 +207,9 @@ if (isset($_GET['search'])) {
                                                                 foreach ($query_cabang as $qc) {
                                                             ?>
                                                                     <?php if ($tgl != $data['start']) { ?>
-                                                                        <td style="color:red; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                        <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
-                                                                        <td style="color:green; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
+                                                                        <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php }
                                                                 } ?>
                                                         </tr>
@@ -243,9 +243,9 @@ if (isset($_GET['search'])) {
                                                             foreach ($query as $data) {
                                                             ?>
                                                                 <?php if ($data['jam'] == $data['start_jam']) { ?>
-                                                                    <td style="color:green; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
+                                                                    <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } else { ?>
-                                                                    <td style="color:red; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                    <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } ?>
                                                         </tr>
                                                     <?php } ?>
@@ -301,11 +301,11 @@ if (isset($_GET['search'])) {
                                             $namahari = date('l', strtotime($date));
                                             $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg");
                                             foreach ($user_query as $karyawan) { ?>
-                                                <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]) {
-                                                                                                            echo 'background-color: red; color: #ffffff;';
-                                                                                                        } else {
-                                                                                                            echo 'background-color: green; color: #ffffff';
-                                                                                                        } ?>"><?= $karyawan['username'] ?></li>
+                                                <li style="width: 50%; margin: 5px 0; text-align: center; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]) {
+                                                                                                                                echo 'background-color: red; color: #ffffff;';
+                                                                                                                            } else {
+                                                                                                                                echo 'background-color: green; color: #ffffff';
+                                                                                                                            } ?>"><?= $karyawan['username'] ?></li>
                                             <?php } ?>
                                         </ul>
                                     </div>
