@@ -300,7 +300,7 @@ if (isset($_GET['search'])) {
                                                 );
                                                 $date=date('Y/m/d');
                                                 $namahari = date('l', strtotime($date)); 
-                                                $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg");
+                                                $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg AND users.level = 2");
                                                 foreach ($user_query as $karyawan) { ?>
                                                     <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]){ echo 'background-color: red; color: #ffffff;'; } else { echo 'background-color: green; color: #ffffff'; } ?>"><?= $karyawan['username'] ?></li>
                                                 <?php } ?>
