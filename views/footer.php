@@ -94,6 +94,17 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     });
 </script>
 <script type="text/javascript">
+  $('#ModalAdd').on('hidden.bs.modal', function(){
+    $(this)
+    .find("input,textarea,select")
+       .val('')
+       .end()
+    .find("input[type=checkbox], input[type=radio]")
+       .prop("checked", "")
+       .end();
+});
+</script>
+<script type="text/javascript">
   $(document).ready(function() {
     // [ besic-bar-chart ] start
     setTimeout(function() {
