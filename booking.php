@@ -195,7 +195,7 @@ include 'views/notifications.php';
                         <div class="col">
                             <div class="form-group">
                                 <label>Pilih Cabang</label>
-                                <select name="id_cabang" class="form-control" required="">
+                                <select name="id_cabang" id="id_cabang" class="form-control" required="">
                                     <option value=""></option>
                                     <?php
                                     $cabang = ucwords($_GET['cabang']);
@@ -220,9 +220,9 @@ include 'views/notifications.php';
                         <div class="col">
                             <div class="form-group">
                                 <label>Nama Pemasang</label>
-                                <select name="id_users" class="form-control" id="id_users" required="">
+                                <!-- <select name="id_users" class="form-control" id="id_users" required="">
                                     <option value=""></option>
-                                    <?php
+                                    <?php /**
                                     $tanggal_sekarang = date('Y-m-d');
                                             $tgl_set = $data['tanggal'];
                                             $daftar_hari = array(
@@ -241,9 +241,10 @@ include 'views/notifications.php';
                                             foreach ($query as $d) { ?>
                                                 <option value="<?php echo $d['id_users'] ?>">
                                                     <?php echo $d['username'] ?></option>
-                                                <?php } ?>
+                                                <?php } **/ ?>
 
-                                    </select>
+                                    </select> -->
+                                    <div id="pemasang"></div>
                                 </div>
                             </div>
                         </div>
