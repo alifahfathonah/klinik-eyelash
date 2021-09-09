@@ -15,7 +15,7 @@ $barang = mysqli_query($link, "SELECT * FROM tbl_produk");
 $jsArrayy = "var hrg_brgg = new Array();\n";
 
 require_once('db/bdd.php');
-$sql = "SELECT a.* FROM events a ORDER BY a.id ASC";
+$sql = "SELECT a.* FROM events a JOIN tbl_customer b ON b.kode_customer = a.kode_customer ORDER BY a.id ASC";
 $req = $bdd->prepare($sql);
 $req->execute();
 $events = $req->fetchAll();
@@ -70,8 +70,7 @@ include 'views/notifications.php';
                     </div>
                     <div class="card-body">
                         <div class="row align-items-center">
-                            <div id="calendar" class="col-centered">
-                            </div>
+                            <div id="calendar" class="col-centered"></div>
                         </div>
                     </div>
                 </div>
@@ -128,6 +127,19 @@ include 'views/notifications.php';
 
                         <div class="col-sm-4">
                             <div class="form-group">
+                                <label>Jenis Customer</label>
+                                <select name="jenis_customer" id="jenis_customer" class="form-control">
+                                    <option value="customer_baru">Customer Baru</option>
+                                    <option value="customer_lama">Customer Lama</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div id="data_customer"></div>
+                        </div>
+                        
+                        <!-- <div class="col-sm-4">
+                            <div class="form-group">
                                 <label>Nama Customer</label>
                                 <input type="text" name="nama" class="form-control" id="title" required="">
                             </div>
@@ -143,30 +155,21 @@ include 'views/notifications.php';
                                 <label>Tanggal Lahir</label>
                                 <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir">
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Tanggal Pasang</label>
-                                    <!-- <?php
-                                            // $date = date("Y-m-d");
-                                            // $tgl_booking = date('d F Y', strtotime($date));
-                                    ?>    -->
-                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $_GET['tanggal']; ?>" disabled="">
-                                </div>
+                                <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $_GET['tanggal']; ?>" disabled="">
                             </div>
-                            <div class=" col-sm-6">
-                                <div class="form-group">
-                                    <label>Tgl Retouch</label>
-                                    <div id="tgl_retouch"></div>
-                                </select>
+                        </div>
+                        <div class=" col-sm-6">
+                            <div class="form-group">
+                                <label>Tgl Retouch</label>
+                                <div id="tgl_retouch"></div>
                             </div>
                         </div>
 
-                        <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
-                        # tanggal kosong
-                        } else {
-                            echo "value=" . $_GET['tanggal'];
-                        } ?> readonly="">
+                        <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {} else { echo "value=" . $_GET['tanggal']; } ?> readonly="">
 
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -177,7 +180,6 @@ include 'views/notifications.php';
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Sampai Jam</label>
-                                <!-- <input type="time" name="ends_jam" class="form-control hour" id="ends_jam"> -->
                                 <div id="jam_ends"></div>
                             </div>
                         </div>
@@ -200,50 +202,22 @@ include 'views/notifications.php';
                                     <?php
                                     $cabang = ucwords($_GET['cabang']);
                                     $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
-                                    foreach ($query1 as $d) {
-                                        ?>
-
-                                        <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
-                                            echo "selected";
-                                        } ?>>
-                                        <?php echo $d['nama_cabang'] ?></option>
-                                    <?php } ?>
-                                </select>
+                                    foreach ($query1 as $d) { ?>
+                                        <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") { echo "selected"; } ?>>
+                                            <?php echo $d['nama_cabang'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="row mt-3">
-                        <div class="col-12 mb-3">
-                            <h5>Informasi Pemasang</h5>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Nama Pemasang</label>
-                                <!-- <select name="id_users" class="form-control" id="id_users" required="">
-                                    <option value=""></option>
-                                    <?php /**
-                                    $tanggal_sekarang = date('Y-m-d');
-                                            $tgl_set = $data['tanggal'];
-                                            $daftar_hari = array(
-                                                'Sunday' => 'Minggu',
-                                                'Monday' => 'Senin',
-                                                'Tuesday' => 'Selasa',
-                                                'Wednesday' => 'Rabu',
-                                                'Thursday' => 'Kamis',
-                                                'Friday' => 'Jumat',
-                                                'Saturday' => 'Sabtu'
-                                            );
-                                            $date=date('Y/m/d');
-                                            $namahari = date('l', strtotime($date));
-                                            $cabang_data = ucwords($_GET['cabang']);
-                                            $query = mysqli_query($link, "SELECT a.*, b.*, c.* FROM users a JOIN tbl_status_kerja b ON b.id_users = a.id_users JOIN tbl_cabang c ON b.cabang = c.id_cabang WHERE a.level = 2 AND c.nama_cabang LIKE '%$cabang_data%' AND b.hari_libur != '$daftar_hari[$namahari]'");
-                                            foreach ($query as $d) { ?>
-                                                <option value="<?php echo $d['id_users'] ?>">
-                                                    <?php echo $d['username'] ?></option>
-                                                <?php } **/ ?>
-
-                                    </select> -->
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                <h5>Informasi Pemasang</h5>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Nama Pemasang</label>
                                     <div id="pemasang"></div>
                                 </div>
                             </div>

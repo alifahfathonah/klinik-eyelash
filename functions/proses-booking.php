@@ -3,6 +3,7 @@ include "../model/db.php";
 session_start();
 
 if (isset($_POST['submit'])) {
+
   $id_produk = $_POST['id_produk'];
   $harga = $_POST['harga'];
   $nama = $_POST['nama'];
@@ -21,63 +22,152 @@ if (isset($_POST['submit'])) {
   $keterangan = $_POST['keterangan'];
   $status = 1;
 
-  $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
-  $username = mysqli_fetch_array($query);
+  if ($_POST['jenis_customer'] == 'customer_lama') {
+    $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
+    $username = mysqli_fetch_array($query);
 
-  $cekdulu =  mysqli_query($link, "SELECT * FROM events WHERE start = '$tgl_pasang' AND id_users= '$id_users' AND id_cabang= '$id_cabang' ");
-  $data = mysqli_fetch_array($cekdulu);
-  // var_dump($data['start']);die();
+    $cekdulu =  mysqli_query($link, "SELECT * FROM events WHERE start = '$tgl_pasang' AND id_users= '$id_users' AND id_cabang= '$id_cabang' AND start_jam = '$start_jam'");
+    $data = mysqli_fetch_array($cekdulu);
 
-  if (empty($data['start_jam'])) {
-    $data['start_jam'] = "0";
-  } else {
-    $data['start_jam'];
-  }
+    if ($id_cabang == '1') {
+      if ($start_jam == '09:00') {
+        $id_slot = '1';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '2';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '3';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '4';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '5';
+      }
+    } else if ($id_cabang == '2') {
+      if ($start_jam == '09:00') {
+        $id_slot = '16';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '17';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '18';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '19';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '20';
+      }
+    } else if ($id_cabang == '3') {
+      if ($start_jam == '09:00') {
+        $id_slot = '21';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '22';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '23';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '24';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '25';
+      }
+    }
 
-  if (empty($data['ends_jam'])) {
-    $data['ends_jam'] = "0";
-  } else {
-    $data['ends_jam'];
-  }
-
-  if (empty($data['id_cabang'])) {
-    $data['id_cabang'] = "0";
-  } else {
-    $data['id_cabang'];
-  }
-
-  if (empty($data['id_users'])) {
-    $data['id_users'] = "0";
-  } else {
-    $data['id_users'];
-  }
-
-  // echo $id_users . " != " . $data['id_users'] . " && " . $start_jam . " != " . $data['start_jam'] . " && " . $id_cabang . " != " . $data['id_cabang'];
-  // die();
-
-  if ($id_users != $data['id_users'] && $start_jam != $data['start_jam'] && $id_cabang != $data['id_cabang']) {
-    $query = "INSERT INTO events(nama, no_telp, start, start_jam, ends, ends_jam, sumber, id_produk, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, tgl_lahir, status) values ('$nama', '$no_telp', '$tgl_pasang', '$start_jam', '', '$ends_jam', '$sumber', '$id_produk', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$tgl_lahir', '$status')";
-    $result = mysqli_query($link, $query);
-    $id = mysqli_insert_id($link);
-    // var_dump($query);
-    // die();
-    if ($result) { // Cek jika proses simpan ke database sukses atau tidak
-      $_SESSION['status'] = "Berhasil";
-      $_SESSION['status_text'] = "Booking Berhasil Di Simpan";
-      $_SESSION['status_code'] = "success";
-      header("location: ../booking");
+    if ($data == NULL) {
+      $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, tgl_lahir, kode_customer) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$tgl_lahir', '$nama')";
+      $result = mysqli_query($link, $query);
+      $id = mysqli_insert_id($link);
+      if ($result) { // Cek jika proses simpan ke database sukses atau tidak
+        $_SESSION['status'] = "Berhasil";
+        $_SESSION['status_text'] = "Booking Berhasil Di Simpan";
+        $_SESSION['status_code'] = "success";
+        header("location: ../booking");
+      } else {
+        $_SESSION['status'] = "Gagal";
+        $_SESSION['status_text'] = "Booking Gagal Di Simpan";
+        $_SESSION['status_code'] = "error";
+        header("location: ../booking");
+      }
     } else {
       $_SESSION['status'] = "Gagal";
-      $_SESSION['status_text'] = "Booking Gagal Di Simpan";
+      $_SESSION['status_text'] = ' ' . $username['username'] . ' Sudah Mempunyai Jadwal di Jam ' . $start_jam . ' - ' . $ends_jam . ' ';
       $_SESSION['status_code'] = "error";
       header("location: ../booking");
     }
-  } else {
-    $_SESSION['status'] = "Gagal";
-    $_SESSION['status_text'] = ' ' . $username['username'] . ' Sudah Mempunyai Jadwal di Jam ' . $start_jam . ' - ' . $ends_jam . ' ';
-    $_SESSION['status_code'] = "error";
-    header("location: ../booking");
+  } else if ($_POST['jenis_customer'] == 'customer_baru') {
+    $query_customer = mysqli_query($link, "SELECT max(kode_customer) as kode_customer FROM tbl_customer");
+    $data = mysqli_fetch_array($query_customer);
+    $kode_customer = $data['kode_customer'];
+    $urutan = (int) substr($kode_customer, 4, 4);
+
+    $urutan++;
+
+    $huruf = "CKNW";
+    $kodecustomer = $huruf . sprintf("%04s", $urutan);
+
+    $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
+    $username = mysqli_fetch_array($query);
+
+    $cekdulu =  mysqli_query($link, "SELECT * FROM events WHERE start = '$tgl_pasang' AND id_users= '$id_users' AND id_cabang= '$id_cabang' AND start_jam = '$start_jam'");
+    $data = mysqli_fetch_array($cekdulu);
+
+    if ($id_cabang == '1') {
+      if ($start_jam == '09:00') {
+        $id_slot = '1';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '2';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '3';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '4';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '5';
+      }
+    } else if ($id_cabang == '2') {
+      if ($start_jam == '09:00') {
+        $id_slot = '16';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '17';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '18';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '19';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '20';
+      }
+    } else if ($id_cabang == '3') {
+      if ($start_jam == '09:00') {
+        $id_slot = '21';
+      } else if ($start_jam == '10:00') {
+        $id_slot = '22';
+      } else if ($start_jam == '11:00') {
+        $id_slot = '23';
+      } else if ($start_jam == '12:00') {
+        $id_slot = '24';
+      } else if ($start_jam == '13:00') {
+        $id_slot = '25';
+      }
+    }
+
+    if ($data == NULL) {
+      $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, tgl_lahir, kode_customer) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$tgl_lahir', '$kodecustomer')";
+      $result = mysqli_query($link, $query);
+      $customer = "INSERT INTO tbl_customer(kode_customer, nama_customer, no_telp, tgl_lahir, sumber, status) VALUES('$kodecustomer', '$nama', '$no_telp', '$tgl_lahir', '$sumber', '$status')";
+      mysqli_query($link, $customer);
+      $id = mysqli_insert_id($link);
+      if ($result) { // Cek jika proses simpan ke database sukses atau tidak
+        $_SESSION['status'] = "Berhasil";
+        $_SESSION['status_text'] = "Booking Berhasil Di Simpan";
+        $_SESSION['status_code'] = "success";
+        header("location: ../booking");
+      } else {
+        $_SESSION['status'] = "Gagal";
+        $_SESSION['status_text'] = "Booking Gagal Di Simpan";
+        $_SESSION['status_code'] = "error";
+        header("location: ../booking");
+      }
+    } else {
+      $_SESSION['status'] = "Gagal";
+      $_SESSION['status_text'] = ' ' . $username['username'] . ' Sudah Mempunyai Jadwal di Jam ' . $start_jam . ' - ' . $ends_jam . ' ';
+      $_SESSION['status_code'] = "error";
+      header("location: ../booking");
+    }
   }
+
 }
 
 if (isset($_POST['edit'])) {
@@ -145,16 +235,28 @@ if (isset($_POST['edit'])) {
   }
 }
 
+// FUNGSI TAMBAH CUSTOMER TANYA TANYA
+
 if (isset($_POST['tanya_tanya'])) {
+
+  $query = mysqli_query($link, "SELECT max(kode_customer) as kode_customer FROM tbl_customer");
+  $data = mysqli_fetch_array($query);
+  $kode_customer = $data['kode_customer'];
+  $urutan = (int) substr($kode_customer, 4, 4);
+
+  $urutan++;
+
+  $huruf = "CKNW";
+  $kodecustomer = $huruf . sprintf("%04s", $urutan);
   $nama = $_POST['nama'];
   $no_telp = $_POST['no_telp'];
   $sumber = $_POST['sumber'];
   $status = 2;
 
-  $query = "INSERT INTO events(nama, no_telp, sumber, status) values ('$nama', '$no_telp', '$sumber','$status')";
+  $query = "INSERT INTO tbl_customer(kode_customer, nama_customer, no_telp, sumber, status) values ('$kodecustomer', '$nama', '$no_telp', '$sumber','$status')";
   $result = mysqli_query($link, $query);
-  $id = mysqli_insert_id($link);
   // var_dump($result);die();
+  $id = mysqli_insert_id($link);
   if ($result) { // Cek jika proses simpan ke database sukses atau tidak
     $_SESSION['status'] = "Berhasil";
     $_SESSION['status_text'] = "data Berhasil Di Simpan";
@@ -167,6 +269,61 @@ if (isset($_POST['tanya_tanya'])) {
     header("location: ../dashboard");
   }
 }
+
+// FUNGSI EDIT TANYA TANYA
+if (isset($_POST['edit_tanya'])) {
+
+  $kode_customer = $_POST['kode_customer'];
+  $nama = $_POST['nama'];
+  $no_telp = $_POST['no_telp'];
+  $sumber = $_POST['sumber'];
+  $status = 2;
+
+  $query = "UPDATE tbl_customer SET nama_customer = '$nama', no_telp = '$no_telp', sumber = '$sumber' WHERE kode_customer = '$kode_customer'";
+  $result = mysqli_query($link, $query);
+  // var_dump($result);die();
+  $id = mysqli_insert_id($link);
+  if ($result) { // Cek jika proses simpan ke database sukses atau tidak
+    $_SESSION['status'] = "Berhasil";
+    $_SESSION['status_text'] = "data Berhasil Di Simpan";
+    $_SESSION['status_code'] = "success";
+    header("location: ../data-customer");
+  } else {
+    $_SESSION['status'] = "Gagal";
+    $_SESSION['status_text'] = "data Gagal Di Simpan";
+    $_SESSION['status_code'] = "error";
+    header("location: ../data-customer");
+  }
+}
+// END FUNGSI EDIT TANYA TANYA
+
+// FUNGSI EDIT CUSTOMER
+if (isset($_POST['edit_customer'])) {
+
+  $kode_customer = $_POST['kode_customer'];
+  $nama = $_POST['nama'];
+  $no_telp = $_POST['no_telp'];
+  $sumber = $_POST['sumber'];
+  $tgl_lahir = $_POST['tgl_lahir'];
+  $status = 2;
+
+  $query = "UPDATE tbl_customer SET nama_customer = '$nama', no_telp = '$no_telp', sumber = '$sumber', tgl_lahir = '$tgl_lahir' WHERE kode_customer = '$kode_customer'";
+  $result = mysqli_query($link, $query);
+  // var_dump($result);die();
+  $id = mysqli_insert_id($link);
+  if ($result) { // Cek jika proses simpan ke database sukses atau tidak
+    $_SESSION['status'] = "Berhasil";
+    $_SESSION['status_text'] = "data Berhasil Di Simpan";
+    $_SESSION['status_code'] = "success";
+    header("location: ../data-customer");
+  } else {
+    $_SESSION['status'] = "Gagal";
+    $_SESSION['status_text'] = "data Gagal Di Simpan";
+    $_SESSION['status_code'] = "error";
+    header("location: ../data-customer");
+  }
+}
+// END FUNGSI EDIT CUSTOMER
 
 if (isset($_POST['Event'])) {
   $id = $_POST['Event'][0];

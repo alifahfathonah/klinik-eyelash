@@ -73,6 +73,29 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     })
   });
 </script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#jenis_customer').change(function() {
+      var jenis_customer = document.getElementById("jenis_customer").value;
+      // console.log(id_cabang);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/form-booking-response.php',
+        data: {
+          'jenis_customer': jenis_customer,
+        },
+
+        success: function(response) {
+          $('#data_customer').html(response);
+          console.log(jenis_customer);
+        }
+      });
+    })
+  });
+</script>
+
 <script type="text/javascript">
     $(window).on("load", function() {
       var id_cabang = document.getElementById("id_cabang").value;
@@ -472,7 +495,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
         ?> {
           id: '<?php echo $event['id']; ?>',
-          title: '<?php echo $event['nama']; ?>',
+          title: '<?php echo $event['nama_customer']; ?>',
           start: '<?php echo $start; ?>',
           end: '<?php echo $end; ?>',
           color: '<?php echo $event['warna']; ?>',
