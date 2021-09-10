@@ -89,7 +89,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
         success: function(response) {
           $('#data_customer').html(response);
-          console.log(jenis_customer);
         }
       });
     })
@@ -458,6 +457,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
           $('#ModalEdit #sumber').val(event.sumber);
           $('#ModalEdit #id_cabang').val(event.id_cabang);
           $('#ModalEdit #id_produk').val(event.id_produk);
+          $('#ModalEdit #kode_customer').val(event.kode_customer);
           $('#ModalEdit #harga').val(event.harga);
           $('#ModalEdit #id_tipe').val(event.id_tipe);
           $('#ModalEdit #id_users').val(event.id_users);
@@ -495,14 +495,16 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
         ?> {
           id: '<?php echo $event['id']; ?>',
-          title: '<?php echo $event['nama_customer']; ?>',
           start: '<?php echo $start; ?>',
           end: '<?php echo $end; ?>',
           color: '<?php echo $event['warna']; ?>',
-          no_telp: '<?php echo $event['no_telp']; ?>',
-          sumber: '<?php echo $event['sumber']; ?>',
+          title: '<?php echo $event['nama_customer'] ?>',
+          no_telp: '<?php echo $event['no_telp'] ?>',
+          sumber: '<?php echo $event['sumber'] ?>',
+          tgl_lahir: '<?php echo $event['tgl_lahir'] ?>',
           id_cabang: '<?php echo $event['id_cabang']; ?>',
           id_produk: '<?php echo $event['id_produk']; ?>',
+          kode_customer: '<?php echo $event['kode_customer']; ?>',
           harga: '<?php echo $event['harga']; ?>',
           id_tipe: '<?php echo $event['id_tipe']; ?>',
           id_users: '<?php echo $event['id_users']; ?>',
@@ -515,7 +517,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
           starts: '<?php echo $event['start']; ?>',
           ends: '<?php echo $event['ends']; ?>',
           tgl_retouch: '<?php echo $event['tgl_retouch']; ?>',
-          tgl_lahir: '<?php echo $event['tgl_lahir']; ?>',
         },
       <?php endforeach; ?>
       ]
@@ -549,7 +550,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
               'Data berhasil di pindahkan',
               'success',
               ).then((result) => {
-                window.location.href = "dashboard";
+                window.location.href = "booking";
               });
             } else {
               Swal.fire(
@@ -557,7 +558,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
                 'Data gagal di pindahkan',
                 'error',
                 ).then((result) => {
-                  window.location.href = "dashboard";
+                  window.location.href = "booking";
                 });
               }
             }
