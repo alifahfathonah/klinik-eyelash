@@ -191,28 +191,28 @@ if (isset($_GET['search'])) {
                                                     </thead>
 
                                                     <tbody>
-                                                        <tr>
-                                                            <?php
-                                                            $no = 1;
-                                                            $tgl = date('Y-m-d');
-                                                            $query = mysqli_query($link, "SELECT DISTINCT * FROM tbl_slot a WHERE a.id_cabang = $id_cbg
-                                                                AND a.id_jabatan = 1
-                                                                ORDER BY a.jam ASC");
-                                                            foreach ($query as $data) {
-                                                                $id_cabang = $data['id_cabang'];
-                                                                $query_cabang = mysqli_query($link, "SELECT a.*, b.*, c.*
-                                                                FROM events a
-                                                                JOIN tbl_cabang b ON b.id_cabang = a.id_cabang");
-                                                                foreach ($query_cabang as $qc) {
-                                                                    ?>
-                                                                    <?php if ($data['jam'] == $data['start_jam'] && $data['start'] == $tgl) { ?>
-                                                                        <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam']?></a></td>
+                                                        <?php
+                                                        $no = 1;
+                                                        $tgl = date('Y-m-d');
+                                                        $query = mysqli_query($link, "SELECT DISTINCT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.start, b.id_jabatan as jabatan_events
+                                                            FROM tbl_slot a 
+                                                            LEFT JOIN events b ON a.id_slot = b.id_slot
+                                                            WHERE a.id_cabang = $id_cbg
+                                                            AND a.id_jabatan = 1
+                                                            ORDER BY a.jam ASC");
+                                                        foreach ($query as $data) { 
+                                                            $id_cabang = $data['id_cabang'];
+                                                            $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
+                                                            foreach ($query_cabang as $qc) { ?>
+                                                                <?php if ($data['start'] == $tgl && $data['jabatan_events'] == 1) { ?>
+                                                                    <tr>
+                                                                        <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
                                                                         <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
-                                                                    <?php }
-                                                                } ?>
-                                                            </tr>
-                                                        <?php } ?>
+                                                                    <?php } ?>
+                                                                </tr>
+                                                            <?php }
+                                                        } ?>
 
                                                     </tbody>
                                                 </table>
