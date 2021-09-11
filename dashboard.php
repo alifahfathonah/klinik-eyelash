@@ -194,7 +194,7 @@ if (isset($_GET['search'])) {
                                                         <?php
                                                         $no = 1;
                                                         $tgl = date('Y-m-d');
-                                                        $query = mysqli_query($link, "SELECT DISTINCT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.start, b.id_jabatan as jabatan_events
+                                                        $query = mysqli_query($link, "SELECT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.id_slot as slot_event, b.start, b.id_jabatan as jabatan_events
                                                             FROM tbl_slot a 
                                                             LEFT JOIN events b ON a.id_slot = b.id_slot
                                                             WHERE a.id_cabang = $id_cbg
