@@ -120,7 +120,7 @@ if (isset($_GET['search'])) {
                                         if (!empty($cari)) {
                                             $cari = date('d F Y', strtotime($cari));
                                             $cari10 = date('d F Y', strtotime($cari10));
-                                            ?>
+                                        ?>
                                             <strong>
                                                 <p>Tanggal : <?php echo $cari ?></p>
                                             </strong>
@@ -172,7 +172,7 @@ if (isset($_GET['search'])) {
                     $nama_cbg = $cq['nama_cabang'];
 
                     //echo $id_cbg . $nama_cbg;
-                    ?>
+                ?>
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-header text-center">
@@ -194,13 +194,14 @@ if (isset($_GET['search'])) {
                                                         <?php
                                                         $no = 1;
                                                         $tgl = date('Y-m-d');
-                                                        $query = mysqli_query($link, "SELECT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.id_slot as slot_event, b.start, b.id_jabatan as jabatan_events
+                                                        $query = mysqli_query($link, "SELECT distinct a.jam, b.start_jam, a.id_slot, a.id_cabang, b.id_slot as slot_event, max(b.start) as start, b.id_jabatan as jabatan_events
                                                             FROM tbl_slot a 
                                                             LEFT JOIN events b ON a.id_slot = b.id_slot
                                                             WHERE a.id_cabang = $id_cbg
                                                             AND a.id_jabatan = 1
-                                                            ORDER BY a.jam ASC");
-                                                        foreach ($query as $data) { 
+                                                            group by a.jam
+");
+                                                        foreach ($query as $data) {
                                                             $id_cabang = $data['id_cabang'];
                                                             $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
                                                             foreach ($query_cabang as $qc) { ?>
@@ -210,7 +211,7 @@ if (isset($_GET['search'])) {
                                                                     <?php } else { ?>
                                                                         <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } ?>
-                                                                </tr>
+                                                                    </tr>
                                                             <?php }
                                                         } ?>
 
@@ -240,14 +241,14 @@ if (isset($_GET['search'])) {
                                                                 AND a.id_jabatan = 2
                                                                 ORDER BY a.jam ASC");
                                                             foreach ($query as $data) {
-                                                                ?>
+                                                            ?>
                                                                 <?php if ($data['jam'] == $data['start_jam'] && $data['start'] == $tgl) { ?>
                                                                     <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } else { ?>
                                                                     <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } ?>
-                                                            </tr>
-                                                        <?php } ?>
+                                                        </tr>
+                                                    <?php } ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -276,7 +277,7 @@ if (isset($_GET['search'])) {
                         foreach ($cabang_query as $cq) {
                             $id_cbg = $cq['id_cabang'];
                             $nama_cbg = $cq['nama_cabang'];
-                            ?>
+                        ?>
                             <div class="col-md-4 mb-4">
                                 <div class="card">
                                     <div class="card-header">
@@ -301,10 +302,10 @@ if (isset($_GET['search'])) {
                                             $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg AND users.level = 2");
                                             foreach ($user_query as $karyawan) { ?>
                                                 <li style="width: 50%; margin: 5px 0; text-align: center; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]) {
-                                                    echo 'background-color: red; color: #ffffff;';
-                                                } else {
-                                                    echo 'background-color: green; color: #ffffff';
-                                                } ?>"><?= $karyawan['username'] ?></li>
+                                                                                                                                echo 'background-color: red; color: #ffffff;';
+                                                                                                                            } else {
+                                                                                                                                echo 'background-color: green; color: #ffffff';
+                                                                                                                            } ?>"><?= $karyawan['username'] ?></li>
                                             <?php } ?>
                                         </ul>
                                     </div>
@@ -346,7 +347,7 @@ if (isset($_GET['search'])) {
                 while ($data = mysqli_fetch_array($hasil)) {
                     $no++;
                 }
-                ?>
+            ?>
 
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
@@ -468,169 +469,169 @@ if (isset($_GET['search'])) {
                                         foreach ($query1 as $d) { ?>
                                             <option value="<?php echo $d['id_cabang'] ?>">
                                                 <?php echo $d['nama_cabang'] ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
+                                        <?php } ?>
+                                    </select>
                                 </div>
-                            </div>
-
-                            <div class="row mt-3">
-                                <div class="col-12 mb-3">
-                                    <h5>Informasi Produk</h5>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>Nama Produk</label>
-                                        <select name="id_produk" id="id_produk" class="form-control" onchange="changeValueEdit(this.value)" placeholder="Nama Produk">
-                                            <option value=""></option>
-                                            <?php if (mysqli_num_rows($barang)) { ?>
-                                                <?php while ($row_brgg = mysqli_fetch_array($barang)) { ?>
-                                                    <option value="<?php echo $row_brgg["id_produk"] ?>"> <?php echo $row_brgg["nama_produk"] ?> </option>
-                                                    <?php $jsArrayy .= "hrg_brgg['" . $row_brgg['id_produk'] . "'] = {hrg:'" . addslashes($row_brgg['harga']) . "'};\n";
-                                                } ?>
-                                            <?php } ?>
-
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>Harga Produk</label>
-                                        <input type="text" name="harga" class="form-control" id="harga" placeholder="Harga Otomatis Terisi">
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>Tipe Produk</label>
-                                        <select name="id_tipe" class="form-control" id="id_tipe" placeholder="Tipe Produk">
-                                            <option value=""></option>
-                                            <?php
-                                            $query1 = mysqli_query($link, "SELECT a.* FROM tbl_tipe a ");
-                                            foreach ($query1 as $d) { ?>
-                                                <option value="<?php echo $d['id_tipe'] ?>">
-                                                    <?php echo $d['nama_tipe'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row mt-3">
-                                    <div class="col-12 mb-3">
-                                        <h5>Informasi Pemasang</h5>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label>Nama Pemasang</label>
-                                            <select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">
-                                                <option value=""></option>
-                                                <?php
-                                                $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.level = 2");
-                                                foreach ($query as $d) { ?>
-                                                    <option value="<?php echo $d['id_users'] ?>">
-                                                        <?php echo $d['username'] ?></option>
-                                                    <?php } ?>
-
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-3">
-                                        <div class="col-12 mb-3">
-                                            <h5>Informasi Pembayaran</h5>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Transfer</label>
-                                                <input type="text" name="transfer" id="transfer" class="form-control" id="transfer" placeholder="Transfer">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>Cash</label>
-                                                <input type="text" name="cash" class="form-control" id="cash" placeholder="Cash">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Status</label>
-                                                <select name="warna" class="form-control" id="color" placeholder="Status">
-                                                    <option value=""></option>
-                                                    <option style="color:#008000;" value="#008000">&#9724; Sudah Bayar / Lunas </option>
-                                                    <option style="color:#0071c5;" value="#0071c5">&#9724; Masih DP </option>
-                                                    <option style="color:#FF0000;" value="#FF0000">&#9724; Belum Bayar </option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label>Keterangan</label>
-                                                <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-12">
-                                            <button type="submit" name="edit" class="btn btn-primary">Simpan</button>
-                                            <button type="button" class="btn btn-danger" onclick="deletebooking()">Hapus Data</button>
-                                        </div>
-                                    </div>
-                                </form>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="modal fade" id="modal-tanya" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Masih Tanya Tanya</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                <h5>Informasi Produk</h5>
                             </div>
-                            <div class="modal-body">
-                                <form action="functions/proses-booking" method="post">
-                                    <div class="row mt-3">
-                                        <div class="col-12 mb-3">
-                                            <h5>Informasi Booking</h5>
-                                        </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Nama Produk</label>
+                                    <select name="id_produk" id="id_produk" class="form-control" onchange="changeValueEdit(this.value)" placeholder="Nama Produk">
+                                        <option value=""></option>
+                                        <?php if (mysqli_num_rows($barang)) { ?>
+                                            <?php while ($row_brgg = mysqli_fetch_array($barang)) { ?>
+                                                <option value="<?php echo $row_brgg["id_produk"] ?>"> <?php echo $row_brgg["nama_produk"] ?> </option>
+                                            <?php $jsArrayy .= "hrg_brgg['" . $row_brgg['id_produk'] . "'] = {hrg:'" . addslashes($row_brgg['harga']) . "'};\n";
+                                            } ?>
+                                        <?php } ?>
 
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nama Customer</label>
-                                                <input type="text" name="nama" class="form-control" id="title" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                <label>Nomor Whatsapp</label>
-                                                <input type="number" name="no_telp" class="form-control" id="no_telp" required="">
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="form-group">
-                                                <label>Sumber</label>
-                                                <select name="sumber" class="form-control" id="sumber">
-                                                    <option value=""></option>
-                                                    <option value="IG"> Instagram </option>
-                                                    <option value="Teman"> Teman </option>
-                                                    <option value="Iklan"> Iklan </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <button type="submit" name="tanya_tanya" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </div>
-                                </form>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Harga Produk</label>
+                                    <input type="text" name="harga" class="form-control" id="harga" placeholder="Harga Otomatis Terisi">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Tipe Produk</label>
+                                    <select name="id_tipe" class="form-control" id="id_tipe" placeholder="Tipe Produk">
+                                        <option value=""></option>
+                                        <?php
+                                        $query1 = mysqli_query($link, "SELECT a.* FROM tbl_tipe a ");
+                                        foreach ($query1 as $d) { ?>
+                                            <option value="<?php echo $d['id_tipe'] ?>">
+                                                <?php echo $d['nama_tipe'] ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                <h5>Informasi Pemasang</h5>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Nama Pemasang</label>
+                                    <select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">
+                                        <option value=""></option>
+                                        <?php
+                                        $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.level = 2");
+                                        foreach ($query as $d) { ?>
+                                            <option value="<?php echo $d['id_users'] ?>">
+                                                <?php echo $d['username'] ?></option>
+                                        <?php } ?>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                <h5>Informasi Pembayaran</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Transfer</label>
+                                    <input type="text" name="transfer" id="transfer" class="form-control" id="transfer" placeholder="Transfer">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Cash</label>
+                                    <input type="text" name="cash" class="form-control" id="cash" placeholder="Cash">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select name="warna" class="form-control" id="color" placeholder="Status">
+                                        <option value=""></option>
+                                        <option style="color:#008000;" value="#008000">&#9724; Sudah Bayar / Lunas </option>
+                                        <option style="color:#0071c5;" value="#0071c5">&#9724; Masih DP </option>
+                                        <option style="color:#FF0000;" value="#FF0000">&#9724; Belum Bayar </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Keterangan</label>
+                                    <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <button type="submit" name="edit" class="btn btn-primary">Simpan</button>
+                                <button type="button" class="btn btn-danger" onclick="deletebooking()">Hapus Data</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <?php
-                include 'views/footer.php';
-                ?>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-tanya" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Masih Tanya Tanya</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="functions/proses-booking" method="post">
+                        <div class="row mt-3">
+                            <div class="col-12 mb-3">
+                                <h5>Informasi Booking</h5>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Nama Customer</label>
+                                    <input type="text" name="nama" class="form-control" id="title" required="">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Nomor Whatsapp</label>
+                                    <input type="number" name="no_telp" class="form-control" id="no_telp" required="">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Sumber</label>
+                                    <select name="sumber" class="form-control" id="sumber">
+                                        <option value=""></option>
+                                        <option value="IG"> Instagram </option>
+                                        <option value="Teman"> Teman </option>
+                                        <option value="Iklan"> Iklan </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="submit" name="tanya_tanya" class="btn btn-primary">Simpan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+    include 'views/footer.php';
+    ?>
