@@ -10,8 +10,9 @@ $query = mysqli_query($link, "SELECT * FROM tbl_produk WHERE id_produk = $id_pro
 $hasil = mysqli_fetch_array($query);
 
 $date = strtotime($start);
-$tujuh_hari = strtotime("+7 day", $date);
+$tujuh_hari = strtotime('+'.$hasil['waktu_retouch'].' day', $date);
 $retouch = date("Y-m-d", $tujuh_hari);
+// $retouch = date("Y-m-d", $hasil['waktu_retouch']);
 // $retouch = date('d F Y', strtotime($kembali));
 
 echo '<input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title" required="" value="' . $retouch . '">';

@@ -7,8 +7,9 @@ session_start();
 if(isset($_POST['submit'])){ 
   $nama_produk = $_POST['nama_produk'];
   $harga = $_POST['harga'];
+  $waktu_retouch = $_POST['waktu_retouch'];
 
-  $query="INSERT INTO tbl_produk(nama_produk,harga) values('$nama_produk','$harga')";
+  $query="INSERT INTO tbl_produk(nama_produk,harga, waktu_retouch) values('$nama_produk','$harga', '$waktu_retouch')";
   $result=mysqli_query($link,$query);
   $id = mysqli_insert_id($link);
   // var_dump($result);die();
@@ -32,8 +33,9 @@ if(isset($_POST['edit'])){
   $id_produk = $_POST['id_produk'];
   $nama_produk = $_POST['nama_produk'];
   $harga = $_POST['harga'];
+  $waktu_retouch = $_POST['waktu_retouch'];
 
-  $sql = "UPDATE tbl_produk SET nama_produk='$nama_produk', harga = '$harga' WHERE id_produk = $id_produk";
+  $sql = "UPDATE tbl_produk SET nama_produk='$nama_produk', harga = '$harga', waktu_retouch = '$waktu_retouch' WHERE id_produk = $id_produk";
   $result = mysqli_query($link, $sql);
   // var_dump($result);die();
   if($result){ // Cek jika proses simpan ke database sukses atau tidak

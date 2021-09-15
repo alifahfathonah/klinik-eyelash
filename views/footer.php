@@ -56,6 +56,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     $('#id_cabang').change(function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;
+      var id_jabatan = document.getElementById("id_jabatan").value;
       // console.log(id_cabang);
 
       $.ajax({
@@ -64,6 +65,31 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
         data: {
           'id_cabang': id_cabang,
           'tanggal': tanggal,
+          'id_jabatan': id_jabatan,
+        },
+
+        success: function(response) {
+          $('#pemasang').html(response);
+        }
+      });
+    })
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#id_jabatan').change(function() {
+      var id_cabang = document.getElementById("id_cabang").value;
+      var tanggal = document.getElementById("start").value;
+      var id_jabatan = document.getElementById("id_jabatan").value;
+      // console.log(id_cabang);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/pilih-pemasang.php',
+        data: {
+          'id_cabang': id_cabang,
+          'tanggal': tanggal,
+          'id_jabatan': id_jabatan,
         },
 
         success: function(response) {
@@ -99,6 +125,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     $(window).on("load", function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;
+      var id_jabatan = document.getElementById("id_jabatan").value;
       // console.log(id_cabang);
 
       $.ajax({
@@ -107,6 +134,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
         data: {
           'id_cabang': id_cabang,
           'tanggal': tanggal,
+          'id_jabatan': id_jabatan,
         },
 
         success: function(response) {
@@ -462,6 +490,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
           $('#ModalEdit #id_tipe').val(event.id_tipe);
           $('#ModalEdit #id_users').val(event.id_users);
           $('#ModalEdit #transfer').val(event.transfer);
+          $('#ModalEdit #id_jabatan').val(event.id_jabatan);
           $('#ModalEdit #cash').val(event.cash);
           $('#ModalEdit #id_produk').val(event.id_produk);
           $('#ModalEdit #keterangan').val(event.keterangan);
@@ -508,6 +537,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
           harga: '<?php echo $event['harga']; ?>',
           id_tipe: '<?php echo $event['id_tipe']; ?>',
           id_users: '<?php echo $event['id_users']; ?>',
+          id_jabatan: '<?php echo $event['id_jabatan']; ?>',
           transfer: '<?php echo $event['transfer']; ?>',
           cash: '<?php echo $event['cash']; ?>',
           id_produk: '<?php echo $event['id_produk']; ?>',

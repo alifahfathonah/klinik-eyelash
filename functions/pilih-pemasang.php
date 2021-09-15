@@ -18,9 +18,11 @@ $namahari = date('l', strtotime($tanggal));
 
 // GET id_cabang
 $cabang = $_POST['id_cabang'];
-$query = mysqli_query($link, "SELECT a.*, b.* FROM tbl_status_kerja a JOIN users b ON a.id_users = b.id_users JOIN tbl_cabang c ON a.cabang = c.id_cabang WHERE a.cabang = '$cabang' AND b.level = '2' AND hari_libur != '$daftar_hari[$namahari]' ");
+$id_jabatan = $_POST['id_jabatan'];
+$query = mysqli_query($link, "SELECT a.*, b.* FROM tbl_status_kerja a JOIN users b ON a.id_users = b.id_users JOIN tbl_cabang c ON a.cabang = c.id_cabang WHERE a.cabang = '$cabang' AND b.level = '2' AND hari_libur != '$daftar_hari[$namahari]' AND a.id_jabatan = '$id_jabatan'");
 
 echo '<select name="id_users" class="form-control" id="id_users" required="">
+		<option value="0" disabled>-- Pilih Salah Satu --</option>
 		';
 foreach ($query as $data) {
 	// echo '<option value="1">1</option>';

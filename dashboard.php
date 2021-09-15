@@ -209,7 +209,7 @@ if (isset($_GET['search'])) {
                                                                     <tr>
                                                                         <td style="color:green; font-weight:900; text-align:center;"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
-                                                                        <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                        <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&jabatan=1&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } ?>
                                                                     </tr>
                                                             <?php }

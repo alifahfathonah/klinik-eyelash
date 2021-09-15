@@ -30,9 +30,7 @@ include 'views/header.php';
     }
 </script>
 
-<body onload="<?php if ($_GET['popup'] == 1) {
-    echo "loadPopup()";
-} ?>">
+<body onload="<?php if($_GET['popup'] == 1) { echo "loadPopup()";} ?>">
 
 <?php
 include 'views/navbar.php';
@@ -129,6 +127,7 @@ include 'views/notifications.php';
                             <div class="form-group">
                                 <label>Jenis Customer</label>
                                 <select name="jenis_customer" id="jenis_customer" class="form-control">
+                                    <option value="0" disabled selected>-- PILIH CUSTOMER --</option>
                                     <option value="customer_baru">Customer Baru</option>
                                     <option value="customer_lama">Customer Lama</option>
                                 </select>
@@ -213,6 +212,16 @@ include 'views/notifications.php';
                     <div class="row mt-3">
                         <div class="col-12 mb-3">
                             <h5>Informasi Pemasang</h5>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Jabatan Pemasang</label>
+                                <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                    <option value=""></option>
+                                    <option value="1"> Senior </option>
+                                    <option value="2"> Junior </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
@@ -402,6 +411,16 @@ include 'views/notifications.php';
                     <div class="row mt-3">
                         <div class="col-12 mb-3">
                             <h5>Informasi Pemasang</h5>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Jabatan Pemasang</label>
+                                <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                    <option value=""></option>
+                                    <option value="1"> Senior </option>
+                                    <option value="2"> Junior </option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
