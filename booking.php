@@ -218,8 +218,8 @@ include 'views/notifications.php';
                                 <label>Jabatan Pemasang</label>
                                 <select name="id_jabatan" class="form-control" id="id_jabatan">
                                     <option value=""></option>
-                                    <option value="1"> Senior </option>
-                                    <option value="2"> Junior </option>
+                                    <option value="1" <?php if ($_GET['id_jabatan'] == '1') { echo 'selected'; } ?>> Senior </option>
+                                    <option value="2" <?php if ($_GET['id_jabatan'] == '2') { echo 'selected'; } ?>> Junior </option>
                                 </select>
                             </div>
                         </div>
