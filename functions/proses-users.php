@@ -11,13 +11,14 @@ if(isset($_POST['submit']) ){
     $hari_libur = $_POST['hari_libur'];
     $id_cabang = $_POST['id_cabang'];
     $level = $_POST['level'];
+    $id_jabatan = $_POST['id_jabatan'];
     
     // trim - remove spasi
     if( !empty(trim($username)) && !empty(trim($password)) && !empty(trim($level)) ){
 
         if(register_cek_username($username)){
 
-            if(register_user($username, $password, $level, $hari_libur, $id_cabang)){
+            if(register_user($username, $password, $level, $hari_libur, $id_cabang, $id_jabatan)){
                 $_SESSION['status'] = "Berhasil";
                 $_SESSION['status_text'] = "Users Berhasil Di Tambahkan";
                 $_SESSION['status_code'] = "success";
@@ -58,7 +59,7 @@ if(isset($_POST['edit']) ){
 
         if(register_cek_username($username)){
 
-            if(register_user_edit($id_users,$username, $password, $level, $hari_libur, $id_cabang)){
+            if(register_user_edit($id_users,$username, $password, $level, $hari_libur, $id_cabang, $id_jabatan)){
                 $_SESSION['status'] = "Berhasil";
                 $_SESSION['status_text'] = "Users Berhasil Di Edit";
                 $_SESSION['status_code'] = "success";
@@ -91,9 +92,10 @@ if (isset($_POST['info_karyawan'])) {
     $username = $_POST['username'];
     $hari_libur = $_POST['hari_libur'];
     $id_cabang = $_POST['id_cabang'];
+    $id_jabatan = $_POST['id_jabatan'];
     $tanggal = date('Y-m-d');
 
-    $sql = "UPDATE tbl_status_kerja SET hari_libur='$hari_libur', cabang = '$id_cabang', tanggal = '$tanggal' WHERE id_users = $id_users";
+    $sql = "UPDATE tbl_status_kerja SET hari_libur='$hari_libur', cabang = '$id_cabang', tanggal = '$tanggal', id_jabatan='$id_jabatan' WHERE id_users = $id_users";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak

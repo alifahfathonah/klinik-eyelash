@@ -1,6 +1,6 @@
 <?php
 
-function register_user($username, $password, $level, $hari_libur, $id_cabang){
+function register_user($username, $password, $level, $hari_libur, $id_cabang, $id_jabatan){
     global $link;
 
     $username = mysqli_real_escape_string($link, $username);
@@ -8,6 +8,7 @@ function register_user($username, $password, $level, $hari_libur, $id_cabang){
     $level = mysqli_real_escape_string($link, $level);
     $hari_libur = mysqli_real_escape_string($link, $hari_libur);
     $id_cabang = mysqli_real_escape_string($link, $id_cabang);
+    $id_jabatan = mysqli_real_escape_string($link, $id_jabatan);
     $tanggal = date('Y-m-d');
     // var_dump(array($hari_libur,$id_cabang,$tanggal));die();
     $password = password_hash($password, PASSWORD_DEFAULT);
@@ -16,7 +17,7 @@ function register_user($username, $password, $level, $hari_libur, $id_cabang){
 
     if ( mysqli_query($link, $query) ) {
         $last_id = mysqli_insert_id($link);
-        $query_dua = "INSERT INTO tbl_status_kerja(id_users, hari_libur, cabang, tanggal) VALUES($last_id, '$hari_libur', $id_cabang, '$tanggal')";
+        $query_dua = "INSERT INTO tbl_status_kerja(id_users, hari_libur, cabang, tanggal, id_jabatan) VALUES($last_id, '$hari_libur', $id_cabang, '$tanggal', '$id_jabatan')";
         $datasquery = mysqli_query($link, $query_dua);
         // var_dump($datasquery); die();
         return true;  
@@ -25,7 +26,7 @@ function register_user($username, $password, $level, $hari_libur, $id_cabang){
     }
 }
 
-function register_user_edit($id_users, $username, $password, $level, $hari_libur, $id_cabang){
+function register_user_edit($id_users, $username, $password, $level, $hari_libur, $id_cabang, $id_jabatan){
     global $link;
 
     $id_users = mysqli_real_escape_string($link, $id_users);

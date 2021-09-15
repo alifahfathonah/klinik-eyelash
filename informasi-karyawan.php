@@ -171,7 +171,16 @@ include 'views/header.php';
 																					<option value="<?= $cabang['id_cabang']; ?>" <?php if ($data['nama_cabang'] == $cabang['nama_cabang']) { echo 'selected'; } ?>><?= $cabang['nama_cabang']; ?></option>
 																				<?php } ?>
 																			</select>
-																			<!-- <input type="date" name="tanggal" value="<?php //echo $data['tanggal'] ?>" class="form-control" id="Name"> -->
+																		</div>
+																	</div> 
+																	<div class="col">
+																		<div class="form-group">
+																			<label class="floating-label" for="id_jabatan">Jabatan Pemasang</label>
+																			<select name="id_jabatan" class="form-control" id="id_jabatan" placeholder="Pilih Jabatan">
+																				<option value=""></option>
+																				<option value="1" <?php if ($data['id_jabatan'] == '1') { echo 'selected'; }?>>Senior</option>
+																				<option value="2" <?php if ($data['id_jabatan'] == '2') { echo 'selected'; }?>>Junior</option>
+																			</select>
 																		</div>
 																	</div>       
 																	<div class="col-sm-12">
@@ -271,9 +280,18 @@ include 'views/header.php';
 											<option value="<?= $cabang['id_cabang']; ?>"><?= $cabang['nama_cabang']; ?></option>
 										<?php } ?>
 									</select>
-									<!-- <input type="date" name="tanggal" value="<?php //echo $data['tanggal'] ?>" class="form-control" id="Name"> -->
 								</div>
 							</div>
+							<div class="col">
+								<div class="form-group">
+									<label class="floating-label" for="id_jabatan">Jabatan Pemasang</label>
+									<select name="id_jabatan" class="form-control" id="id_jabatan" placeholder="Pilih Jabatan">
+										<option value=""></option>
+										<option value="1">Senior</option>
+										<option value="2">Junior</option>
+									</select>
+								</div>
+							</div> 
 
 							<div class="col-sm-12">
 								<button type="submit" name="submit" class="btn btn-primary">Simpan</button>
