@@ -23,7 +23,7 @@ include 'views/header.php';
 					<div class="row align-items-center">
 						<div class="col-md-12">
 							<div class="page-header-title">
-								<h5>Data Customer Per Hari Ini</h5>
+								<h5>Data Customer</h5>
 							</div>
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a></li>
@@ -36,6 +36,35 @@ include 'views/header.php';
 			</div>
 			<!-- [ breadcrumb ] end -->
 			<!-- [ Main Content ] start -->
+
+			<!-- DATA SEMUA CUSTOMER -->
+			<div class="card shadow mb-4">
+				<a href="#collapseCardAllCustomers" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardAllCustomers">
+					<h6 class="m-0 font-weight-bold text-primary">
+						Data Lengkap Customer
+					</h6>
+				</a>
+
+				<div class="collapse" id="collapseCardAllCustomers">
+					<div class="card-body">
+						<div class="form-group">
+							<label>Pilih Data</label>
+							<form method="POST">
+								<select name="jenis_data_customer" class="form-control" id="jenis_data_customer">
+									<option value="0" disabled>-- PILIH DATA --</option>
+									<option value="semua">Semua Data</option>
+									<option value="lunas">Lunas Hari Ini</option>
+									<option value="belum_lunas">Belum Lunas</option>
+									<option value="retouch">Retouch 3 Hari Lagi</option>
+									<option value="tanya">Baru Tanya-Tanya</option>
+								</select>
+							</form>
+						</div>
+						<div id="data_customer"></div>
+					</div>
+				</div>
+			</div>
+			<!-- END CUSTOMER LUNAS HARI INI -->
 
 			<!-- CUSTOMER LUNAS HARI INI -->
 			<div class="card shadow mb-4">
@@ -81,7 +110,7 @@ include 'views/header.php';
 										LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
 										WHERE a.harga - a.transfer - a.cash = 0
 										AND a.start = '$tgl'
-										AND a.status = 1
+										AND f.status = 1
 										ORDER BY a.start ASC");
 									foreach ($query as $data) { 
 
@@ -229,10 +258,9 @@ include 'views/header.php';
 										LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
 										WHERE a.harga - a.transfer - a.cash != 0
 										AND a.start = '$tgl'
-										AND a.status = 1
+										AND f.status = 1
 										ORDER BY a.start ASC");
 									foreach ($query as $data) { 
-
 										$daftar_hari = array(
 											'Sunday' => 'Minggu',
 											'Monday' => 'Senin',

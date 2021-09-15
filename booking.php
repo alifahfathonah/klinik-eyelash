@@ -127,7 +127,7 @@ include 'views/notifications.php';
                             <div class="form-group">
                                 <label>Jenis Customer</label>
                                 <select name="jenis_customer" id="jenis_customer" class="form-control">
-                                    <option value="0" disabled selected>-- PILIH CUSTOMER --</option>
+                                    <option value="0" disabled>-- PILIH CUSTOMER --</option>
                                     <option value="customer_baru">Customer Baru</option>
                                     <option value="customer_lama">Customer Lama</option>
                                 </select>

@@ -53,6 +53,27 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#jenis_data_customer').change(function() {
+      var jenis_data_customer = document.getElementById("jenis_data_customer").value;
+      // console.log(jenis_data_customer);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/customer-all.php',
+        data: {
+          'jenis_data_customer': jenis_data_customer,
+        },
+
+        success: function(response) {
+          $('#data_customer').html(response);
+        }
+      });
+    })
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
     $('#id_cabang').change(function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;
@@ -122,7 +143,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-    $(window).on("load", function() {
+    $('#id_cabang').on("load", function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;
       var id_jabatan = document.getElementById("id_jabatan").value;
