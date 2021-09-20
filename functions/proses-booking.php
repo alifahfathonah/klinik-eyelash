@@ -23,6 +23,10 @@ if (isset($_POST['submit'])) {
   $keterangan = $_POST['keterangan'];
   $status = 1;
 
+  $query_slot = mysqli_query($link, "SELECT * FROM tbl_slot WHERE id_cabang = '$id_cabang' AND id_jabatan = '$id_jabatan' AND jam = '$start_jam' ");
+  $id_slot = $query_slot['id_slot'];
+  
+  var_dump($id_slot); die();
   if ($id_cabang == '1') {
     if ($id_jabatan == '1') {
       if ($start_jam == '09:00') {

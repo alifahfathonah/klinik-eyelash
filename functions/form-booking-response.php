@@ -1,12 +1,25 @@
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $(".select2").select2({
+            });
+        });
+    </script>
+    </head>
 <?php 
 include "../model/db.php";
+
 if ($_POST['jenis_customer'] == 'customer_lama') { ?>
 	<div class="row">
 		<div class="col-sm-6">
 			<div class="form-group">
 				<label>Nama Customer</label>
-				<select name="nama" id="pilih_nama" class="form-control" required="">
-					<option value="0" disabled selected>-- PILIH SALAH SATU -- </option>
+				<select name="nama" id="pilih_nama" class="form-control select2" required="">
+					<!-- <option value="0" disabled selected>-- PILIH SALAH SATU -- </option> -->
 					<optgroup label="Customer">
 						<?php
 						$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 1");
@@ -50,8 +63,8 @@ if ($_POST['jenis_customer'] == 'customer_lama') { ?>
 		</div>
 	</div>
 <?php } ?>
-
 <script type="text/javascript">
+
 	$(document).ready(function() {
 		$('#pilih_nama').change(function() {
 			var pilih_nama = document.getElementById("pilih_nama").value;
