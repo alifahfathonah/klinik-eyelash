@@ -24,7 +24,7 @@
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 1");
 							foreach ($query as $data_customer) { ?>
-								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer'].' - '.$data_customer['no_telp']; ?></option>
+								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer'] . ' - ' . $data_customer['no_telp']; ?></option>
 							<?php } ?>
 						</optgroup>
 						<optgroup label="Customer Tanya">
@@ -79,12 +79,16 @@
 
 					success: function(response) {
 						console.log(response);
-						if (response = '<span class="status-not-available" style="color: #ff4757"> No HP Sudah Digunakan</span>') {
-							$('#user-availability-status').html(response);
+						if (response == "true") {
+							var hasil = '<span class="status-not-available" style="color: #ff4757"> No HP Sudah Digunakan</span>';
+							$('#user-availability-status').html(hasil);
 							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
-						} else if(response = '<span class="status-available" style="color: #23ad5c"> No HP Bisa Dipakai </span>'){ 
+						} else if (response == "false") {
+							var hasil2 = '<span class="status-available" style="color: #23ad5c"> No HP Bisa Dipakai </span>';
+							$('#user-availability-status').html(hasil2);
 							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary">Simpan</button>');
-							$('#user-availability-status').html(response);
+						} else {
+
 						}
 					}
 				});
