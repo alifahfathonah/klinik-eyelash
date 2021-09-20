@@ -9,6 +9,7 @@ $data = mysqli_fetch_array($query);
 		<div class="form-group">
 			<label>Nomor Whatsapp</label>
 			<input type="text" name="no_telp" class="form-control" id="no_telp" required="" value="<?= $data['no_telp'] ?>">
+			<div id="user-availability-status"></div>
 		</div>
 	</div>
 	<div class="col-sm-6">

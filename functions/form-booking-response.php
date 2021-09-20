@@ -53,6 +53,7 @@
 				<div class="form-group">
 					<label>Nomor Whatsapp</label>
 					<input type="text" name="no_telp" class="form-control" id="no_telp" required="">
+					<div id="user-availability-status"></div>
 				</div>
 			</div>
 			<div class="col-sm-4">
@@ -63,6 +64,33 @@
 			</div>
 		</div>
 	<?php } ?>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#no_telp').change(function() {
+				var no_telp = document.getElementById("no_telp").value;
+				console.log(no_telp);
+
+				$.ajax({
+					type: 'POST',
+					url: 'functions/check_nohp.php',
+					data: {
+						'no_telp': no_telp,
+					},
+
+					success: function(response) {
+						console.log(response);
+						if (response = '<span class="status-not-available" style="color: #ff4757"> No HP Sudah Digunakan</span>') {
+							$('#user-availability-status').html(response);
+							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
+						} else if(response = '<span class="status-available" style="color: #23ad5c"> No HP Bisa Dipakai </span>'){ 
+							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary">Simpan</button>');
+							$('#user-availability-status').html(response);
+						}
+					}
+				});
+			})
+		});
+	</script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#pilih_nama').change(function() {
