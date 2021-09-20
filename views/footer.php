@@ -98,6 +98,17 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#jenis_customer').change(function() {
+      if ($(this).val() == "customer_lama") {
+        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary">Simpan</button>');
+      } else if ($(this).val() == "customer_baru") {
+        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
+      }
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function() {
     $('#id_jabatan').change(function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;

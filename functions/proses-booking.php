@@ -24,105 +24,105 @@ if (isset($_POST['submit'])) {
   $status = 1;
 
   $query_slot = mysqli_query($link, "SELECT * FROM tbl_slot WHERE id_cabang = '$id_cabang' AND id_jabatan = '$id_jabatan' AND jam = '$start_jam' ");
-  $id_slot = $query_slot['id_slot'];
-  
-  var_dump($id_slot); die();
-  if ($id_cabang == '1') {
-    if ($id_jabatan == '1') {
-      if ($start_jam == '09:00') {
-        $id_slot = '1';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '2';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '3';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '4';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '5';
-      } else {
-        $id_slot = '0';
-      }
+  $slot = mysqli_fetch_array($query_slot);
+  $id_slot = $slot['id_slot'];
 
-    } else if ($id_jabatan == '2') {
-      if ($start_jam == '09:00') {
-        $id_slot = '11';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '12';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '13';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '14';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '15';
-      } else {
-        $id_slot = '0';
-      }
+  // if ($id_cabang == '1') {
+  //   if ($id_jabatan == '1') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '1';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '2';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '3';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '4';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '5';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
+
+  //   } else if ($id_jabatan == '2') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '11';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '12';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '13';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '14';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '15';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
       
-    }
-  } else if ($id_cabang == '2') {
-    if ($id_jabatan == '1') {
-      if ($start_jam == '09:00') {
-        $id_slot = '16';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '17';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '18';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '19';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '20';
-      } else {
-        $id_slot = '0';
-      }
+  //   }
+  // } else if ($id_cabang == '2') {
+  //   if ($id_jabatan == '1') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '16';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '17';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '18';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '19';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '20';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
 
-    } else if ($id_jabatan == '2') {
-      if ($start_jam == '09:00') {
-        $id_slot = '6';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '7';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '8';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '9';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '10';
-      } else {
-        $id_slot = '0';
-      }
+  //   } else if ($id_jabatan == '2') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '6';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '7';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '8';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '9';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '10';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
       
-    }
-  } else if ($id_cabang == '3') {
-    if ($id_jabatan == '1') {
-      if ($start_jam == '09:00') {
-        $id_slot = '21';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '22';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '23';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '24';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '25';
-      } else {
-        $id_slot = '0';
-      }
+  //   }
+  // } else if ($id_cabang == '3') {
+  //   if ($id_jabatan == '1') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '21';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '22';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '23';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '24';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '25';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
 
-    } else if ($id_jabatan == '2') {
-      if ($start_jam == '09:00') {
-        $id_slot = '26';
-      } else if ($start_jam == '10:00') {
-        $id_slot = '27';
-      } else if ($start_jam == '11:00') {
-        $id_slot = '28';
-      } else if ($start_jam == '12:00') {
-        $id_slot = '29';
-      } else if ($start_jam == '13:00') {
-        $id_slot = '30';
-      } else {
-        $id_slot = '0';
-      }
-    }
-  }
+  //   } else if ($id_jabatan == '2') {
+  //     if ($start_jam == '09:00') {
+  //       $id_slot = '26';
+  //     } else if ($start_jam == '10:00') {
+  //       $id_slot = '27';
+  //     } else if ($start_jam == '11:00') {
+  //       $id_slot = '28';
+  //     } else if ($start_jam == '12:00') {
+  //       $id_slot = '29';
+  //     } else if ($start_jam == '13:00') {
+  //       $id_slot = '30';
+  //     } else {
+  //       $id_slot = '0';
+  //     }
+  //   }
+  // }
 
   if ($_POST['jenis_customer'] == 'customer_lama') {
     $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");

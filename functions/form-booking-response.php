@@ -78,7 +78,7 @@
 					},
 
 					success: function(response) {
-						console.log(response);
+						// console.log(response);
 						if (response == "true") {
 							var hasil = '<span class="status-not-available" style="color: #ff4757"> No HP Sudah Digunakan</span>';
 							$('#user-availability-status').html(hasil);
