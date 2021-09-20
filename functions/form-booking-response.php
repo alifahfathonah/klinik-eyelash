@@ -5,6 +5,11 @@
 			$(".select2").select2({});
 		});
 	</script>
+	<style type="text/css">
+		.select2-container {
+			z-index: 99999;
+		}
+	</style>
 	<?php
 	include "../model/db.php";
 
@@ -19,7 +24,7 @@
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 1");
 							foreach ($query as $data_customer) { ?>
-								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer']; ?></option>
+								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer'].' - '.$data_customer['no_telp']; ?></option>
 							<?php } ?>
 						</optgroup>
 						<optgroup label="Customer Tanya">
