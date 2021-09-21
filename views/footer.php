@@ -132,7 +132,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   });
 </script>
 <script type="text/javascript">
-    $('#id_jabatan').load(function() {
+    $(window).on("load",function() {
       var id_cabang = document.getElementById("id_cabang").value;
       var tanggal = document.getElementById("start").value;
       var id_jabatan = document.getElementById("id_jabatan").value;
@@ -180,7 +180,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     var id_cabang = document.getElementById("id_cabang").value;
     var tanggal = document.getElementById("start").value;
     var id_jabatan = document.getElementById("id_jabatan").value;
-    console.log(id_cabang);
 
     $.ajax({
       type: 'POST',
