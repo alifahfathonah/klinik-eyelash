@@ -243,6 +243,7 @@ if (isset($_POST['edit'])) {
   $ends_jam = $_POST['ends_jam'];
   $tgl_retouch = $_POST['tgl_retouch'];
   $tgl_lahir = $_POST['tgl_lahir'];
+  $id_jabatan = $_POST['id_jabatan'];
 
   $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
   $username = mysqli_fetch_array($query);

@@ -712,6 +712,44 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
+    $('#start_jam').change(function() {
+      var data_start_jam = document.getElementById("start_jam").value;
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/hitung-jam.php',
+        data: {
+          'start_jam': data_start_jam,
+        },
+
+        success: function(response) {
+          $('#jam_ends').html(response);
+        }
+      });
+    })
+  });
+</script>
+
+<script type="text/javascript">
+    $(window).on("load", function() {
+      var data_start_jam = document.getElementById("start_jam").value;
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/hitung-jam.php',
+        data: {
+          'start_jam': data_start_jam,
+        },
+
+        success: function(response) {
+          $('#jam_ends').html(response);
+        }
+      });
+    });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
     $('#level').change(function() {
       var level = $(this).val();
       var hari_libur = document.getElementById("hari_libur").val;

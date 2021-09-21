@@ -30,7 +30,7 @@ include 'views/header.php';
     }
 </script>
 
-<body onload="<?php if ($_GET['popup'] == 1) {
+<body onload="<?php if (!empty($_GET['popup'] == 1)) {
                     echo "loadPopup()";
                 } ?>">
 
@@ -207,9 +207,7 @@ include 'views/header.php';
                                         $cabang = ucwords($_GET['cabang']);
                                         $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
                                         foreach ($query1 as $d) { ?>
-                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
-                                                                                                echo "selected";
-                                                                                            } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") { echo "selected"; } ?>> <?php echo $d['nama_cabang'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
