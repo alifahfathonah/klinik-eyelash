@@ -202,7 +202,7 @@ if (isset($_GET['search'])) {
                                                             AND a.id_jabatan = 1
                                                             group by a.jam");
                                                         foreach ($query as $data) {
-                                                            $id_cabang = $data['id_cabang'];
+                                                            $id_cabang = $data['cabangs'];
                                                             $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
                                                             foreach ($query_cabang as $qc) { ?>
                                                                 <?php if ($data['start'] == $tgl && $data['jabatan_events'] == 1) { ?>
@@ -451,7 +451,7 @@ if (isset($_GET['search'])) {
                                                             AND a.id_jabatan = 2
                                                             group by a.jam");
                                                             foreach ($query as $data) {
-                                                                $id_cabang = $data['id_cabang'];
+                                                                $id_cabang = $data['cabangs'];
                                                                 $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
                                                                 foreach ($query_cabang as $qc) { ?>
                                                                     <?php if ($data['start'] == $tgl && $data['jabatan_events'] == 2) { ?>
