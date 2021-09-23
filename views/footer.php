@@ -132,26 +132,26 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   });
 </script>
 <script type="text/javascript">
-    $(window).on("load",function() {
-      var id_cabang = document.getElementById("id_cabang").value;
-      var tanggal = document.getElementById("start").value;
-      var id_jabatan = document.getElementById("id_jabatan").value;
-      // console.log(id_cabang);
+  $(window).on("load", function() {
+    var id_cabang = document.getElementById("id_cabang").value;
+    var tanggal = document.getElementById("start").value;
+    var id_jabatan = document.getElementById("id_jabatan").value;
+    // console.log(id_cabang);
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/pilih-pemasang.php',
-        data: {
-          'id_cabang': id_cabang,
-          'tanggal': tanggal,
-          'id_jabatan': id_jabatan,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-pemasang.php',
+      data: {
+        'id_cabang': id_cabang,
+        'tanggal': tanggal,
+        'id_jabatan': id_jabatan,
+      },
 
-        success: function(response) {
-          $('#pemasang').html(response);
-        }
-      });
+      success: function(response) {
+        $('#pemasang').html(response);
+      }
     });
+  });
 </script>
 
 <script type="text/javascript">
@@ -663,8 +663,11 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   <?php echo $jsArray; ?>
 
+
   function changeValueEdit(id_produk) {
-    document.getElementById("harga").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga_1").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga_2").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga_3").value = hrg_brg[id_produk].harga;
   };
 </script>
 
@@ -731,21 +734,21 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-    $(window).on("load", function() {
-      var data_start_jam = document.getElementById("start_jam").value;
+  $(window).on("load", function() {
+    var data_start_jam = document.getElementById("start_jam").value;
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/hitung-jam.php',
-        data: {
-          'start_jam': data_start_jam,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/hitung-jam.php',
+      data: {
+        'start_jam': data_start_jam,
+      },
 
-        success: function(response) {
-          $('#jam_ends').html(response);
-        }
-      });
+      success: function(response) {
+        $('#jam_ends').html(response);
+      }
     });
+  });
 </script>
 
 <script type="text/javascript">
