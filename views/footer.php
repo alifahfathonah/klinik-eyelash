@@ -99,8 +99,9 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   $(document).ready(function() {
     $('#jenis_customer').change(function() {
+      var alert = "'Anda yakin data sudah benar?'";
       if ($(this).val() == "customer_lama") {
-        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary">Simpan</button>');
+        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary"  onclick="return confirm('+alert+')">Simpan</button>');
       } else if ($(this).val() == "customer_baru") {
         $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
       }

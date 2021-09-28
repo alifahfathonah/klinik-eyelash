@@ -483,7 +483,7 @@ include 'views/header.php';
                             </div>
 
                             <div class="col-sm-12">
-                                <button type="submit" name="edit" class="btn btn-primary">Simpan</button>
+                                <button type="submit" name="edit" class="btn btn-primary" onclick="return confirm('Anda yakin data sudah benar ?')">Simpan</button>
                                 <button type="button" class="btn btn-danger" onclick="deletebooking()">Hapus Data</button>
                             </div>
                         </div>

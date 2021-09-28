@@ -196,7 +196,7 @@ include 'views/header.php';
                             </div>
                         </div> -->
                         <div class="col-sm-12">
-                        	<button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+                        	<button type="submit" name="submit" onclick="return confirm('Anda yakin data sudah benar ?')" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
                 </form>

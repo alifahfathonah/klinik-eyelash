@@ -58,7 +58,7 @@
 					<a href="slot" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Slot</span></a>
 				</li>
 				<li class="nav-item">
-					<a href="informasi-karyawan" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Informasi Hari Libur</span></a>
+					<a href="informasi-karyawan" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Informasi Karyawan</span></a>
 				</li>
 
 			</ul>

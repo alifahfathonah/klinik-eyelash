@@ -84,9 +84,10 @@
 							$('#user-availability-status').html(hasil);
 							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
 						} else if (response == "false") {
+							var alert = "'Anda yakin data sudah benar?'";
 							var hasil2 = '<span class="status-available" style="color: #23ad5c"> No HP Bisa Dipakai </span>';
 							$('#user-availability-status').html(hasil2);
-							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary">Simpan</button>');
+							$('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" onclick="return confirm('+alert+')">Simpan</button>');
 						} else {
 
 						}
