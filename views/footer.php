@@ -101,7 +101,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     $('#jenis_customer').change(function() {
       var alert = "'Anda yakin data sudah benar?'";
       if ($(this).val() == "customer_lama") {
-        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary"  onclick="return confirm('+alert+')">Simpan</button>');
+        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary"  onclick="return confirm(' + alert + ')">Simpan</button>');
       } else if ($(this).val() == "customer_baru") {
         $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
       }
@@ -666,9 +666,38 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 
   function changeValueEdit(id_produk) {
-    document.getElementById("harga_1").value = hrg_brg[id_produk].harga;
-    document.getElementById("harga_2").value = hrg_brg[id_produk].harga;
-    document.getElementById("harga_3").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-1").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-2").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-3").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-4").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-5").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-6").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-7").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-8").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-9").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-10").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-11").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-12").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-13").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-14").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-15").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-16").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-17").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-18").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-19").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-20").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-21").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-22").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-23").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-24").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-25").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-26").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-27").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-28").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-29").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-30").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-31").value = hrg_brg[id_produk].harga;
+    document.getElementById("harga-32").value = hrg_brg[id_produk].harga;
   };
 </script>
 
