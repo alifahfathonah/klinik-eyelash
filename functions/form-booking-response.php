@@ -19,7 +19,6 @@
 				<div class="form-group">
 					<label>Nama Customer</label>
 					<select name="nama" id="pilih_nama" class="form-control select2" required="">
-						<!-- <option value="0" disabled selected>-- PILIH SALAH SATU -- </option> -->
 						<optgroup label="Customer">
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 1");
@@ -27,11 +26,25 @@
 								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer'] . ' - ' . $data_customer['no_telp']; ?></option>
 							<?php } ?>
 						</optgroup>
+					</select>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div id="customer"></div>
+			</div>
+		</div>
+
+	<?php } else if ($_POST['jenis_customer'] == 'customer_tanya') { ?>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<label>Nama Customer</label>
+					<select name="nama" id="pilih_nama" class="form-control select2" required="">
 						<optgroup label="Customer Tanya">
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 2");
 							foreach ($query as $data_customer) { ?>
-								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer']; ?></option>
+								<option value="<?= $data_customer['kode_customer']; ?>"> <?= $data_customer['nama_customer'].' - '.$data_customer['no_telp']; ?></option>
 							<?php } ?>
 						</optgroup>
 					</select>

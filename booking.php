@@ -132,6 +132,7 @@ include 'views/header.php';
                                         <option value="0">-- PILIH CUSTOMER --</option>
                                         <option value="customer_baru">Customer Baru</option>
                                         <option value="customer_lama">Customer Lama</option>
+                                        <option value="customer_tanya">Customer Tanya</option>
                                     </select>
                                 </div>
                             </div>
@@ -170,10 +171,7 @@ include 'views/header.php';
                                 </div>
                             </div>
 
-                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
-                                                                                                                    } else {
-                                                                                                                        echo "value=" . $_GET['tanggal'];
-                                                                                                                    } ?> readonly="">
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) { } else { echo "value=" . $_GET['tanggal']; } ?> readonly="">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
