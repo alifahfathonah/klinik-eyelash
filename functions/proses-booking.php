@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
   //   }
   // }
 
-  if ($_POST['jenis_customer'] == 'customer_lama') {
+  if ($_POST['jenis_customer'] == 'customer_lama' || $_POST['jenis_customer'] == 'customer_tanya') {
     $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
     $username = mysqli_fetch_array($query);
 
