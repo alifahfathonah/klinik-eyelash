@@ -396,7 +396,7 @@ include 'views/header.php';
                             <div class="col">
                                 <div class="form-group">
                                     <label>Harga Produk</label>
-                                    <input type="text" name="harga" class="form-control" id="harga" placeholder="Harga Otomatis Terisi">
+                                    <input type="text" name="harga" class="form-control" id="hrg" placeholder="Harga Otomatis Terisi">
                                 </div>
                             </div>
                             <div class="col">

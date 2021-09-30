@@ -540,7 +540,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
           $('#ModalEdit #id_cabang').val(event.id_cabang);
           $('#ModalEdit #id_produk').val(event.id_produk);
           $('#ModalEdit #kode_customer').val(event.kode_customer);
-          $('#ModalEdit #harga').val(event.harga);
+          $('#ModalEdit #hrg').val(event.hrg);
           $('#ModalEdit #id_tipe').val(event.id_tipe);
           $('#ModalEdit #id_users').val(event.id_users);
           $('#ModalEdit #transfer').val(event.transfer);
@@ -588,7 +588,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
             id_cabang: '<?php echo $event['id_cabang']; ?>',
             id_produk: '<?php echo $event['id_produk']; ?>',
             kode_customer: '<?php echo $event['kode_customer']; ?>',
-            harga: '<?php echo $event['harga']; ?>',
+            hrg: '<?php echo $event['harga']; ?>',
             id_tipe: '<?php echo $event['id_tipe']; ?>',
             id_users: '<?php echo $event['id_users']; ?>',
             id_jabatan: '<?php echo $event['id_jabatan']; ?>',
@@ -662,6 +662,15 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+  <?php echo $jsArrayy; ?>
+
+  function changeValueEdit(id_produk) {
+    var hrg = document.getElementById("hrg").value = hrg_brgg[id_produk].hrg;
+    console.log(hrg);
+  };
+</script>
+
+<!-- <script type="text/javascript">
   <?php echo $jsArray; ?>
 
 
@@ -699,7 +708,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     document.getElementById("harga-31").value = hrg_brg[id_produk].harga;
     document.getElementById("harga-32").value = hrg_brg[id_produk].harga;
   };
-</script>
+</script> -->
 
 <script type="text/javascript">
   $(document).ready(function() {
