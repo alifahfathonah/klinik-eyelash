@@ -102,6 +102,8 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
       var alert = "'Anda yakin data sudah benar?'";
       if ($(this).val() == "customer_lama") {
         $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary"  onclick="return confirm(' + alert + ')">Simpan</button>');
+      } else if ($(this).val() == "customer_tanya") {
+        $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary"  onclick="return confirm(' + alert + ')">Simpan</button>');
       } else if ($(this).val() == "customer_baru") {
         $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
       }
