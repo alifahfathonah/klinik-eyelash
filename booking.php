@@ -354,7 +354,7 @@ include 'views/header.php';
                             <div class="col">
                                 <div class="form-group">
                                     <label>Pilih Cabang</label>
-                                    <select name="id_cabang" class="form-control" id="id_cabang" placeholder="Cabang">
+                                    <!-- <select name="id_cabang" class="form-control" id="id_cabang" placeholder="Cabang">
                                         <option value=""></option>
                                         <?php
                                         $cabang = ucwords($_GET['cabang']);
@@ -365,7 +365,19 @@ include 'views/header.php';
                                                                                                 echo "selected";
                                                                                             } ?>> <?php echo $d['nama_cabang'] ?></option>
                                         <?php } ?>
+                                    </select> -->
+                                    <div class="form-group">
+                                    <label>Pilih Cabang</label>
+                                    <select name="id_cabang" id="id_cabang" class="form-control" required="">
+                                        <option value=""></option>
+                                        <?php
+                                        $cabang = ucwords($_GET['cabang']);
+                                        $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
+                                        foreach ($query1 as $d) { ?>
+                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") { echo "selected"; } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                        <?php } ?>
                                     </select>
+                                </div>
                                 </div>
                             </div>
                         </div>
@@ -421,15 +433,20 @@ include 'views/header.php';
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Jabatan Pemasang</label>
-                                    <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                    <!-- <select name="id_jabatan" class="form-control" id="id_jabatan">
                                         <option value=""></option>
                                         <option value="1"> Senior </option>
                                         <option value="2"> Junior </option>
+                                    </select> -->
+                                    <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                        <option value=""></option>
+                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '1') { echo "selected"; } ?>> Senior </option>
+                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '2') { echo "selected"; } ?>> Junior </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label>Nama Pemasang</label>
                                     <select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">
                                         <option value=""></option>
@@ -440,6 +457,10 @@ include 'views/header.php';
                                         <?php } ?>
 
                                     </select>
+                                </div> -->
+                                <div class="form-group">
+                                    <label>Nama Pemasang</label>
+                                    <div id="pemasang"></div>
                                 </div>
                             </div>
                         </div>

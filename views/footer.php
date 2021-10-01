@@ -664,6 +664,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+  << << << < HEAD
   <?php echo $jsArray; ?>
 
   function changeValueEdit(id_produk, id_harga) {
@@ -672,7 +673,15 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     $("#" + id_harga).val(hrg_brg[id_produk].harga);
     //var harganya = document.getElementById(id_harga).value = hrg_brg[id_produk].harga;
     // console.log(harganya);
-  };
+    ===
+    === =
+    <?php echo $jsArrayy; ?>
+
+    function changeValueEdit(id_produk) {
+      var harga = document.getElementById("hrg").value = hrg_brgg[id_produk].hrg;
+      console.log(harga); >>>
+      >>> > 6 d235d60bf3cb218d3433e84abb42415011f3828
+    };
 </script>
 
 <script type="text/javascript">
