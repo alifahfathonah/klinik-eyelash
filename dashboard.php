@@ -323,11 +323,11 @@ if (isset($_GET['search'])) {
                                                                                                     $jsArray = "var hrg_brg = new Array();\n";
 
                                                                                                     if (mysqli_num_rows($barang)) { ?>
-                                                                                                        <?php while ($row_brg = mysqli_fetch_array($barang)) { ?>
-                                                                                                            <option value="<?php echo $row_brg["id_produk"] ?>" <?php if (!empty($row_brg["id_produk"] == $data['produks'])) {
+                                                                                                        <?php while ($row_brgg = mysqli_fetch_array($barang)) { ?>
+                                                                                                            <option value="<?php echo $row_brgg["id_produk"] ?>" <?php if (!empty($row_brgg["id_produk"] == $data['produks'])) {
                                                                                                                 echo "selected";
-                                                                                                            } ?>> <?php echo $row_brg["nama_produk"] ?> </option>
-                                                                                                            <?php $jsArray .= "hrg_brg['" . $row_brg['id_produk'] . "'] = {harga:'" . addslashes($row_brg['harga']) . "'};\n";
+                                                                                                            } ?>> <?php echo $row_brgg["nama_produk"] ?> </option>
+                                                                                                            <?php $jsArrayy .= "hrg_brgg['" . $row_brgg['id_produk'] . "'] = {hrg:'" . addslashes($row_brgg['harga']) . "'};\n";
                                                                                                         } ?>
                                                                                                     <?php } ?>
 
@@ -337,8 +337,7 @@ if (isset($_GET['search'])) {
                                                                                         <div class="col">
                                                                                             <div class="form-group">
                                                                                                 <label>Harga Produk</label>
-                                                                                                <input type="text" name="harga" class="form-control" id="harga-<?= $data['id_events'] ?>" placeholder="Harga Otomatis Terisi" value="<?= $data['harga'] ?>">
-                                                                                                <?php $nomorz++; ?>
+                                                                                                <input type="text" name="harga" class="form-control" id="hrg" placeholder="Harga Otomatis Terisi">
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col">
@@ -381,7 +380,7 @@ if (isset($_GET['search'])) {
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="col">
-                                                                                            <div class="form-group">
+                                                                                            <!-- <div class="form-group">
                                                                                                 <label>Nama Pemasang</label>
                                                                                                 <select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">
                                                                                                     <option value=""></option>
@@ -395,6 +394,13 @@ if (isset($_GET['search'])) {
                                                                                                     <?php } ?>
 
                                                                                                 </select>
+                                                                                            </div> -->
+
+                                                                                            <div class="col">
+                                                                                                <div class="form-group">
+                                                                                                    <label>Nama Pemasang</label>
+                                                                                                    <div id="pemasang"></div>
+                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
