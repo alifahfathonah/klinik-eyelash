@@ -669,9 +669,9 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   function changeValueEdit(id_produk, id_harga) {
     //var id_harga = document.getElementById("id_harga").value;
     // var harganya = $("#" + id_harga).value = hrg_brg[id_produk].harga;
-    $("#" + id_harga).val(hrg_brg[id_produk].harga);
     //var harganya = document.getElementById(id_harga).value = hrg_brg[id_produk].harga;
     // console.log(harganya);
+    $("#" + id_harga).val(hrg_brg[id_produk].harga);
   };
 </script>
 

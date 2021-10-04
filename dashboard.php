@@ -602,7 +602,11 @@ if (isset($_GET['search'])) {
                                                                                 <div class="col">
                                                                                     <div class="form-group">
                                                                                         <label>Nama Produk</label>
-                                                                                        <select name="id_produk" id="id_produk" class="form-control" onchange="changeValueEdit(harga-<?= $data['id_events'] ?>&this.value)" placeholder="Nama Produk">
+                                                                                        <?php
+                                                                                        $id_harga = "harga-" . $data['id_events'];
+                                                                                        ?>
+                                                                                        <input type="hidden" id="id_harga-<?= $data['id_events'] ?>" value="<?= $id_harga ?>">
+                                                                                        <select name="id_produk" id="id_produk" class="form-control" onchange="changeValueEdit(this.value,document.getElementById('id_harga-<?= $data['id_events'] ?>').value)" placeholder="Nama Produk">
                                                                                             <option value=""></option>
                                                                                             <?php
                                                                                             $barang = mysqli_query($link, "SELECT * FROM tbl_produk");
