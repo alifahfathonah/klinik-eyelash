@@ -1,5 +1,5 @@
-<?php 
-include ("../model/db.php");
+<?php
+include("../model/db.php");
 
 $tanggal_sekarang = date('Y-m-d');
 $tanggal = $_POST['tanggal'];
@@ -13,18 +13,20 @@ $daftar_hari = array(
 	'Friday' => 'Jumat',
 	'Saturday' => 'Sabtu'
 );
-$date=date('Y/m/d');
+$date = date('Y/m/d');
 $namahari = date('l', strtotime($tanggal));
-$id_jabatan = $_POST['id_jabatan'];
+//var_dump($daftar_hari[$namahari]);
 
 // GET id_cabang
 $cabang = $_POST['id_cabang'];
-$query = mysqli_query($link, "SELECT a.*, b.*, c.*, FROM tbl_status_kerja a JOIN users b ON a.id_users = b.id_users JOIN tbl_cabang c ON a.cabang = c.id_cabang WHERE a.cabang = '$cabang' AND b.level = '2' AND hari_libur != '$daftar_hari[$namahari]' AND a.id_jabatan = '$id_jabatan'");
+$id_jabatan = $_POST['id_jabatan'];
+$query = mysqli_query($link, "SELECT a.*, b.* FROM tbl_status_kerja a JOIN users b ON a.id_users = b.id_users JOIN tbl_cabang c ON a.cabang = c.id_cabang WHERE a.cabang = '$cabang' AND b.level = '2' AND hari_libur != '$daftar_hari[$namahari]' AND a.id_jabatan = '$id_jabatan'");
 
-echo '<select name="id_users" class="form-control" id="id_users" required="">
-		';
-foreach ($query as $data) { ?>
-	<option value="<?= $data['id_users'] ?>" <?php if($data['id_users'] == $data['users_e']) { echo 'selected'; }?> ><?= $data['username'] ?> </option>
-<?php }
+echo '<select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">';
+
+foreach ($query as $data) {
+	// echo '<option value="1">1</option>';
+	echo '<option value="' . $data['id_users'] . '">' . $data['username'] . '</option>';
+}
+
 echo '</select>';
-?>

@@ -1,5 +1,5 @@
-<?php 
-include ("../model/db.php");
+<?php
+include("../model/db.php");
 
 $tanggal_sekarang = date('Y-m-d');
 $tanggal = $_POST['tanggal'];
@@ -13,7 +13,7 @@ $daftar_hari = array(
 	'Friday' => 'Jumat',
 	'Saturday' => 'Sabtu'
 );
-$date=date('Y/m/d');
+$date = date('Y/m/d');
 $namahari = date('l', strtotime($tanggal));
 
 // GET id_cabang
@@ -26,7 +26,6 @@ echo '<select name="id_users" class="form-control" id="id_users" required="">
 		';
 foreach ($query as $data) {
 	// echo '<option value="1">1</option>';
-	echo '<option value="'.$data['id_users'].'">'.$data['username'].'</option>';
+	echo '<option value="' . $data['id_users'] . '">' . $data['username'] . '</option>';
 }
 echo '</select>';
-?>

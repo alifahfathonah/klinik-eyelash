@@ -171,7 +171,10 @@ include 'views/header.php';
                                 </div>
                             </div>
 
-                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) { } else { echo "value=" . $_GET['tanggal']; } ?> readonly="">
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
+                                                                                                                    } else {
+                                                                                                                        echo "value=" . $_GET['tanggal'];
+                                                                                                                    } ?> readonly="">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -205,7 +208,9 @@ include 'views/header.php';
                                         $cabang = ucwords($_GET['cabang']);
                                         $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
                                         foreach ($query1 as $d) { ?>
-                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") { echo "selected"; } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
+                                                                                                echo "selected";
+                                                                                            } ?>> <?php echo $d['nama_cabang'] ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
@@ -221,8 +226,14 @@ include 'views/header.php';
                                     <label>Jabatan Pemasang</label>
                                     <select name="id_jabatan" class="form-control" id="id_jabatan">
                                         <option value=""></option>
-                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '1') { echo "selected"; } ?>> Senior </option>
-                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '2') { echo "selected"; } ?>> Junior </option>
+                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '1') {
+                                                                echo "selected";
+                                                            } ?>> Senior </option>
+                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '2') {
+                                                                echo "selected";
+                                                            } ?>> Junior </option>
                                     </select>
                                 </div>
                             </div>
@@ -367,17 +378,19 @@ include 'views/header.php';
                                         <?php } ?>
                                     </select> -->
                                     <div class="form-group">
-                                    <label>Pilih Cabang</label>
-                                    <select name="id_cabang" id="id_cabang" class="form-control" required="">
-                                        <option value=""></option>
-                                        <?php
-                                        $cabang = ucwords($_GET['cabang']);
-                                        $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
-                                        foreach ($query1 as $d) { ?>
-                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") { echo "selected"; } ?>> <?php echo $d['nama_cabang'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
+                                        <label>Pilih Cabang</label>
+                                        <select name="id_cabang" id="id_cabang" class="form-control" required="">
+                                            <option value=""></option>
+                                            <?php
+                                            $cabang = ucwords($_GET['cabang']);
+                                            $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
+                                            foreach ($query1 as $d) { ?>
+                                                <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
+                                                                                                    echo "selected";
+                                                                                                } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -440,8 +453,14 @@ include 'views/header.php';
                                     </select> -->
                                     <select name="id_jabatan" class="form-control" id="id_jabatan">
                                         <option value=""></option>
-                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '1') { echo "selected"; } ?>> Senior </option>
-                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '2') { echo "selected"; } ?>> Junior </option>
+                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '1') {
+                                                                echo "selected";
+                                                            } ?>> Senior </option>
+                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '2') {
+                                                                echo "selected";
+                                                            } ?>> Junior </option>
                                     </select>
                                 </div>
                             </div>

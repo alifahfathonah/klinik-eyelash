@@ -252,7 +252,7 @@ if (isset($_GET['search'])) {
                                                                                             <div class="col-sm-6">
                                                                                                 <div class="form-group">
                                                                                                     <label>Tanggal Pasang</label>
-                                                                                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" value="<?= $data['start'] ?>" readonly="">
+                                                                                                    <input type="date" name="start" class="form-control" id="start-<?= $data['id_events'] ?>" placeholder="Title" value="<?= $data['start'] ?>" readonly="">
                                                                                                 </div>
                                                                                             </div>
                                                                                             <div class="col-sm-6">
@@ -293,7 +293,7 @@ if (isset($_GET['search'])) {
                                                                                             <div class="col">
                                                                                                 <div class="form-group">
                                                                                                     <label>Pilih Cabang</label>
-                                                                                                    <select name="id_cabang" class="form-control" id="id_cabang" placeholder="Cabang">
+                                                                                                    <select name="id_cabang" class="form-control" onchange="cKaryawan($('#id_jabatan-<?= $data['id_events'] ?>').val(),this.value,$('#start-<?= $data['id_events'] ?>').val())" id="id_cabang-<?= $data['id_events'] ?>" placeholder="Cabang">
                                                                                                         <option value=""></option>
                                                                                                         <?php
                                                                                                         $cabang = ucwords($_GET['cabang']);
@@ -371,7 +371,7 @@ if (isset($_GET['search'])) {
                                                                                             <div class="col-sm-12">
                                                                                                 <div class="form-group">
                                                                                                     <label>Jabatan Pemasang</label>
-                                                                                                    <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                                                                                    <select name="id_jabatan" class="form-control" onchange="cKaryawan(this.value,$('#id_cabang-<?= $data['id_events'] ?>').val(),$('#start-<?= $data['id_events'] ?>').val())" id="id_jabatan-<?= $data['id_events'] ?>">
                                                                                                         <option value=""></option>
                                                                                                         <option value="1" <?php if ($data['jabatan_events'] == '1') {
                                                                                                                                 echo "selected";
@@ -387,20 +387,27 @@ if (isset($_GET['search'])) {
                                                                                             <div class="col">
                                                                                                 <div class="form-group">
                                                                                                     <label>Nama Pemasang</label>
-                                                                                                    <select name="id_users" class="form-control" id="id_users" placeholder="Nama Pemasang">
-                                                                                                        <option value=""></option>
-                                                                                                        <?php
-                                                                                                        $query = mysqli_query($link, "SELECT * FROM tbl_status_kerja a JOIN users b ON b.id_users = a.id_users WHERE b.level = '2'");
-                                                                                                        foreach ($query as $d) { ?>
-                                                                                                            <option value="<?php echo $d['id_users'] ?>" <?php if ($d['id_users'] == $data['pemasangs']) {
-                                                                                                                                                                echo "selected";
-                                                                                                                                                            } else {
-                                                                                                                                                            } ?>> <?php echo $d['username'] ?></option>
-                                                                                                        <?php } ?>
-
-                                                                                                    </select>
+                                                                                                    <div id="karyawannya"></div>
                                                                                                 </div>
                                                                                             </div>
+                                                                                            <script>
+                                                                                                function cKaryawan(id_jabatan, id_cabang, tanggal) {
+                                                                                                    $.ajax({
+                                                                                                        type: 'POST',
+                                                                                                        url: 'functions/pilih-pemasang-edit.php',
+                                                                                                        data: {
+                                                                                                            'id_jabatan': id_jabatan,
+                                                                                                            'id_cabang': id_cabang,
+                                                                                                            'tanggal': tanggal
+                                                                                                        },
+
+                                                                                                        success: function(response) {
+                                                                                                            console.log(response);
+                                                                                                            $('#karyawannya').html(response);
+                                                                                                        }
+                                                                                                    });
+                                                                                                }
+                                                                                            </script>
                                                                                         </div>
 
                                                                                         <div class="row mt-3">
