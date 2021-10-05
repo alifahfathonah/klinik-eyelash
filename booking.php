@@ -171,10 +171,7 @@ include 'views/header.php';
                                 </div>
                             </div>
 
-                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
-                                                                                                                    } else {
-                                                                                                                        echo "value=" . $_GET['tanggal'];
-                                                                                                                    } ?> readonly="">
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) { } else { echo "value=" . $_GET['tanggal']; } ?> readonly="">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -226,14 +223,8 @@ include 'views/header.php';
                                     <label>Jabatan Pemasang</label>
                                     <select name="id_jabatan" class="form-control" id="id_jabatan">
                                         <option value=""></option>
-                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) {
-                                                            } else if ($_GET['id_jabatan'] == '1') {
-                                                                echo "selected";
-                                                            } ?>> Senior </option>
-                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) {
-                                                            } else if ($_GET['id_jabatan'] == '2') {
-                                                                echo "selected";
-                                                            } ?>> Junior </option>
+                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '1') { echo "selected"; } ?>> Senior </option>
+                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '2') { echo "selected"; } ?>> Junior </option>
                                     </select>
                                 </div>
                             </div>

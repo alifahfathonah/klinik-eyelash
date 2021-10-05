@@ -45,11 +45,25 @@ include 'views/header.php';
 					</h6>
 				</a>
 
-				<div class="collapse" id="collapseCardAllCustomers" style="padding:">
+				<div class="collapse" id="collapseCardAllCustomers">
 					<div class="card-body">
 						<div class="form-group">
+							<form action="functions/download_data_customer.php" method="post">
+								<div class="row">
+									<div class="col-4">
+										<label>Dari Tanggal</label>
+										<input type="date" name="tanggal_awal" class="form-control" required>
+									</div>
+									<div class="col-4">
+										<label>Sampai Tanggal</label>
+										<input type="date" name="tanggal_akhir" class="form-control" required>
+									</div>
+									<div class="col-4">
+										<button type="submit" class="btn btn-sm btn-primary">Download</button>
+									</div>
+								</div>
+							</form>
 							<div class="dt-responsive table-responsive mt-5">
-								<a href="functions/download_data_customer.php" class="btn btn-sm btn-primary">Download</a>
 								<table id="user-list-table" class="table nowrap dataTable" role="grid" aria-describedby="user-list-table_info">
 									<thead>
 										<tr>
@@ -196,13 +210,13 @@ include 'views/header.php';
 			<!-- CUSTOMER TELAH PASANG 7 HARI -->
 			<!-- CUSTOMER RETOUCH 3 HARI KEDEPAN -->
 			<div class="card shadow mb-4">
-				<a href="#collapseCardRetouch" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardRetouch">
+				<a href="#collapseCardTujuhHari" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardTujuhHari">
 					<h6 class="m-0 font-weight-bold text-primary">
 						Data Customer Sudah Pasang 7 Hari
 					</h6>
 				</a>
 
-				<div class="collapse" id="collapseCardRetouch">
+				<div class="collapse" id="collapseCardTujuhHari">
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
