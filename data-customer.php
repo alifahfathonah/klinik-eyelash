@@ -81,13 +81,14 @@ include 'views/header.php';
 											<th>Transfer</th>
 											<th>Cash</th>
 											<th>Keterangan</th>
+											<th>Komplain</th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php  
 										$no = 1;
 										$tgl = date('Y-m-d');
-										$query = mysqli_query($link,"SELECT a.*, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*
+										$query = mysqli_query($link,"SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*
 											FROM events a 
 											LEFT JOIN users b ON a.id_users = b.id_users
 											LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
@@ -138,38 +139,40 @@ include 'views/header.php';
 													} ?>
 												</td>
 												<td><?php echo $data['keterangan'] ?></td>
+												<td><button class="btn btn-icon btn-warning"><i class="fa fa-comments" data-toggle="modal" data-target="#modal-komplain-<?php echo $data['id_events'] ?>"></i></button></td>
 											</tr>
 
-											<div class="modal fade" id="modal-edit-<?php echo $data['id_produk'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+											<div class="modal fade" id="modal-komplain-<?php echo $data['id_events'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-xl">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title">Produk</h5>
+															<h5 class="modal-title">Komplain</h5>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
 														</div>
 														<div class="modal-body">
-															<form action="functions/proses-produk" method="post">
+															<form action="functions/proses-komplain" method="post">
 																<div class="row">
 																	<div class="col-12 mb-3">
-																		<h5>Informasi Produk</h5>
+																		<h5>Informasi Komplain</h5>
 																	</div>
-																	<input type="hidden" name="id_produk" value="<?php echo $data['id_produk'] ?>">
-																	<div class="col-sm-6">
+																	<input type="hidden" name="id_events" value="<?php echo $data['id_events'] ?>">
+																	<div class="col-sm-12">
 																		<div class="form-group">
-																			<label class="floating-label" for="Name">Nama Produk</label>
-																			<input type="text" name="nama_produk" value="<?php echo $data['nama_produk'] ?>" class="form-control" id="Name" placeholder="">
-																		</div>
-																	</div>
-																	<div class="col-sm-6">
-																		<div class="form-group fill">
-																			<label class="floating-label" for="Email">Harga Produk</label>
-																			<input type="number" name="harga" value="<?php echo $data['harga'] ?>" class="form-control" id="Harga" placeholder="">
+																			<label class="floating-label" for="Name">Atas Nama</label>
+																			<input type="text" name="nama" value="<?php echo $data['nama_customer'] ?>" class="form-control" id="Name" placeholder="">
+																			<input type="hidden" name="kode_customer" value="<?= $data['kode_customer'] ?>">
 																		</div>
 																	</div>
 																	<div class="col-sm-12">
-																		<button type="submit" name="edit" class="btn btn-primary">Edit</button>
+																		<div class="form-group fill">
+																			<label class="floating-label" for="Email">Komplain</label>
+																			<textarea class="form-control" required name="komplain"></textarea>
+																		</div>
+																	</div>
+																	<div class="col-sm-12">
+																		<button type="submit" name="submit" class="btn btn-primary">Submit Komplain</button>
 																	</div>
 																</div>
 															</form>
@@ -196,6 +199,7 @@ include 'views/header.php';
 											<th>Transfer</th>
 											<th>Cash</th>
 											<th>Keterangan</th>
+											<th>Komplain</th>
 										</tr>
 									</tfoot>
 								</table>
@@ -786,6 +790,7 @@ include 'views/header.php';
 
 			</div>
 
+			<!-- DATA SEMUA CUSTOMER -->
 			<div class="card shadow mb-4">
 				<a href="#collapseCardSemua" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardSemua">
 					<h6 class="m-0 font-weight-bold text-primary">
@@ -891,6 +896,74 @@ include 'views/header.php';
 										<th>No</th>
 										<th>Nama</th>
 										<th>No Whatsapp</th>
+										<th></th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<!-- DATA KOMPLAIN -->
+			<div class="card shadow mb-4">
+				<a href="#collapseCardKomplain" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKomplain">
+					<h6 class="m-0 font-weight-bold text-primary">
+						Data Komplain Customer
+					</h6>
+				</a>
+
+				<div class="collapse" id="collapseCardKomplain">
+					<div class="card-body">
+
+						<div class="dt-responsive table-responsive">
+							<table id="user-list-table-ret" class="table nowrap">
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>Kode Customer</th>
+										<th>Nama</th>
+										<th>Id Pesanan</th>
+										<th>Komplain</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php  
+									$no = 1;
+									$query = mysqli_query($link,"
+										SELECT a.*, b.id as id_events, c.* FROM komplain a
+										LEFT JOIN events b ON a.id_pemesanan = b.id
+										LEFT JOIN tbl_customer c ON a.kode_customer = c.kode_customer
+										ORDER BY a.date_created DESC");
+									foreach ($query as $data) {
+										?>
+										<tr>
+											<td><?php echo $no++; ?></td>
+											<td><?php echo $data['kode_customer'] ?></td>
+											<td><?php echo $data['nama_customer'] ?></td>
+											<td><?php echo $data['id_events'] ?></td>
+											<td><?php echo $data['komplain'] ?></td>
+											<td>
+												<!-- <span class="badge badge-light-success"></span>
+												<div class="overlay-edit">
+													<button type="button" class="btn btn-icon btn-success" data-toggle="modal" data-target="#modal-edit-customer-<?php echo $data['id'] ?>"><i class="feather icon-edit"></i></button>
+
+													<button type="button" class="btn btn-icon btn-danger" onclick="deleteproduk(<?php echo $data['id_produk'] ?>)"><i class="feather icon-trash-2"></i></button>
+												</div> -->
+											</td>
+										</tr>
+
+									<?php } ?>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>No</th>
+										<th>Kode Customer</th>
+										<th>Nama</th>
+										<th>Id Pesanan</th>
+										<th>Komplain</th>
 										<th></th>
 									</tr>
 								</tfoot>
