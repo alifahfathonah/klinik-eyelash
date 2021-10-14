@@ -282,11 +282,15 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#user-list-tablee').DataTable();
-    $('#user-list-table').DataTable();
-    $('#user-list-table-ret').DataTable();
-    $('#user-list-table-rett').DataTable();
     $('#user-list-table-status').DataTable();
+    $('#user-list-table-komplain').DataTable();
+    $('#user-list-table-all').DataTable();
+    $('#user-list-table-tanya').DataTable();
+    $('#user-list-table-rett').DataTable();
+    $('#user-list-table-blunas').DataTable();
+    $('#user-list-table-lunas').DataTable();
+    $('#user-list-table-seven').DataTable();
+    $('#user-list-table').DataTable();
   });
 </script>
 

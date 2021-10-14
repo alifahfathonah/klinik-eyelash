@@ -15,7 +15,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Tanggal</th>
 			<th>Jam</th>
 			<th>Nama</th>
-			<th>Kode Customer</th>
+			<th>No HP</th>
 			<th>Status</th>
 			<th>Jenis</th>
 			<th>Tanggal Retouch</th>
@@ -24,6 +24,9 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Transfer</th>
 			<th>Cash</th>
 			<th>Keterangan</th>
+			<th>Komplain</th>
+			<th>Penyebab</th>
+			<th>Solusi</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -32,13 +35,14 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 		$tanggal_akhir = $_POST['tanggal_akhir'];
 		$no = 1;
 		$tgl = date('Y-m-d');
-		$query = mysqli_query($link,"SELECT a.*, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*
+		$query = mysqli_query($link,"SELECT a.*, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*, g.*
 			FROM events a 
 			LEFT JOIN users b ON a.id_users = b.id_users
 			LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
 			LEFT JOIN tbl_produk d ON a.id_produk = d.id_produk
 			LEFT JOIN tbl_tipe e ON a.id_tipe = e.id_tipe
 			LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
+			LEFT JOIN komplain g ON g.id_pemesanan = a.id
 			WHERE start BETWEEN '" . $tanggal_awal . "' AND  '" . $tanggal_akhir . "'
 			ORDER BY f.kode_customer ASC");
 		foreach ($query as $data) { 
@@ -65,7 +69,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 				<td>'<?php echo $tanggal ?></td>
 				<td><?php echo $data['start_jam'] ?> - <?php echo $data['ends_jam'] ?></td>
 				<td><?php echo $data['nama_customer'] ?></td>
-				<td><?php echo $data['kode_customer'] ?></td>
+				<td>'<?php echo $data['no_telp'] ?></td>
 				<td style="background-color: <?php echo $data['warna'] ?>; color: #ffffff;">
 					<?php if ($data['warna'] == "#008000"){ ?>
 						Sudah Bayar / Lunas
@@ -94,6 +98,9 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 					} ?>
 				</td>
 				<td><?php echo $data['keterangan'] ?></td>
+				<td><?php echo $data['komplain'] ?></td>
+				<td><?php echo $data['penyebab'] ?></td>
+				<td><?php echo $data['solusi'] ?></td>
 			</tr>
 
 		<?php } ?>
@@ -116,6 +123,9 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Transfer</th>
 			<th>Cash</th>
 			<th>Keterangan</th>
+			<th>Komplain</th>
+			<th>Penyebab</th>
+			<th>Solusi</th>
 		</tr>
 	</tfoot>
 </table>

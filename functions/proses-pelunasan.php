@@ -11,10 +11,12 @@ if(isset($_POST['bayar_trans'])){
   $data = mysqli_fetch_array($cekdulu);
   $data_trans = $data['transfer'];
 
+  var_dump($id);die();
   if ($data['transfer'] == true) {
+
     $hasil = $transfer + $data_trans;
 
-    $sql = "UPDATE events SET transfer='$hasil', warna = '$warna' WHERE id = $id";
+    $sql = "UPDATE events SET transfer=$hasil, warna = '$warna' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak

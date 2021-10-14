@@ -95,7 +95,7 @@ include 'views/header.php';
 											LEFT JOIN tbl_produk d ON a.id_produk = d.id_produk
 											LEFT JOIN tbl_tipe e ON a.id_tipe = e.id_tipe
 											LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
-											ORDER BY f.kode_customer ASC");
+											ORDER BY a.start desc");
 										foreach ($query as $data) { 
 
 											$daftar_hari = array(
@@ -143,7 +143,7 @@ include 'views/header.php';
 											</tr>
 
 											<div class="modal fade" id="modal-komplain-<?php echo $data['id_events'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-												<div class="modal-dialog modal-xl">
+												<div class="modal-dialog modal-md">
 													<div class="modal-content">
 														<div class="modal-header">
 															<h5 class="modal-title">Komplain</h5>
@@ -169,6 +169,18 @@ include 'views/header.php';
 																		<div class="form-group fill">
 																			<label class="floating-label" for="Email">Komplain</label>
 																			<textarea class="form-control" required name="komplain"></textarea>
+																		</div>
+																	</div>
+																	<div class="col-sm-12">
+																		<div class="form-group fill">
+																			<label class="floating-label" for="Email">Penyebab</label>
+																			<textarea class="form-control" required name="penyebab"></textarea>
+																		</div>
+																	</div>
+																	<div class="col-sm-12">
+																		<div class="form-group fill">
+																			<label class="floating-label" for="Email">Solusi</label>
+																			<textarea class="form-control" required name="solusi"></textarea>
 																		</div>
 																	</div>
 																	<div class="col-sm-12">
@@ -205,7 +217,6 @@ include 'views/header.php';
 								</table>
 							</div>
 						</div>
-						<div id="data_customer"></div>
 					</div>
 				</div>
 			</div>
@@ -224,7 +235,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-table-ret" class="table nowrap">
+							<table id="user-list-table-seven" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -301,8 +312,8 @@ include 'views/header.php';
 				<div class="collapse" id="collapseCardAllCustomer">
 					<div class="card-body">
 
-						<div class="dt-responsive table-responsive mt-5">
-							<table id="user-list-table" class="table nowrap">
+						<div class="dt-responsive table-responsive">
+							<table id="user-list-table-lunas" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -381,7 +392,7 @@ include 'views/header.php';
 											<td><?php echo $data['keterangan'] ?></td>
 										</tr>
 
-										<div class="modal fade" id="modal-edit-<?php echo $data['id_produk'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+										<!-- <div class="modal fade" id="modal-edit-<?php echo $data['id_produk'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-xl">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -417,7 +428,7 @@ include 'views/header.php';
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> -->
 
 									<?php } ?>
 								</tbody>
@@ -457,7 +468,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-tablee" class="table nowrap">
+							<table id="user-list-table-blunas" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -520,14 +531,14 @@ include 'views/header.php';
 											<td>
 												<span class="badge badge-light-success"></span>
 												<div class="overlay-edit">
-													<button class="btn btn-success btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-transfer-<?php echo $data['kurang'] ?>">Transfer<span class="ripple ripple-animate"></span></button>
+													<button class="btn btn-success btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-transfer-<?php echo $data['id'] ?>">Transfer<span class="ripple ripple-animate"></span></button>
 
-													<button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-cash-<?php echo $data['kurang'] ?>">Cash<span class="ripple ripple-animate"></span></button>
+													<button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-cash-<?php echo $data['id'] ?>">Cash<span class="ripple ripple-animate"></span></button>
 												</div>
 											</td>
 										</tr>
 
-										<div class="modal fade" id="modal-transfer-<?php echo $data['kurang'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal-transfer-<?php echo $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-md">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -539,7 +550,7 @@ include 'views/header.php';
 													<div class="modal-body">
 														<form action="functions/proses-pelunasan" method="post">
 															<div class="row">
-																<input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+																<input type="text" name="id" value="<?php echo $data['id'] ?>">
 																<div class="col-sm-12">
 																	<div class="form-group">
 																		<label>Jumlah Pembayaran</label>
@@ -556,7 +567,7 @@ include 'views/header.php';
 											</div>
 										</div>
 
-										<div class="modal fade" id="modal-cash-<?php echo $data['kurang'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal-cash-<?php echo $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-md">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -568,7 +579,7 @@ include 'views/header.php';
 													<div class="modal-body">
 														<form action="functions/proses-pelunasan" method="post">
 															<div class="row">
-																<input type="hidden" name="id" value="<?php echo $data['id'] ?>">
+																<input type="text" name="id" value="<?php echo $data['id'] ?>">
 																<div class="col-sm-12">
 																	<div class="form-group">
 																		<label>Jumlah Pembayaran</label>
@@ -617,7 +628,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-table-ret" class="table nowrap">
+							<table id="user-list-table-rett" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -693,7 +704,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-table-ret" class="table nowrap">
+							<table id="user-list-table-tanya" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -802,7 +813,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-table-ret" class="table nowrap">
+							<table id="user-list-table-all" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -918,7 +929,7 @@ include 'views/header.php';
 					<div class="card-body">
 
 						<div class="dt-responsive table-responsive">
-							<table id="user-list-table-ret" class="table nowrap">
+							<table id="user-list-table-komplain" class="table nowrap">
 								<thead>
 									<tr>
 										<th>No</th>
