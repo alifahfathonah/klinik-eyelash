@@ -2,21 +2,24 @@
 include "../model/db.php";
 session_start();
 
+
+
 if(isset($_POST['bayar_trans'])){ 
   $id = $_POST['id'];
   $transfer = $_POST['transfer'];
   $warna = '#008000';
+  $tgl_pelunasan = date('Y-m-d');
 
   $cekdulu=  mysqli_query($link,"SELECT * FROM events WHERE id = '$id' ");
   $data = mysqli_fetch_array($cekdulu);
   $data_trans = $data['transfer'];
 
-  var_dump($id);die();
+  // var_dump($id);die();
   if ($data['transfer'] == true) {
 
     $hasil = $transfer + $data_trans;
 
-    $sql = "UPDATE events SET transfer=$hasil, warna = '$warna' WHERE id = $id";
+    $sql = "UPDATE events SET transfer=$hasil, warna = '$warna', keterangan = 'Lunas', tgl_pelunasan = '$tgl_pelunasan' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak
@@ -34,7 +37,7 @@ if(isset($_POST['bayar_trans'])){
     }
   }else{
     $hasil = $transfer;
-    $sql = "UPDATE events SET transfer='$hasil', warna = '$warna' WHERE id = $id";
+    $sql = "UPDATE events SET transfer='$hasil', warna = '$warna', keterangan = 'Lunas', tgl_pelunasan = '$tgl_pelunasan' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak
@@ -58,6 +61,7 @@ if(isset($_POST['bayar_cash'])){
   $id = $_POST['id'];
   $cash = $_POST['cash'];
   $warna = '#008000';
+  $tgl_pelunasan = date('Y-m-d');
 
   $cekdulu=  mysqli_query($link,"SELECT * FROM events WHERE id = '$id' ");
   $data = mysqli_fetch_array($cekdulu);
@@ -66,7 +70,7 @@ if(isset($_POST['bayar_cash'])){
   if ($data['cash'] == true) {
     $hasil = $cash + $data_cash;
 
-    $sql = "UPDATE events SET cash='$hasil', warna = '$warna' WHERE id = $id";
+    $sql = "UPDATE events SET cash='$hasil', warna = '$warna', keterangan = 'Lunas', tgl_pelunasan = '$tgl_pelunasan' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak
@@ -84,7 +88,7 @@ if(isset($_POST['bayar_cash'])){
     }
   }else{
     $hasil = $cash;
-    $sql = "UPDATE events SET cash='$hasil', warna = '$warna' WHERE id = $id";
+    $sql = "UPDATE events SET cash='$hasil', warna = '$warna', keterangan = 'Lunas', tgl_pelunasan = '$tgl_pelunasan' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     // var_dump($result);die();
     if($result){ // Cek jika proses simpan ke database sukses atau tidak

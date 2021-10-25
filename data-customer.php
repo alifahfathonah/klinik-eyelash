@@ -344,8 +344,8 @@ include 'views/header.php';
 										LEFT JOIN tbl_tipe e ON a.id_tipe = e.id_tipe
 										LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
 										WHERE a.harga - a.transfer - a.cash = 0
-										AND a.start = '$tgl'
-										AND f.status = 1
+										AND (a.tgl_pelunasan = '$tgl' AND f.status = 1) OR (a.start = '$tgl'
+										AND f.status = 1)
 										ORDER BY a.start ASC");
 									foreach ($query as $data) { 
 
@@ -484,17 +484,12 @@ include 'views/header.php';
 									<?php  
 									$no = 1;
 									$tgl = date('Y-m-d');
-									$query = mysqli_query($link,"SELECT a.*, (a.harga - a.transfer - a.cash) as kurang, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*
+									$query = mysqli_query($link,"SELECT a.*, a.id as id_events, (a.harga - a.transfer - a.cash) as kurang, f.*
 										FROM events a 
-										LEFT JOIN users b ON a.id_users = b.id_users
-										LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
-										LEFT JOIN tbl_produk d ON a.id_produk = d.id_produk
-										LEFT JOIN tbl_tipe e ON a.id_tipe = e.id_tipe
 										LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
 										WHERE a.harga - a.transfer - a.cash != 0
-										AND a.start = '$tgl'
 										AND f.status = 1
-										ORDER BY a.start ASC");
+										ORDER BY DATE(a.start)=DATE(NOW()) DESC");
 									foreach ($query as $data) { 
 										$daftar_hari = array(
 											'Sunday' => 'Minggu',
@@ -531,14 +526,14 @@ include 'views/header.php';
 											<td>
 												<span class="badge badge-light-success"></span>
 												<div class="overlay-edit">
-													<button class="btn btn-success btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-transfer-<?php echo $data['id'] ?>">Transfer<span class="ripple ripple-animate"></span></button>
+													<button class="btn btn-success btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-transfer-<?php echo $data['id_events'] ?>">Transfer<span class="ripple ripple-animate"></span></button>
 
-													<button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-cash-<?php echo $data['id'] ?>">Cash<span class="ripple ripple-animate"></span></button>
+													<button class="btn btn-primary btn-sm btn-round has-ripple" data-toggle="modal" data-target="#modal-cash-<?php echo $data['id_events'] ?>">Cash<span class="ripple ripple-animate"></span></button>
 												</div>
 											</td>
 										</tr>
 
-										<div class="modal fade" id="modal-transfer-<?php echo $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal-transfer-<?php echo $data['id_events'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-md">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -550,7 +545,7 @@ include 'views/header.php';
 													<div class="modal-body">
 														<form action="functions/proses-pelunasan" method="post">
 															<div class="row">
-																<input type="text" name="id" value="<?php echo $data['id'] ?>">
+																<input type="hidden" name="id" value="<?php echo $data['id_events'] ?>">
 																<div class="col-sm-12">
 																	<div class="form-group">
 																		<label>Jumlah Pembayaran</label>
@@ -567,7 +562,7 @@ include 'views/header.php';
 											</div>
 										</div>
 
-										<div class="modal fade" id="modal-cash-<?php echo $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal-cash-<?php echo $data['id_events'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-md">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -579,7 +574,7 @@ include 'views/header.php';
 													<div class="modal-body">
 														<form action="functions/proses-pelunasan" method="post">
 															<div class="row">
-																<input type="text" name="id" value="<?php echo $data['id'] ?>">
+																<input type="hidden" name="id" value="<?php echo $data['id_events'] ?>">
 																<div class="col-sm-12">
 																	<div class="form-group">
 																		<label>Jumlah Pembayaran</label>
