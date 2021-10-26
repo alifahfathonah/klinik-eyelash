@@ -194,12 +194,13 @@ if (isset($_GET['search'])) {
                                                         <?php
                                                         $no = 1;
                                                         $tgl = date('Y-m-d');
-                                                        $query = mysqli_query($link, "SELECT distinct a.jam, b.kode_customer as kode_cus, b.id as id_events, b.start_jam, b.ends_jam, b.tgl_retouch, b.id_cabang as cabangs, b.id_produk as produks, a.id_slot, a.id_cabang, b.id_slot as slot_event, b.harga, b.id_users as pemasangs, b.transfer, b.cash, b.keterangan, b.warna, b.start, b.id_jabatan as jabatan_events
-                                                            FROM tbl_slot a 
-                                                            LEFT JOIN events b ON a.id_slot = b.id_slot
-                                                            WHERE a.id_cabang = $id_cbg
-                                                            AND a.id_jabatan = 1
-                                                            group by a.jam");
+                                                        $query = mysqli_query($link, "SELECT distinct a.jam, b.kode_customer as kode_cus, b.id as id_events, b.start_jam, b.ends_jam, b.tgl_retouch, b.id_cabang as cabangs, b.id_produk as produks, a.id_slot, a.id_cabang, b.id_slot as slot_event, b.harga, b.id_users as pemasangs, b.transfer, b.cash, b.keterangan, b.warna, max(b.start) as start, b.id_jabatan as jabatan_events, c.*
+                                                                    FROM tbl_slot a 
+                                                                    LEFT JOIN events b ON a.id_slot = b.id_slot
+                                                                    LEFT JOIN tbl_customer c ON b.kode_customer = c.kode_customer
+                                                                    WHERE a.id_cabang = $id_cbg
+                                                                    AND a.id_jabatan = 1
+                                                                    group by a.jam");
                                                         $nomorz = 1;
                                                         $i = 1;
                                                         foreach ($query as $data) {
