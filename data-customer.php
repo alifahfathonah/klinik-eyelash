@@ -343,10 +343,9 @@ include 'views/header.php';
 										LEFT JOIN tbl_produk d ON a.id_produk = d.id_produk
 										LEFT JOIN tbl_tipe e ON a.id_tipe = e.id_tipe
 										LEFT JOIN tbl_customer f ON f.kode_customer = a.kode_customer
-										WHERE a.harga - a.transfer - a.cash = 0
-										AND (a.tgl_pelunasan = '$tgl' AND f.status = 1) OR (a.start = '$tgl'
-										AND f.status = 1)
-										ORDER BY a.start ASC");
+										WHERE (a.harga - a.transfer - a.cash = 0
+										AND a.tgl_pelunasan = '$tgl' AND f.status = 1) OR (a.harga - a.transfer - a.cash = 0 AND a.start = '$tgl' AND f.status = 1)
+										ORDER BY a.start DESC");
 									foreach ($query as $data) { 
 
 										$daftar_hari = array(
@@ -461,7 +460,7 @@ include 'views/header.php';
 			<div class="card shadow mb-4">
 				<a href="#collapseCardBelumCustomer" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardBelumCustomer">
 					<h6 class="m-0 font-weight-bold text-primary">
-						Data Customer Belum Lunas Per Hari Ini
+						Data Customer Belum Lunas
 					</h6>
 				</a>
 				<div class="collapse" id="collapseCardBelumCustomer">
@@ -473,6 +472,7 @@ include 'views/header.php';
 									<tr>
 										<th>No</th>
 										<th>Nama</th>
+										<th>Tanggal Booking</th>
 										<th>Harga</th>
 										<th>Transfer</th>
 										<th>Cash</th>
@@ -507,6 +507,7 @@ include 'views/header.php';
 										<tr>
 											<td><?php echo $no++; ?></td>
 											<td><?php echo $data['nama_customer'] ?></td>
+											<td><?php echo $daftar_hari[$hari].', '.$tanggal ?></td>
 											<td>Rp. <?php echo number_format( $data['harga'] ); ?></td>
 											<td>
 												<?php if ($data['transfer'] == true) { ?>
@@ -597,6 +598,7 @@ include 'views/header.php';
 									<tr>
 										<th>No</th>
 										<th>Nama</th>
+										<th>Tanggal Booking</th>
 										<th>Harga</th>
 										<th>Transfer</th>
 										<th>Cash</th>

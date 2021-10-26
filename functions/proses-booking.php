@@ -22,6 +22,11 @@ if (isset($_POST['submit'])) {
   $cash = $_POST['cash'];
   $keterangan = $_POST['keterangan'];
   $status = 1;
+  if ($transfer == $harga || $cash == $harga) {
+    $tgl_pelunasan = date('Y-m-d');
+  } else {
+    $tgl_pelunasan = "0000-00-00";
+  }
 
   $query_slot = mysqli_query($link, "SELECT * FROM tbl_slot WHERE id_cabang = '$id_cabang' AND id_jabatan = '$id_jabatan' AND jam = '$start_jam' ");
   $slot = mysqli_fetch_array($query_slot);
@@ -133,7 +138,7 @@ if (isset($_POST['submit'])) {
 
     if ($_POST['status_customer'] == 1) {
       if ($data == NULL) {
-        $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$nama', '$id_jabatan')";
+        $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan, tgl_pelunasan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$nama', '$id_jabatan', '$tgl_pelunasan')";
         $result = mysqli_query($link, $query);
         $id = mysqli_insert_id($link);
         // var_dump($result);die();
@@ -156,7 +161,7 @@ if (isset($_POST['submit'])) {
       }
     } else if ($_POST['status_customer'] == 2) {
       if ($data == NULL) {
-        $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$nama', '$id_jabatan')";
+        $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan, tgl_pelunasan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$nama', '$id_jabatan', '$tgl_pelunasan')";
         $result = mysqli_query($link, $query);
         $id = mysqli_insert_id($link);
         $query_update_customer = "UPDATE tbl_customer SET status = 1 WHERE kode_customer = '$nama'";
@@ -198,7 +203,7 @@ if (isset($_POST['submit'])) {
     $data = mysqli_fetch_array($cekdulu);
 
     if ($data == NULL) {
-      $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$kodecustomer', '$id_jabatan')";
+      $query = "INSERT INTO events(start, start_jam, ends, ends_jam, id_produk, id_slot, id_cabang, harga, id_tipe, id_users, transfer, cash, warna, keterangan, tgl_retouch, kode_customer, id_jabatan, tgl_pelunasan) values ('$tgl_pasang', '$start_jam', '', '$ends_jam', '$id_produk', '$id_slot', '$id_cabang', '$harga', '', '$id_users', '$transfer', '$cash', '$warna', '$keterangan', '$tgl_retouch', '$kodecustomer', '$id_jabatan', '$tgl_pelunasan')";
       $result = mysqli_query($link, $query);
       $id = mysqli_insert_id($link);
       $customer = "INSERT INTO tbl_customer(kode_customer, nama_customer, no_telp, tgl_lahir, sumber, status) VALUES('$kodecustomer', '$nama', '$no_telp', '$tgl_lahir', '$sumber', '$status')";
