@@ -207,8 +207,8 @@ if (isset($_GET['search'])) {
                                                             $id_cabang = $id_cbg;
                                                             $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
                                                             foreach ($query_cabang as $qc) { ?>
-                                                                <?php if ($data['start'] == $tgl && $data['jabatan_events'] == 1) { ?>
                                                                     <tr>
+                                                                <?php if ($data['start'] == $tgl && $data['jabatan_events'] == 1) { ?>
                                                                         <td style="color:green; font-weight:900; text-align:center;"><a href="#" data-toggle="modal" data-target="#ModalEdit-<?= $data['id_events'] ?>" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                     <?php } else { ?>
                                                                         <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&id_jabatan=1&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>

@@ -63,11 +63,11 @@ if (isset($_GET['search'])) {
 }
 
 ?>
-<!-- <style>
+<style>
     .dt-responsive {
         overflow: hidden;
     }
-</style> -->
+</style>
 
 <body class="">
 
@@ -167,103 +167,85 @@ if (isset($_GET['search'])) {
             <div class="row">
                 <?php
                 $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang");
+                $tgl = date('Y-m-d');
                 foreach ($cabang_query as $cq) {
                     $id_cbg = $cq['id_cabang'];
-                    $nama_cbg = $cq['nama_cabang'];
-
-                    //echo $id_cbg . $nama_cbg;
-                    ?>
-                    <div class="col-lg-6">
+                    $nama_cbg = $cq['nama_cabang']; ?>
+                    <div class="col-lg-4">
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header text-center">
                                 <h5><?= $nama_cbg ?></h5>
                             </div>
                             <div class="card-body">
                                 <div class="row align-items-center">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-6">
                                         <div class="card-body">
                                             <div class="dt-responsive">
                                                 <table id="user-list-tableee" class="table nowrap">
                                                     <thead>
                                                         <tr>
-                                                            <th colspan="6">Jam</th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Senior</td>
-                                                            <?php
-                                                            $no = 1;
-                                                            $tgl = date('Y-m-d');
-                                                            $query = mysqli_query($link, "SELECT DISTINCT a.jam, b.start_jam, a.id_slot, a.id_cabang, b.start
-                                                                FROM tbl_slot a 
-                                                                LEFT JOIN events b ON a.id_slot = b.id_slot
-                                                                WHERE a.id_cabang = $id_cbg
-                                                                AND a.id_jabatan = 1
-                                                                ORDER BY a.jam ASC");
-                                                            foreach ($query as $data) {
-                                                                $id_cabang = $data['id_cabang'];
-                                                                $query_cabang = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE id_cabang = $id_cabang");
-                                                                foreach ($query_cabang as $qc) {
-                                                                    ?>
-                                                                    <?php if ($tgl != $data['start']) { ?>
-                                                                        <td style="color:red"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
-                                                                    <?php } else { ?>
-                                                                        <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
-                                                                    <?php }
-                                                                } ?>
-
-                                                            <?php } ?>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="card-body">
-                                            <div class="dt-responsive">
-                                                <table id="user-list-tableee" class="table nowrap">
-                                                    <thead>
-                                                        <tr>
-                                                            <th colspan="6">Jam</th>
+                                                            <th style="text-align: center;">Senior</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        <?php 
+                                                        $query = mysqli_query($link, "SELECT * FROM tbl_slot a RIGHT JOIN events b ON b.id_slot = a.id_slot WHERE a.id_jabatan = 1 AND a.id_cabang = '$id_cbg' AND b.start = '$tgl' GROUP BY a.jam");
+                                                        foreach ($query as $data) { ?>
+                                                           <tr>
+                                                            <td style="<?php if ($data['start'] == $tgl) { echo "color: green;"; } else { echo "color: red;";} ?>"><?= $data['jam']; ?></td>
+                                                           </tr>
+                                                       <?php } ?>
+
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                   </div>
+                                   <div class="col-lg-6">
+                                    <div class="card-body">
+                                        <div class="dt-responsive">
+                                            <table id="user-list-tableee" class="table nowrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="text-align: center;">Junior</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- Query for Data Customer -->
+                                                    <?php $q_booking = mysqli_query($link, "SELECT * FROM events WHERE id_cabang = $id_cbg AND id_jabatan = 2 AND start = '$tgl'");
+                                                    foreach ($q_booking as $qb) { ?>
                                                         <tr>
-                                                            <td>Junior</td>
-                                                            <?php
-                                                            $no = 1;
-                                                            $tgl = date('Y-m-d');
-                                                            $query = mysqli_query($link, "SELECT a.jam, b.start_jam
-                                                                FROM tbl_slot a 
-                                                                LEFT JOIN events b ON a.id_slot = b.id_slot
-                                                                WHERE a.id_cabang = $id_cabang
-                                                                AND a.id_jabatan = 2
-                                                                ORDER BY a.jam ASC");
-                                                            foreach ($query as $data) {
-                                                                ?>
-                                                                <?php if ($data['jam'] == $data['start_jam']) { ?>
-                                                                    <td style="color:green"><a href="data-customer" style="color: green"><?php echo $data['jam'] ?></a></td>
-                                                                <?php } else { ?>
-                                                                    <td style="color:red"><a href="booking?cabang=<?php echo $qc['nama_cabang'] ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&popup=1" style="color: red;"><?php echo $data['jam'] ?></a></td>
-                                                                <?php } ?>
-                                                            <?php } ?>
+                                                            <td style="color:green; font-weight:900; text-align:center;"><?php echo $qb['start_jam'] ?></td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                    <?php } ?>
+
+                                                    <!-- Query for Slot -->
+                                                    <?php
+                                                    $q_data = mysqli_query($link, "SELECT * FROM tbl_slot WHERE id_cabang = $id_cbg AND id_jabatan = 2 ORDER BY jam ASC");
+                                                    foreach ($q_data as $qd) { ?>
+                                                        <tr>
+                                                            <?php if ($qd['id_cabang'] == $id_cbg && $qd['id_slot'] != $qb['id_slot']) { ?>
+                                                                <td style="color:green; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $nama_cbg ?>&jam=<?php echo $qd['jam'] ?>&tanggal=<?= $tgl ?>&id_jabatan=2&popup=1" style="color:red;"><?php echo $qd['jam'] ?></a></td>
+                                                            </tr> 
+                                                        <?php }
+                                                    } ?>
+
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            <?php } ?>
+        </div>
 
-                <?php } ?>
-            </div>
+
+        <!-- informasi karyawan -->
+        <div class="row">
+            <div class="col-12">
                 <div class="card shadow mb-4">
                     <a href="#collapseCardKaryawan" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardKaryawan">
                         <h6 class="m-0 font-weight-bold text-primary">
@@ -288,7 +270,7 @@ if (isset($_GET['search'])) {
                                             <ul style="list-style: none;">
                                                 <?php
                                                 $tanggal_sekarang = date('Y-m-d');
-                                                // $tgl_set = $data['tanggal'];
+                                            // $tgl_set = $data['tanggal'];
                                                 $daftar_hari = array(
                                                     'Sunday' => 'Minggu',
                                                     'Monday' => 'Senin',
@@ -298,11 +280,15 @@ if (isset($_GET['search'])) {
                                                     'Friday' => 'Jumat',
                                                     'Saturday' => 'Sabtu'
                                                 );
-                                                $date=date('Y/m/d');
-                                                $namahari = date('l', strtotime($date)); 
+                                                $date = date('Y/m/d');
+                                                $namahari = date('l', strtotime($date));
                                                 $user_query = mysqli_query($link, "SELECT * FROM users JOIN tbl_status_kerja ON tbl_status_kerja.id_users = users.id_users WHERE tbl_status_kerja.cabang = $id_cbg AND users.level = 2");
                                                 foreach ($user_query as $karyawan) { ?>
-                                                    <li style="width: 50%; margin: 5px 0; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]){ echo 'background-color: red; color: #ffffff;'; } else { echo 'background-color: green; color: #ffffff'; } ?>"><?= $karyawan['username'] ?></li>
+                                                    <li style="width: 50%; margin: 5px 0; text-align: center; padding: 10px; <?php if ($karyawan['hari_libur'] == $daftar_hari[$namahari]) {
+                                                        echo 'background-color: red; color: #ffffff;';
+                                                    } else {
+                                                        echo 'background-color: green; color: #ffffff';
+                                                    } ?>"><?= $karyawan['username'] ?></li>
                                                 <?php } ?>
                                             </ul>
                                         </div>
@@ -310,8 +296,108 @@ if (isset($_GET['search'])) {
                                 </div>
                             <?php } ?>
                         </div>
+                        <div style="padding: 10px 20px;">* Keterangan : Merah = Libur, Hijau = Masuk</div>
                     </div>
-                    <div style="padding: 10px 0;">* Keterangan : Merah = Libur, Hijau = Masuk</div>
                 </div>
-                <?php include 'views/footer.php';
-                ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Input Data Customer</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-tanya">Tanya Tanya ?</button>
+                        <a href="booking" class="btn btn-info">Booking Sekarang</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Tanya -->
+        <div class="modal fade" id="modal-tanya" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Masih Tanya Tanya</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="functions/proses-booking" method="post">
+                            <div class="row mt-3">
+                                <div class="col-12 mb-3">
+                                    <h5>Informasi Booking</h5>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Nama Customer</label>
+                                        <input type="text" name="nama" class="form-control" id="title" required="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label>Nomor Whatsapp</label>
+                                        <input type="number" name="no_telp" class="form-control" id="no_telp" required="">
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label>Sumber</label>
+                                        <select name="sumber" class="form-control" id="sumber">
+                                            <option value=""></option>
+                                            <option value="IG"> Instagram </option>
+                                            <option value="Teman"> Teman </option>
+                                            <option value="Iklan"> Iklan </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="submit" name="tanya_tanya" class="btn btn-primary">Simpan</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#no_telp').change(function() {
+                    var no_telp = document.getElementById("no_telp").value;
+                    console.log(no_telp);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'functions/check_nohp.php',
+                        data: {
+                            'no_telp': no_telp,
+                        },
+
+                        success: function(response) {
+                            if (response == "true") {
+                                var hasil = '<span class="status-not-available" style="color: #ff4757"> No HP Sudah Digunakan</span>';
+                                $('#user-availability-status').html(hasil);
+                                $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" disabled>Simpan</button>');
+                            } else if (response == "false") {
+                                var alert = "'Anda yakin data sudah benar?'";
+                                var hasil2 = '<span class="status-available" style="color: #23ad5c"> No HP Bisa Dipakai </span>';
+                                $('#user-availability-status').html(hasil2);
+                                $('#submitData').html('<button type="submit" name="submit" class="btn btn-primary" onclick="return confirm(' + alert + ')">Simpan</button>');
+                            } else {
+
+                            }
+                        }
+                    });
+                })
+            });
+        </script>
+        <?php
+        include 'views/footer.php';
+        ?>
+    </div>
+</div>
