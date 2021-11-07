@@ -1,5 +1,6 @@
 <?php
 
+date_default_timezone_set("Asia/Jakarta");
 $host   = 'onyx.cloudns.io';
 $user   = 'sitesidadmin_klinik';
 $pass   = 'Admin1234@yx##';
