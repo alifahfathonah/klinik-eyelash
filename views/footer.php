@@ -819,6 +819,22 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+    $('.start_jam').click(function() {
+      var data_start_jam = $('.start_jam').val();
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/hitung-jam.php',
+        data: {
+          'start_jam': data_start_jam,
+        },
+
+        success: function(response) {
+          $('.hour').html(response);
+        }
+      });
+    });
+
   $(document).ready(function() {
     $('#start_jam').click(function() {
       var data_start_jam = document.getElementById("start_jam").value;
@@ -839,6 +855,22 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+    $('.start_jam').change(function() {
+      var data_start_jam = $(".start_jam").val();
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/hitung-jam.php',
+        data: {
+          'start_jam': data_start_jam,
+        },
+
+        success: function(response) {
+          $('.hour').replaceWith(response);
+        }
+      });
+    });
+
   $(document).ready(function() {
     $('#start_jam').change(function() {
       var data_start_jam = document.getElementById("start_jam").value;

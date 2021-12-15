@@ -333,7 +333,7 @@ include 'views/header.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Jam</label>
-                                    <input type="time" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam">
+                                    <input type="time" name="start_jam" class="form-control start_jam" id="start_jam" placeholder="jam">
                                 </div>
                             </div>
                             <div class="col-sm-6">
