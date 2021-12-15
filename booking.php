@@ -321,13 +321,13 @@ include 'views/header.php';
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Tanggal Pasang</label>
-                                    <input type="date" name="start" class="form-control" id="start" placeholder="Title" readonly="">
+                                    <input type="date" name="start" class="form-control start" id="start" placeholder="Title" readonly="">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Tanggal Retouch</label>
-                                    <input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title">
+                                    <input type="date" name="tgl_retouch" class="form-control tgl_retouch" id="tgl_retouch" placeholder="Title">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -356,22 +356,8 @@ include 'views/header.php';
                             <div class="col">
                                 <div class="form-group">
                                     <label>Pilih Cabang</label>
-                                    <!-- <select name="id_cabang" class="form-control" id="id_cabang" placeholder="Cabang">
+                                    <select name="id_cabang" id="id_cabang" class="form-control id_cabang" required="">
                                         <option value=""></option>
-                                        <?php
-                                        $cabang = ucwords($_GET['cabang']);
-                                        $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
-                                        foreach ($query1 as $d) {
-                                        ?>
-                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
-                                                                                                echo "selected";
-                                                                                            } ?>> <?php echo $d['nama_cabang'] ?></option>
-                                        <?php } ?>
-                                    </select> -->
-                                    <div class="form-group">
-                                        <label>Pilih Cabang</label>
-                                        <select name="id_cabang" id="id_cabang" class="form-control" required="">
-                                            <option value=""></option>
                                             <?php
                                             $cabang = ucwords($_GET['cabang']);
                                             $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
@@ -381,7 +367,6 @@ include 'views/header.php';
                                                                                                 } ?>> <?php echo $d['nama_cabang'] ?></option>
                                             <?php } ?>
                                         </select>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -393,17 +378,13 @@ include 'views/header.php';
                             <div class="col">
                                 <div class="form-group">
                                     <label>Nama Produk</label>
-                                    <select name="id_produk" id="id_produk" class="form-control" onchange="changeValueEdit(this.value)" placeholder="Nama Produk">
+                                    <select name="id_produk" id="id_produk" class="form-control id_harga" onchange="changeValueEdit(this.value)" placeholder="Nama Produk">
                                         <option value=""></option>
                                         <?php
-                                        $barang = mysqli_query($link, "SELECT * FROM tbl_produk");
-                                        $jsArray = "var hrg_brg = new Array();\n";
-
-                                        if (mysqli_num_rows($barang)) { ?>
-                                            <?php while ($row_brg = mysqli_fetch_array($barang)) { ?>
-                                                <option value="<?php echo $row_brg["id_produk"] ?>"> <?php echo $row_brg["nama_produk"] ?> </option>
-                                            <?php $jsArray .= "hrg_brg['" . $row_brg['id_produk'] . "'] = {harga:'" . addslashes($row_brg['harga']) . "'};\n";
-                                            } ?>
+                                            $q_produk = mysqli_query($link, "SELECT * FROM tbl_produk");
+                                            foreach ($q_produk as $produk) {
+                                        ?>
+                                            <option value="<?php echo $produk['id_produk'] ?>"> <?php echo $produk['nama_produk'] ?></option>
                                         <?php } ?>
 
                                     </select>
@@ -412,7 +393,7 @@ include 'views/header.php';
                             <div class="col">
                                 <div class="form-group">
                                     <label>Harga Produk</label>
-                                    <input type="text" name="harga" class="form-control" id="hrg" placeholder="Harga Otomatis Terisi">
+                                    <input type="text" name="harga" class="form-control hrg" id="hrg" placeholder="Harga Otomatis Terisi">
                                 </div>
                             </div>
                             <div class="col">
@@ -442,7 +423,7 @@ include 'views/header.php';
                                         <option value="1"> Senior </option>
                                         <option value="2"> Junior </option>
                                     </select> -->
-                                    <select name="id_jabatan" class="form-control" id="id_jabatan">
+                                    <select name="id_jabatan" class="form-control id_jabatan" id="id_jabatan">
                                         <option value=""></option>
                                         <option value="1" <?php if (empty(($_GET['id_jabatan']))) {
                                                             } else if ($_GET['id_jabatan'] == '1') {
@@ -470,7 +451,17 @@ include 'views/header.php';
                                 </div> -->
                                 <div class="form-group">
                                     <label>Nama Pemasang</label>
-                                    <div id="pemasang"></div>
+                                    <select name="id_users" class="form-control id_users" id="id_users" required="">
+                                        <option value=""></option>
+                                        <?php
+                                        $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.level = 2");
+                                        foreach ($query as $d) { ?>
+                                            <option value="<?php echo $d['id_users'] ?>">
+                                            <?php echo $d['username'] ?></option>
+                                        <?php } ?>
+
+                                        </select>
+                                    <div id="pemasang" class="pemasang"></div>
                                 </div>
                             </div>
                         </div>

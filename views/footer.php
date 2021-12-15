@@ -73,6 +73,78 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+
+  // $(window).on("load", function() {
+  //     var id_cabang = $(".id_cabang").val();
+  //     var tanggal = $(".start").val();
+  //     var id_jabatan = $(".id_jabatan").val();
+  //     console.log("Cabang", id_cabang);
+  //     console.log("tanggal", tanggal);
+  //     console.log("Jabatan", id_jabatan);
+
+  //   $.ajax({
+  //     type: 'POST',
+  //     url: 'functions/pilih-pemasang.php',
+  //     data: {
+  //       'id_cabang': id_cabang,
+  //       'tanggal': tanggal,
+  //       'id_jabatan': id_jabatan,
+  //     },
+
+  //     success: function(response) {
+  //       $('.pemasang').html(response);
+  //     }
+  //   });
+  // });
+
+  $('.id_jabatan').change(function() {
+      var id_cabang = $(".id_cabang").val();
+      var tanggal = $(".start").val();
+      var id_jabatan = $(".id_jabatan").val();
+      console.log("Cabang", id_cabang);
+      console.log("tanggal", tanggal);
+      console.log("Jabatan", id_jabatan);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/pilih-pemasang-edit.php',
+        data: {
+          'id_cabang': id_cabang,
+          'tanggal': tanggal,
+          'id_jabatan': id_jabatan,
+        },
+
+        success: function(response) {
+          $('.id_users').replaceWith(response);
+        }
+      });
+    });
+
+  $('.id_cabang').change(function() {
+      var id_cabang = $(".id_cabang").val();
+      var tanggal = $(".start").val();
+      var id_jabatan = $(".id_jabatan").val();
+      console.log("Cabang", id_cabang);
+      console.log("tanggal", tanggal);
+      console.log("Jabatan", id_jabatan);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/pilih-pemasang-edit.php',
+        data: {
+          'id_cabang': id_cabang,
+          'tanggal': tanggal,
+          'id_jabatan': id_jabatan,
+        },
+
+        success: function(response) {
+          $('.id_users').replaceWith(response);
+        }
+      });
+    });
+</script>
+
+<script type="text/javascript">
   $(document).ready(function() {
     $('#id_cabang').change(function() {
       var id_cabang = document.getElementById("id_cabang").value;
@@ -661,6 +733,33 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   <?php echo $jsArrayy; ?>
 
+  $('.id_harga').change(function() {
+      var id_harga = $(".id_harga").val();
+      // $(".hrg").val(id_harga)
+      console.log("id_harga", id_harga);
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/pilih-harga.php',
+        data: {
+          'id_produk': id_harga,
+        },
+
+        success: function(response) {
+          $(".hrg").replaceWith(response)
+        }
+      });
+    });
+
+  // function changeValue(id_produk) {
+  //   var harga = $(".hrg").val(hrg_brgg[id_produk].hrg);
+  //   console.log(harga);
+  // };
+</script>
+
+<script type="text/javascript">
+  <?php echo $jsArrayy; ?>
+
   function changeValue(id_produk) {
     var harga = document.getElementById("hrg").value = hrg_brgg[id_produk].hrg;
     console.log(harga);
@@ -680,6 +779,24 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+  $('.id_harga').change(function() {
+      var id_produk = $(this).val();
+      var data_start = $(".start").val();
+
+      $.ajax({
+        type: 'POST',
+        url: 'functions/cari-retouch.php',
+        data: {
+          'id_produk': id_produk,
+          'start': data_start
+        },
+
+        success: function(response) {
+          $('.tgl_retouch').replaceWith(response);
+        }
+      });
+    });
+
   $(document).ready(function() {
     $('#produk').change(function() {
       var id_produk = $(this).val();

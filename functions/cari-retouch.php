@@ -15,7 +15,7 @@ $retouch = date("Y-m-d", $tujuh_hari);
 // $retouch = date("Y-m-d", $hasil['waktu_retouch']);
 // $retouch = date('d F Y', strtotime($kembali));
 
-echo '<input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title" required="" value="' . $retouch . '">';
+echo '<input type="date" name="tgl_retouch" class="form-control tgl_retouch" id="tgl_retouch" placeholder="Title" required="" value="' . $retouch . '">';
 // while ($hasil = mysqli_fetch_array($query)) {
 // 	echo '<option value="'.$hasil['id_produk'].'">'.$hasil['waktu_pemasangan'].'</option>';
 // }
