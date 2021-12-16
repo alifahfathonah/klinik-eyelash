@@ -250,6 +250,10 @@ if (isset($_POST['edit'])) {
   $tgl_lahir = $_POST['tgl_lahir'];
   $id_jabatan = $_POST['id_jabatan'];
 
+  $query_slot = mysqli_query($link, "SELECT * FROM tbl_slot WHERE id_cabang = '$id_cabang' AND id_jabatan = '$id_jabatan' AND jam = '$start_jam' ");
+  $slot = mysqli_fetch_array($query_slot);
+  $id_slot = $slot['id_slot'];
+
   $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.id_users = '$id_users' ");
   $username = mysqli_fetch_array($query);
 
@@ -270,7 +274,7 @@ if (isset($_POST['edit'])) {
   // die();
 
   if (!$data) {
-    $sql = "UPDATE events SET id_produk='$id_produk', id_cabang='$id_cabang', harga='$harga', id_tipe='$id_tipe', id_users='$id_users', transfer='$transfer', cash='$cash', warna='$warna', keterangan='$keterangan', start_jam = '$start_jam', ends_jam = '$ends_jam', tgl_retouch = '$tgl_retouch', kode_customer = '$kode_customer', id_jabatan='$id_jabatan' WHERE id = $id";
+    $sql = "UPDATE events SET id_produk='$id_produk', id_slot='$id_slot', id_cabang='$id_cabang', harga='$harga', id_tipe='$id_tipe', id_users='$id_users', transfer='$transfer', cash='$cash', warna='$warna', keterangan='$keterangan', start_jam = '$start_jam', ends_jam = '$ends_jam', tgl_retouch = '$tgl_retouch', kode_customer = '$kode_customer', id_jabatan='$id_jabatan' WHERE id = $id";
     $result = mysqli_query($link, $sql);
     $query_customer = "UPDATE tbl_customer SET nama_customer = '$nama', no_telp = '$no_telp', sumber = '$sumber', tgl_lahir = '$tgl_lahir' WHERE kode_customer = '$kode_customer'";
     mysqli_query($link, $query_customer);

@@ -200,7 +200,7 @@ if (isset($_GET['search'])) {
                                                                 <?php if ($data['tanggal'] == $tgl) { ?>
                                                                     <td style="color:green; font-weight:900; text-align:center;"><a href="#" data-toggle="modal" data-target="#ModalEdit-<?= $data['id'] ?>" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } else { ?>
-                                                                    <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $nama_cbg ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&id_jabatan=1&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                    <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $nama_cbg; ?>&jam=<?php echo $data['jam']; ?>&tanggal=<?= $tanggal_sekarang; ?>&id_jabatan=1&popup=1" target="_blank" style="color: red;"><?php echo $data['jam']; ?></a></td>
                                                                 <?php } ?>
                                                             </tr>
                                                         <?php } ?>
@@ -232,7 +232,7 @@ if (isset($_GET['search'])) {
                                                                 <?php if ($data['tanggal'] == $tgl) { ?>
                                                                     <td style="color:green; font-weight:900; text-align:center;"><a href="#" data-toggle="modal" data-target="#ModalEdit-<?= $data['id'] ?>" style="color: green"><?php echo $data['jam'] ?></a></td>
                                                                 <?php } else { ?>
-                                                                    <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $nama_cbg ?>&jam=<?php echo $data['jam'] ?>&tanggal=<?= $tanggal_sekarang ?>&id_jabatan=2&popup=1" target="_blank" style="color: red;"><?php echo $data['jam'] ?></a></td>
+                                                                    <td style="color:red; font-weight:900; text-align:center;"><a href="booking?cabang=<?php echo $nama_cbg; ?>&jam=<?php echo $data['jam']; ?>&tanggal=<?= $tanggal_sekarang; ?>&id_jabatan=2&popup=1" target="_blank" style="color: red;"><?php echo $data['jam']; ?></a></td>
                                                                 <?php } ?>
                                                             </tr>
                                                         <?php } ?>
@@ -260,7 +260,7 @@ if (isset($_GET['search'])) {
                     foreach ($data_popup as $popup) {
                         ?>
 
-                        <div class="modal fade" id="ModalEdit-<?= $popup['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel-<?= $popup['id'] ?>" aria-hidden="true">
+                        <div class="modal fade" id="ModalEdit-<?= $popup['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel-<?= $popup['id']; ?>" aria-hidden="true">
                             <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -278,45 +278,45 @@ if (isset($_GET['search'])) {
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label>Nama Customer</label>
-                                                        <input type="hidden" name="id" id="id" value="<?= $popup['id'] ?>">
-                                                        <input type="hidden" name="kode_customer" id="kode_customer" value="<?= $popup['kode_customer'] ?>">
-                                                        <input type="text" name="nama" class="form-control" id="title" placeholder="Nama Customer" value="<?= $popup['nama_customer'] ?>">
+                                                        <input type="hidden" name="id" id="id" value="<?= $popup['id']; ?>">
+                                                        <input type="hidden" name="kode_customer" id="kode_customer" value="<?= $popup['kode_customer']; ?>">
+                                                        <input type="text" name="nama" class="form-control" id="title" placeholder="Nama Customer" value="<?= $popup['nama_customer']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label>Nomor Whatsapp</label>
-                                                        <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Whatsapp" value="<?= $popup['no_telp'] ?>">
+                                                        <input type="text" name="no_telp" class="form-control" id="no_telp" placeholder="No Whatsapp" value="<?= $popup['no_telp']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label>Tanggal Lahir</label>
-                                                        <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir" value="<?= $popup['tgl_lahir'] ?>">
+                                                        <input type="date" name="tgl_lahir" class="form-control" id="tgl_lahir" placeholder="Tanggal Lahir" value="<?= $popup['tgl_lahir']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Tanggal Pasang</label>
-                                                        <input type="date" name="start" class="form-control" id="start-<?= $popup['id']; ?>" placeholder="Title" value="<?= $popup['start'] ?>" readonly="">
+                                                        <input type="date" name="start" class="form-control" id="start-<?= $popup['id']; ?>" placeholder="Title" value="<?= $popup['start']; ?>" readonly="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Tanggal Retouch</label>
-                                                        <input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title" value="<?= $popup['tgl_retouch'] ?>">
+                                                        <input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title" value="<?= $popup['tgl_retouch']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Jam</label>
-                                                        <input type="time" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam" value="<?= str_replace(' ', '', $popup['start_jam']) ?>">
+                                                        <input type="time" name="start_jam" class="form-control hour" id="start_jam" placeholder="jam" value="<?= str_replace(' ', '', $popup['start_jam']); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Sampai Jam</label>
-                                                        <input type="time" name="ends_jam" class="form-control hour" id="ends_jam" placeholder="jam" value="<?= str_replace(' ', '', $popup['ends_jam']) ?>">
+                                                        <input type="time" name="ends_jam" class="form-control hour" id="ends_jam" placeholder="jam" value="<?= str_replace(' ', '', $popup['ends_jam']); ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col">
@@ -346,9 +346,9 @@ if (isset($_GET['search'])) {
                                                             $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang");
                                                             foreach ($query1 as $d) {
                                                                 ?>
-                                                                <option value="<?php echo $d['id_cabang'] ?>" <?php if (!empty($d['id_cabang'] == $id_cbg)) {
+                                                                <option value="<?php echo $d['id_cabang']; ?>" <?php if (!empty($d['id_cabang'] == $popup['id_cabang'])) {
                                                                     echo "selected";
-                                                                } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                                                } ?>> <?php echo $d['nama_cabang']; ?></option>
                                                             <?php } ?>
                                                         </select>
                                                     </div>
