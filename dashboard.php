@@ -298,13 +298,13 @@ if (isset($_GET['search'])) {
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Tanggal Pasang</label>
-                                                        <input type="date" name="start" class="form-control" id="start-<?= $popup['id']; ?>" placeholder="Title" value="<?= $popup['start']; ?>" readonly="">
+                                                        <input type="date" name="start" class="form-control start" id="start-<?= $popup['id']; ?>" placeholder="Title" value="<?= $popup['start']; ?>" readonly="">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label>Tanggal Retouch</label>
-                                                        <input type="date" name="tgl_retouch" class="form-control" id="tgl_retouch" placeholder="Title" value="<?= $popup['tgl_retouch']; ?>">
+                                                        <input type="date" name="tgl_retouch" class="form-control tgl_retouch" id="tgl_retouch" placeholder="Title" value="<?= $popup['tgl_retouch']; ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
@@ -362,7 +362,7 @@ if (isset($_GET['search'])) {
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label>Nama Produk</label>
-                                                        <select name="id_produk" id="id_produk-<?= $popup['id']; ?>" class="form-control">
+                                                        <select name="id_produk" id="id_produk-<?= $popup['id']; ?>" class="form-control id_harga">
                                                             <option value=""></option>
                                                             <?php
                                                             $q_produk = mysqli_query($link, "SELECT * FROM tbl_produk");
