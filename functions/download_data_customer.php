@@ -17,6 +17,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Nama</th>
 			<th>No HP</th>
 			<th>Status</th>
+			<th>Nama Produk</th>
 			<th>Jenis</th>
 			<th>Tanggal Retouch</th>
 			<th>Sumber</th>
@@ -35,7 +36,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 		$tanggal_akhir = $_POST['tanggal_akhir'];
 		$no = 1;
 		$tgl = date('Y-m-d');
-		$query = mysqli_query($link,"SELECT a.*, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*, g.*
+		$query = mysqli_query($link,"SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, d.nama_produk, f.*, g.*
 			FROM events a 
 			LEFT JOIN users b ON a.id_users = b.id_users
 			LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
@@ -79,6 +80,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 						Tunggu DP
 					<?php } ?>
 				</td>
+				<td><?php echo $data['nama_produk'] ?></td>
 				<td><?php echo $data['nama_tipe'] ?></td>
 				<td>'<?php echo $tanggal_retouch ?></td>
 				<td><?php echo $data['sumber'] ?></td>
@@ -116,6 +118,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Nama</th>
 			<th>Kode Customer</th>
 			<th>Status</th>
+			<th>Nama Produk</th>
 			<th>Jenis</th>
 			<th>Tanggal Retouch</th>
 			<th>Sumber</th>

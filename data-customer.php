@@ -74,6 +74,7 @@ include 'views/header.php';
 											<th>Tanggal</th>
 											<th>Jam</th>
 											<th>Nama</th>
+											<th>Nama Produk</th>
 											<th>Jenis</th>
 											<th>Tanggal Retouch</th>
 											<th>Sumber</th>
@@ -88,7 +89,7 @@ include 'views/header.php';
 										<?php  
 										$no = 1;
 										$tgl = date('Y-m-d');
-										$query = mysqli_query($link,"SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, f.*
+										$query = mysqli_query($link,"SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, d.nama_produk, f.*
 											FROM events a 
 											LEFT JOIN users b ON a.id_users = b.id_users
 											LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
@@ -120,7 +121,8 @@ include 'views/header.php';
 												<td><?php echo $tanggal ?></td>
 												<td><?php echo $data['start_jam'] ?> - <?php echo $data['ends_jam'] ?></td>
 												<td><?php echo $data['nama_customer'] ?></td>
-												<td><?php echo $data['nama_tipe'] ?></td>
+												<td><?php echo $data['nama_produk'] ?></td>
+												<td><?php if ($data['id_tipe'] != 0) {echo $data['nama_tipe'];} else {echo "-"; } ?></td>
 												<td><?php echo $tanggal_retouch ?></td>
 												<td><?php echo $data['sumber'] ?></td>
 												<td style="background: #4680ff;color: #fff;">Rp. <?php echo number_format( $data['harga'] ); ?></td>
@@ -204,6 +206,7 @@ include 'views/header.php';
 											<th>Tanggal</th>
 											<th>Jam</th>
 											<th>Nama</th>
+											<th>Nama Produk</th>
 											<th>Jenis</th>
 											<th>Tanggal Retouch</th>
 											<th>Sumber</th>
@@ -930,37 +933,41 @@ include 'views/header.php';
 								<thead>
 									<tr>
 										<th>No</th>
-										<th>Kode Customer</th>
+										<th>Lokasi</th>
+										<th>Pemasang</th>
+										<th>Tanggal</th>
 										<th>Nama</th>
-										<th>Id Pesanan</th>
 										<th>Komplain</th>
-										<th></th>
+										<!-- <th></th> -->
 									</tr>
 								</thead>
 								<tbody>
 									<?php  
 									$no = 1;
 									$query = mysqli_query($link,"
-										SELECT a.*, b.id as id_events, c.* FROM komplain a
+										SELECT a.*, b.id as id_events, b.start, c.*, d.nama_cabang, e.username FROM komplain a
 										LEFT JOIN events b ON a.id_pemesanan = b.id
 										LEFT JOIN tbl_customer c ON a.kode_customer = c.kode_customer
+										LEFT JOIN tbl_cabang d ON b.id_cabang = d.id_cabang
+										LEFT JOIN users e ON b.id_users = e.id_users
 										ORDER BY a.date_created DESC");
 									foreach ($query as $data) {
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo $data['kode_customer'] ?></td>
+											<td><?php echo $data['nama_cabang'] ?></td>
+											<td><?php echo $data['username'] ?></td>
+											<td><?php echo date('d F Y', strtotime($data['start'])); ?></td>
 											<td><?php echo $data['nama_customer'] ?></td>
-											<td><?php echo $data['id_events'] ?></td>
 											<td><?php echo $data['komplain'] ?></td>
-											<td>
+											<!-- <td> -->
 												<!-- <span class="badge badge-light-success"></span>
 												<div class="overlay-edit">
 													<button type="button" class="btn btn-icon btn-success" data-toggle="modal" data-target="#modal-edit-customer-<?php echo $data['id'] ?>"><i class="feather icon-edit"></i></button>
 
 													<button type="button" class="btn btn-icon btn-danger" onclick="deleteproduk(<?php echo $data['id_produk'] ?>)"><i class="feather icon-trash-2"></i></button>
 												</div> -->
-											</td>
+											<!-- </td> -->
 										</tr>
 
 									<?php } ?>
@@ -968,11 +975,12 @@ include 'views/header.php';
 								<tfoot>
 									<tr>
 										<th>No</th>
-										<th>Kode Customer</th>
+										<th>Lokasi</th>
+										<th>Pemasang</th>
+										<th>Tanggal</th>
 										<th>Nama</th>
-										<th>Id Pesanan</th>
 										<th>Komplain</th>
-										<th></th>
+										<!-- <th></th> -->
 									</tr>
 								</tfoot>
 							</table>

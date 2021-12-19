@@ -20,6 +20,7 @@
 					<label>Nama Customer</label>
 					<select name="nama" id="pilih_nama" class="form-control select2" required="">
 						<optgroup label="Customer">
+							<option value="0" disabled selected>-- Pilih Salah Satu --</option>
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 1");
 							foreach ($query as $data_customer) { ?>
@@ -41,6 +42,7 @@
 					<label>Nama Customer</label>
 					<select name="nama" id="pilih_nama" class="form-control select2" required="">
 						<optgroup label="Customer Tanya">
+							<option value="0" disabled selected>-- Pilih Salah Satu --</option>
 							<?php
 							$query = mysqli_query($link, "SELECT * FROM tbl_customer WHERE status = 2");
 							foreach ($query as $data_customer) { ?>
