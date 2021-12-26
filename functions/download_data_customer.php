@@ -1,8 +1,8 @@
-<?php 
-include ("../model/db.php");
+<?php
+include("../model/db.php");
 $tanggal = date('d F Y');
 header("Content-type: application/vnd-ms-excel");
-header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".xls");
+header("Content-Disposition: attachment; filename=Data Customer - " . $tanggal . ".xls");
 ?>
 
 <table border="1">
@@ -17,10 +17,9 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			<th>Nama</th>
 			<th>No HP</th>
 			<th>Status</th>
-			<th>Nama Produk</th>
-			<th>Jenis</th>
 			<th>Tanggal Retouch</th>
 			<th>Sumber</th>
+			<th>Nama Produk</th>
 			<th>Harga</th>
 			<th>Transfer</th>
 			<th>Cash</th>
@@ -36,7 +35,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 		$tanggal_akhir = $_POST['tanggal_akhir'];
 		$no = 1;
 		$tgl = date('Y-m-d');
-		$query = mysqli_query($link,"SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, d.nama_produk, f.*, g.*
+		$query = mysqli_query($link, "SELECT a.*, a.id as id_events, c.nama_cabang, b.username, e.nama_tipe, d.harga, d.nama_produk, f.*, g.*
 			FROM events a 
 			LEFT JOIN users b ON a.id_users = b.id_users
 			LEFT JOIN tbl_cabang c ON a.id_cabang = c.id_cabang
@@ -46,7 +45,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			LEFT JOIN komplain g ON g.id_pemesanan = a.id
 			WHERE start BETWEEN '" . $tanggal_awal . "' AND  '" . $tanggal_akhir . "'
 			ORDER BY f.kode_customer ASC");
-		foreach ($query as $data) { 
+		foreach ($query as $data) {
 
 			$daftar_hari = array(
 				'Sunday' => 'Minggu',
@@ -61,7 +60,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 			$hari = date('l', strtotime($data['start']));
 			$tanggal = date('d F Y', strtotime($data['start']));
 			$tanggal_retouch = date('d F Y', strtotime($data['tgl_retouch']));
-			?>
+		?>
 			<tr>
 				<td><?php echo $no++; ?></td>
 				<td><?php echo $data['nama_cabang'] ?></td>
@@ -72,7 +71,7 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 				<td><?php echo $data['nama_customer'] ?></td>
 				<td>'<?php echo $data['no_telp'] ?></td>
 				<td style="background-color: <?php echo $data['warna'] ?>; color: #ffffff;">
-					<?php if ($data['warna'] == "#008000"){ ?>
+					<?php if ($data['warna'] == "#008000") { ?>
 						Sudah Bayar / Lunas
 					<?php } else if ($data['warna'] == "#0071c5") { ?>
 						DP
@@ -80,22 +79,21 @@ header("Content-Disposition: attachment; filename=Data Customer - ".$tanggal.".x
 						Tunggu DP
 					<?php } ?>
 				</td>
-				<td><?php echo $data['nama_produk'] ?></td>
-				<td><?php echo $data['nama_tipe'] ?></td>
 				<td>'<?php echo $tanggal_retouch ?></td>
 				<td><?php echo $data['sumber'] ?></td>
-				<td style="background: #4680ff;color: #fff;">Rp. <?php echo number_format( $data['harga'] ); ?></td>
+				<td><?php echo $data['nama_produk'] ?></td>
+				<td style="background: #4680ff;color: #fff;">Rp. <?php echo number_format($data['harga']); ?></td>
 				<td style="background: #9ccc65;color: #fff;">
 					<?php if ($data['transfer'] == true) { ?>
-						Rp. <?php echo number_format( $data['transfer'] ); ?>
-					<?php }else{
+						Rp. <?php echo number_format($data['transfer']); ?>
+					<?php } else {
 						echo "-";
 					} ?>
 				</td>
 				<td style="background: #9ccc65;color: #fff;">
 					<?php if ($data['cash'] == true) { ?>
-						Rp. <?php echo number_format( $data['cash'] ); ?>
-					<?php }else{
+						Rp. <?php echo number_format($data['cash']); ?>
+					<?php } else {
 						echo "-";
 					} ?>
 				</td>

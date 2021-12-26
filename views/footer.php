@@ -73,7 +73,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-
   // $(window).on("load", function() {
   //     var id_cabang = $(".id_cabang").val();
   //     var tanggal = $(".start").val();
@@ -98,50 +97,50 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   // });
 
   $('.id_jabatan').change(function() {
-      var id_cabang = $(".id_cabang").val();
-      var tanggal = $(".start").val();
-      var id_jabatan = $(".id_jabatan").val();
-      console.log("Cabang", id_cabang);
-      console.log("tanggal", tanggal);
-      console.log("Jabatan", id_jabatan);
+    var id_cabang = $(".id_cabang").val();
+    var tanggal = $(".start").val();
+    var id_jabatan = $(".id_jabatan").val();
+    console.log("Cabang", id_cabang);
+    console.log("tanggal", tanggal);
+    console.log("Jabatan", id_jabatan);
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/pilih-pemasang-edit.php',
-        data: {
-          'id_cabang': id_cabang,
-          'tanggal': tanggal,
-          'id_jabatan': id_jabatan,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-pemasang-edit.php',
+      data: {
+        'id_cabang': id_cabang,
+        'tanggal': tanggal,
+        'id_jabatan': id_jabatan,
+      },
 
-        success: function(response) {
-          $('.id_users').replaceWith(response);
-        }
-      });
+      success: function(response) {
+        $('.id_users').replaceWith(response);
+      }
     });
+  });
 
   $('.id_cabang').change(function() {
-      var id_cabang = $(".id_cabang").val();
-      var tanggal = $(".start").val();
-      var id_jabatan = $(".id_jabatan").val();
-      console.log("Cabang", id_cabang);
-      console.log("tanggal", tanggal);
-      console.log("Jabatan", id_jabatan);
+    var id_cabang = $(".id_cabang").val();
+    var tanggal = $(".start").val();
+    var id_jabatan = $(".id_jabatan").val();
+    console.log("Cabang", id_cabang);
+    console.log("tanggal", tanggal);
+    console.log("Jabatan", id_jabatan);
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/pilih-pemasang-edit.php',
-        data: {
-          'id_cabang': id_cabang,
-          'tanggal': tanggal,
-          'id_jabatan': id_jabatan,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-pemasang-edit.php',
+      data: {
+        'id_cabang': id_cabang,
+        'tanggal': tanggal,
+        'id_jabatan': id_jabatan,
+      },
 
-        success: function(response) {
-          $('.id_users').replaceWith(response);
-        }
-      });
+      success: function(response) {
+        $('.id_users').replaceWith(response);
+      }
     });
+  });
 </script>
 
 <script type="text/javascript">
@@ -206,6 +205,45 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
     })
   });
 </script>
+
+<script type="text/javascript">
+  $(window).on("load", function() {
+    var tgl_complain = document.getElementById("tgl_complain").value;
+    console.log(tgl_complain);
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/check-complain.php',
+      data: {
+        'tgl_complain': tgl_complain,
+      },
+
+      success: function(response) {
+        $('.complain').html(response);
+      }
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(".tgl_complain").change(function() {
+    var tgl_complain = $(".tgl_complain").val();
+    console.log(tgl_complain);
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/check-complain.php',
+      data: {
+        'tgl_complain': tgl_complain,
+      },
+
+      success: function(response) {
+        $('.complain').html(response);
+      }
+    });
+  });
+</script>
+
 <script type="text/javascript">
   $(window).on("load", function() {
     var id_cabang = document.getElementById("id_cabang").value;
@@ -734,22 +772,22 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   <?php echo $jsArrayy; ?>
 
   $('.id_harga').change(function() {
-      var id_harga = $(".id_harga").val();
-      // $(".hrg").val(id_harga)
-      console.log("id_harga", id_harga);
+    var id_harga = $(".id_harga").val();
+    // $(".hrg").val(id_harga)
+    console.log("id_harga", id_harga);
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/pilih-harga.php',
-        data: {
-          'id_produk': id_harga,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-harga.php',
+      data: {
+        'id_produk': id_harga,
+      },
 
-        success: function(response) {
-          $(".hrg").replaceWith(response)
-        }
-      });
+      success: function(response) {
+        $(".hrg").replaceWith(response)
+      }
     });
+  });
 
   // function changeValue(id_produk) {
   //   var harga = $(".hrg").val(hrg_brgg[id_produk].hrg);
@@ -780,22 +818,22 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 
 <script type="text/javascript">
   $('.id_harga').change(function() {
-      var id_produk = $(this).val();
-      var data_start = $(".start").val();
+    var id_produk = $(this).val();
+    var data_start = $(".start").val();
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/cari-retouch.php',
-        data: {
-          'id_produk': id_produk,
-          'start': data_start
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/cari-retouch.php',
+      data: {
+        'id_produk': id_produk,
+        'start': data_start
+      },
 
-        success: function(response) {
-          $('.tgl_retouch').replaceWith(response);
-        }
-      });
+      success: function(response) {
+        $('.tgl_retouch').replaceWith(response);
+      }
     });
+  });
 
   $(document).ready(function() {
     $('#produk').change(function() {
@@ -819,21 +857,21 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-    $('.start_jam').click(function() {
-      var data_start_jam = $('.start_jam').val();
+  $('.start_jam').click(function() {
+    var data_start_jam = $('.start_jam').val();
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/hitung-jam.php',
-        data: {
-          'start_jam': data_start_jam,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/hitung-jam.php',
+      data: {
+        'start_jam': data_start_jam,
+      },
 
-        success: function(response) {
-          $('.hour').html(response);
-        }
-      });
+      success: function(response) {
+        $('.hour').html(response);
+      }
     });
+  });
 
   $(document).ready(function() {
     $('#start_jam').click(function() {
@@ -855,21 +893,21 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-    $('.start_jam').change(function() {
-      var data_start_jam = $(".start_jam").val();
+  $('.start_jam').change(function() {
+    var data_start_jam = $(".start_jam").val();
 
-      $.ajax({
-        type: 'POST',
-        url: 'functions/hitung-jam.php',
-        data: {
-          'start_jam': data_start_jam,
-        },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/hitung-jam.php',
+      data: {
+        'start_jam': data_start_jam,
+      },
 
-        success: function(response) {
-          $('.hour').replaceWith(response);
-        }
-      });
+      success: function(response) {
+        $('.hour').replaceWith(response);
+      }
     });
+  });
 
   $(document).ready(function() {
     $('#start_jam').change(function() {

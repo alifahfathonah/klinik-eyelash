@@ -6,8 +6,8 @@
 
 <nav class="pcoded-navbar menu-light ">
 	<div class="navbar-wrapper  ">
-		<div class="navbar-content scroll-div " >
-			
+		<div class="navbar-content scroll-div ">
+
 			<div class="">
 				<div class="main-menu-header">
 					<img class="img-radius" src="assets/images/avatar-2.jpg" alt="User-Profile-Image">
@@ -16,7 +16,7 @@
 					</div>
 				</div>
 			</div>
-			
+
 			<ul class="nav pcoded-inner-navbar ">
 				<li class="nav-item pcoded-menu-caption">
 					<label>Report</label>
@@ -39,12 +39,12 @@
 				<li class="nav-item pcoded-menu-caption">
 					<label>Kelola Data</label>
 				</li>
-				
+
 				<li class="nav-item pcoded-hasmenu">
 					<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Produk</span></a>
 					<ul class="pcoded-submenu">
 						<li><a href="produk">List Produk</a></li>
-						<li><a href="tipe-produk">Tipe Produk</a></li>
+						<!-- <li><a href="tipe-produk">Tipe Produk</a></li> -->
 					</ul>
 				</li>
 
@@ -62,7 +62,7 @@
 				</li>
 
 			</ul>
-			
+
 		</div>
 	</div>
 </nav>

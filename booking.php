@@ -171,7 +171,10 @@ include 'views/header.php';
                                 </div>
                             </div>
 
-                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) { } else { echo "value=" . $_GET['tanggal']; } ?> readonly="">
+                            <input type="hidden" name="start" class="form-control" id="start" placeholder="Title" <?php if (empty($_GET['tanggal'])) {
+                                                                                                                    } else {
+                                                                                                                        echo "value=" . $_GET['tanggal'];
+                                                                                                                    } ?> readonly="">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -223,8 +226,14 @@ include 'views/header.php';
                                     <label>Jabatan Pemasang</label>
                                     <select name="id_jabatan" class="form-control" id="id_jabatan">
                                         <option value=""></option>
-                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '1') { echo "selected"; } ?>> Senior </option>
-                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) { } else if ($_GET['id_jabatan'] == '2') { echo "selected"; } ?>> Junior </option>
+                                        <option value="1" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '1') {
+                                                                echo "selected";
+                                                            } ?>> Senior </option>
+                                        <option value="2" <?php if (empty(($_GET['id_jabatan']))) {
+                                                            } else if ($_GET['id_jabatan'] == '2') {
+                                                                echo "selected";
+                                                            } ?>> Junior </option>
                                     </select>
                                 </div>
                             </div>
@@ -358,15 +367,15 @@ include 'views/header.php';
                                     <label>Pilih Cabang</label>
                                     <select name="id_cabang" id="id_cabang" class="form-control id_cabang" required="">
                                         <option value=""></option>
-                                            <?php
-                                            $cabang = ucwords($_GET['cabang']);
-                                            $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
-                                            foreach ($query1 as $d) { ?>
-                                                <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
-                                                                                                    echo "selected";
-                                                                                                } ?>> <?php echo $d['nama_cabang'] ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        <?php
+                                        $cabang = ucwords($_GET['cabang']);
+                                        $query1 = mysqli_query($link, "SELECT * FROM tbl_cabang WHERE nama_cabang LIKE '%$cabang%'");
+                                        foreach ($query1 as $d) { ?>
+                                            <option value="<?php echo $d['id_cabang'] ?>" <?php if ($d['nama_cabang'] == "$cabang") {
+                                                                                                echo "selected";
+                                                                                            } ?>> <?php echo $d['nama_cabang'] ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -381,8 +390,8 @@ include 'views/header.php';
                                     <select name="id_produk" id="id_produk" class="form-control id_harga" onchange="changeValueEdit(this.value)" placeholder="Nama Produk">
                                         <option value=""></option>
                                         <?php
-                                            $q_produk = mysqli_query($link, "SELECT * FROM tbl_produk");
-                                            foreach ($q_produk as $produk) {
+                                        $q_produk = mysqli_query($link, "SELECT * FROM tbl_produk");
+                                        foreach ($q_produk as $produk) {
                                         ?>
                                             <option value="<?php echo $produk['id_produk'] ?>"> <?php echo $produk['nama_produk'] ?></option>
                                         <?php } ?>
@@ -394,19 +403,6 @@ include 'views/header.php';
                                 <div class="form-group">
                                     <label>Harga Produk</label>
                                     <input type="text" name="harga" class="form-control hrg" id="hrg" placeholder="Harga Otomatis Terisi">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <label>Tipe Produk</label>
-                                    <select name="id_tipe" class="form-control" id="id_tipe" placeholder="Tipe Produk">
-                                        <option value=""></option>
-                                        <?php
-                                        $query1 = mysqli_query($link, "SELECT a.* FROM tbl_tipe a ");
-                                        foreach ($query1 as $d) { ?>
-                                            <option value="<?php echo $d['id_tipe'] ?>"> <?php echo $d['nama_tipe'] ?></option>
-                                        <?php } ?>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -457,10 +453,10 @@ include 'views/header.php';
                                         $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.level = 2");
                                         foreach ($query as $d) { ?>
                                             <option value="<?php echo $d['id_users'] ?>">
-                                            <?php echo $d['username'] ?></option>
+                                                <?php echo $d['username'] ?></option>
                                         <?php } ?>
 
-                                        </select>
+                                    </select>
                                     <div id="pemasang" class="pemasang"></div>
                                 </div>
                             </div>
