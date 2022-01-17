@@ -209,13 +209,14 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   $(window).on("load", function() {
     var tgl_complain = document.getElementById("tgl_complain").value;
-    console.log(tgl_complain);
+    var tgl_complain_sampai = document.getElementById("tgl_complain_sampai").value;
 
     $.ajax({
       type: 'POST',
       url: 'functions/check-complain.php',
       data: {
         'tgl_complain': tgl_complain,
+        'tgl_complain_sampai': tgl_complain_sampai,
       },
 
       success: function(response) {
@@ -228,13 +229,33 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 <script type="text/javascript">
   $(".tgl_complain").change(function() {
     var tgl_complain = $(".tgl_complain").val();
-    console.log(tgl_complain);
+    var tgl_complain_sampai = $(".tgl_complain_sampai").val();
 
     $.ajax({
       type: 'POST',
       url: 'functions/check-complain.php',
       data: {
         'tgl_complain': tgl_complain,
+        'tgl_complain_sampai': tgl_complain_sampai,
+      },
+
+      success: function(response) {
+        $('.complain').html(response);
+      }
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(".tgl_complain_sampai").change(function() {
+    var tgl_complain = $(".tgl_complain").val();
+    var tgl_complain_sampai = $(".tgl_complain_sampai").val();
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/check-complain.php',
+      data: {
+        'tgl_complain': tgl_complain,
+        'tgl_complain_sampai': tgl_complain_sampai,
       },
 
       success: function(response) {

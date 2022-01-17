@@ -3,15 +3,16 @@
 include("../model/db.php");
 
 $tanggal_complain = $_POST['tgl_complain'];
+$tanggal_complain_sampai = $_POST['tgl_complain_sampai'];
 $no = 1;
 
-if ($tanggal_complain != "" || $tanggal_complain != null) {
+if ($tanggal_complain != "" && $tanggal_complain_sampai != "" || $tanggal_complain != null && $tanggal_complain_sampai != null) {
     $qdata = "SELECT a.*, b.id as id_events, b.start, c.*, d.nama_cabang, e.username FROM komplain a
 										LEFT JOIN events b ON a.id_pemesanan = b.id
 										LEFT JOIN tbl_customer c ON a.kode_customer = c.kode_customer
 										LEFT JOIN tbl_cabang d ON b.id_cabang = d.id_cabang
 										LEFT JOIN users e ON b.id_users = e.id_users
-                                        WHERE b.start = '$tanggal_complain'
+                                        WHERE b.start BETWEEN '$tanggal_complain' AND '$tanggal_complain_sampai'
 										ORDER BY a.date_created DESC";
 } else {
     $qdata = "SELECT a.*, b.id as id_events, b.start, c.*, d.nama_cabang, e.username FROM komplain a

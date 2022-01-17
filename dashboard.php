@@ -166,8 +166,13 @@ if (isset($_GET['search'])) {
 
             <div class="row">
                 <?php
-                $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang");
-                $tgl = date('Y-m-d');
+                $cabang_query = mysqli_query($link, "SELECT * FROM tbl_cabang ");
+                if ($_GET['search'] != null || $_GET['search'] != "") {
+                    $tgl = $_GET['search'];
+                } else {
+                    $tgl =
+                        date('Y-m-d');
+                }
                 foreach ($cabang_query as $cq) {
                     $id_cbg = $cq['id_cabang'];
                     $nama_cbg = $cq['nama_cabang']; ?>

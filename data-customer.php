@@ -942,8 +942,17 @@ include 'views/header.php';
 							<div class="col-2">
 								<label>Cari Berdasarkan Tanggal</label>
 							</div>
-							<div class="col-2">
-								<input type="date" name="tgl_complain" id="tgl_complain" class="tgl_complain form-control">
+							<div class="col-6">
+								<div class="row">
+									<div class="col-6">
+										<label><strong>Dari</strong></label>
+										<input type="date" name="tgl_complain" id="tgl_complain" class="tgl_complain form-control">
+									</div>
+									<div class="col-6">
+										<label><strong>Sampai</strong></label>
+										<input type="date" name="tgl_complain_sampai" id="tgl_complain_sampai" class="tgl_complain_sampai form-control">
+									</div>
+								</div>
 							</div>
 						</div>
 						<br>
