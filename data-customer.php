@@ -969,3 +969,24 @@ include 'views/header.php';
 	<?php
 	include 'views/footer.php';
 	?>
+	<script type="text/javascript">
+		$(window).on("load", function() {
+			var tgl_complain = $("#tgl_complain").val();
+			var tgl_complain_sampai = $("#tgl_complain_sampai").val();
+			console.log(tgl_complain);
+			console.log(tgl_complain_sampai);
+
+			$.ajax({
+				type: 'POST',
+				url: 'functions/check-complain.php',
+				data: {
+					'tgl_complain': tgl_complain,
+					'tgl_complain_sampai': tgl_complain_sampai,
+				},
+
+				success: function(response) {
+					$('.complain').html(response);
+				}
+			});
+		});
+	</script>

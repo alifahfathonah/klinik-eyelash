@@ -182,6 +182,24 @@ include 'views/header.php';
                                     <input type="time" name="start_jam" class="form-control hour" id="start_jam" value="<?= $_GET['jam']; ?>">
                                 </div>
                             </div>
+                            <script type="text/javascript">
+                                $(window).on("load", function() {
+                                    var data_start_jam = $(".hour").val();
+                                    console.log(data_start_jam);
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: 'functions/hitung-jam.php',
+                                        data: {
+                                            'start_jam': data_start_jam,
+                                        },
+
+                                        success: function(response) {
+                                            $('#jam_ends').html(response);
+                                        }
+                                    });
+                                });
+                            </script>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Sampai Jam</label>
@@ -447,7 +465,7 @@ include 'views/header.php';
                                 </div> -->
                                 <div class="form-group">
                                     <label>Nama Pemasang</label>
-                                    <select name="id_users" class="form-control id_users" id="id_users" required="">
+                                    <!-- <select name="id_users" class="form-control id_users" id="id_users" required="">
                                         <option value=""></option>
                                         <?php
                                         $query = mysqli_query($link, "SELECT a.* FROM users a WHERE a.level = 2");
@@ -456,8 +474,29 @@ include 'views/header.php';
                                                 <?php echo $d['username'] ?></option>
                                         <?php } ?>
 
-                                    </select>
-                                    <div id="pemasang" class="pemasang"></div>
+                                    </select> -->
+                                    <div id="karyawannya" class="karyawannya"></div>
+                                    <script type="text/javascript">
+                                        $(window).on("load", function() {
+                                            var id_cabang = $(".id_cabang").val();
+                                            var tanggal = $(".start").val();
+                                            var id_jabatan = $(".id_jabatan").val();
+
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: 'functions/pilih-pemasang-edit.php',
+                                                data: {
+                                                    'id_cabang': id_cabang,
+                                                    'tanggal': tanggal,
+                                                    'id_jabatan': id_jabatan,
+                                                },
+
+                                                success: function(response) {
+                                                    $('#karyawannya').html(response);
+                                                }
+                                            });
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>

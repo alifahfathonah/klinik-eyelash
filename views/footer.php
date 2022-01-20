@@ -15,42 +15,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 }
 ?>
 
-<!-- SweetAlert2 -->
-<script src="assets/sweetalert2/sweetalert2.min.js"></script>
-<!-- Toastr -->
-<script src="assets/toastr/toastr.min.js"></script>
-
-<!-- Required Js -->
-<script src="assets/js/vendor-all.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ripple.js"></script>
-<script src="assets/js/pcoded.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-<!-- datatable Js -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/dataTables.bootstrap4.min.js"></script>
-
-<!-- Apex Chart -->
-<script src="assets/js/apexcharts.min.js"></script>
-
-<!-- custom-chart js -->
-<script src="assets/js/dashboard-main.js"></script>
-
-<!-- FullCalendar -->
-<script src="assets/js/plugins/moment.js"></script>
-<script src="assets/js/plugins/jquery-ui.min.js"></script>
-<script src="assets/js/plugins/fullcalendar.min.js"></script>
-
-<!-- Input mask Js -->
-<script src="assets/js/plugins/jquery.mask.min.js"></script>
-<!-- form-picker-custom Js -->
-<script src="assets/js/form-masking-custom.js"></script>
-
-<!-- <script src="assets/js/highcharts.js"></script>
-<script src="assets/js/highcharts-3d.js"></script> -->
-
 <script type="text/javascript">
   $(document).ready(function() {
     $('#jenis_data_customer').change(function() {
@@ -73,28 +37,53 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-  // $(window).on("load", function() {
-  //     var id_cabang = $(".id_cabang").val();
-  //     var tanggal = $(".start").val();
-  //     var id_jabatan = $(".id_jabatan").val();
-  //     console.log("Cabang", id_cabang);
-  //     console.log("tanggal", tanggal);
-  //     console.log("Jabatan", id_jabatan);
+  $(window).on("load", function() {
+    var id_cabang = $("#id_cabang").val();
+    var tanggal = $("#start").val();
+    var id_jabatan = $("#id_jabatan").val();
+    console.log(tanggal);
+    console.log(id_cabang);
+    console.log(id_cabang);
 
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: 'functions/pilih-pemasang.php',
-  //     data: {
-  //       'id_cabang': id_cabang,
-  //       'tanggal': tanggal,
-  //       'id_jabatan': id_jabatan,
-  //     },
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-pemasang.php',
+      data: {
+        'id_cabang': id_cabang,
+        'tanggal': tanggal,
+        'id_jabatan': id_jabatan,
+      },
 
-  //     success: function(response) {
-  //       $('.pemasang').html(response);
-  //     }
-  //   });
-  // });
+      success: function(response) {
+        $('#pemasang').html(response);
+      }
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $(window).on("load", function() {
+    var id_cabang = $(".id_cabang").val();
+    var tanggal = $(".start").val();
+    var id_jabatan = $(".id_jabatan").val();
+    console.log("Cabang", id_cabang);
+    console.log("tanggal", tanggal);
+    console.log("Jabatan", id_jabatan);
+
+    $.ajax({
+      type: 'POST',
+      url: 'functions/pilih-pemasang.php',
+      data: {
+        'id_cabang': id_cabang,
+        'tanggal': tanggal,
+        'id_jabatan': id_jabatan,
+      },
+
+      success: function(response) {
+        $('.pemasang').html(response);
+      }
+    });
+  });
 
   $('.id_jabatan').change(function() {
     var id_cabang = $(".id_cabang").val();
@@ -266,29 +255,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
-  $(window).on("load", function() {
-    var id_cabang = document.getElementById("id_cabang").value;
-    var tanggal = document.getElementById("start").value;
-    var id_jabatan = document.getElementById("id_jabatan").value;
-    // console.log(id_cabang);
-
-    $.ajax({
-      type: 'POST',
-      url: 'functions/pilih-pemasang.php',
-      data: {
-        'id_cabang': id_cabang,
-        'tanggal': tanggal,
-        'id_jabatan': id_jabatan,
-      },
-
-      success: function(response) {
-        $('#pemasang').html(response);
-      }
-    });
-  });
-</script>
-
-<script type="text/javascript">
   $(document).ready(function() {
     $('#jenis_customer').change(function() {
       var jenis_customer = document.getElementById("jenis_customer").value;
@@ -309,7 +275,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
   });
 </script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   $('#id_cabang').load(function() {
     var id_cabang = document.getElementById("id_cabang").value;
     var tanggal = document.getElementById("start").value;
@@ -329,7 +295,7 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
       }
     });
   });
-</script>
+</script> -->
 <script type="text/javascript">
   $('#ModalAdd').on('hidden.bs.modal', function() {
     $(this)
@@ -946,24 +912,6 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
         }
       });
     })
-  });
-</script>
-
-<script type="text/javascript">
-  $(window).on("load", function() {
-    var data_start_jam = document.getElementById("start_jam").value;
-
-    $.ajax({
-      type: 'POST',
-      url: 'functions/hitung-jam.php',
-      data: {
-        'start_jam': data_start_jam,
-      },
-
-      success: function(response) {
-        $('#jam_ends').html(response);
-      }
-    });
   });
 </script>
 
