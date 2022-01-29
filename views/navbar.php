@@ -40,12 +40,12 @@
 					<label>Kelola Data</label>
 				</li>
 
-				<li class="nav-item pcoded-hasmenu">
-					<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Produk</span></a>
-					<ul class="pcoded-submenu">
+				<li class="nav-item">
+					<a href="produk" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Produk</span></a>
+					<!-- <ul class="pcoded-submenu">
 						<li><a href="produk">List Produk</a></li>
-						<!-- <li><a href="tipe-produk">Tipe Produk</a></li> -->
-					</ul>
+						<li><a href="tipe-produk">Tipe Produk</a></li>
+					</ul> -->
 				</li>
 
 				<li class="nav-item">
