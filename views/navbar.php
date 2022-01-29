@@ -22,7 +22,11 @@
 					<label>Report</label>
 				</li>
 				<li class="nav-item">
-					<a href="dashboard" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					<a href="<?php if ($_SESSION['level'] == "1") {
+									echo "dashboard";
+								} else {
+									echo "dashboard-pemasang";
+								} ?>" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
 				</li>
 				<li class="nav-item">
 					<a href="booking" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user-plus"></i></span><span class="pcoded-mtext">Booking</span></a>
@@ -35,33 +39,35 @@
 				</li>
 			</ul>
 
-			<ul class="nav pcoded-inner-navbar ">
-				<li class="nav-item pcoded-menu-caption">
-					<label>Kelola Data</label>
-				</li>
+			<?php if ($_SESSION['level'] == "1") { ?>
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-menu-caption">
+						<label>Kelola Data</label>
+					</li>
 
-				<li class="nav-item">
-					<a href="produk" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Produk</span></a>
-					<!-- <ul class="pcoded-submenu">
+					<li class="nav-item">
+						<a href="produk" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Produk</span></a>
+						<!-- <ul class="pcoded-submenu">
 						<li><a href="produk">List Produk</a></li>
 						<li><a href="tipe-produk">Tipe Produk</a></li>
 					</ul> -->
-				</li>
+					</li>
 
-				<li class="nav-item">
-					<a href="cabang" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span class="pcoded-mtext">Data Cabang</span></a>
-				</li>
-				<li class="nav-item">
-					<a href="users" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Data Users</span></a>
-				</li>
-				<li class="nav-item">
-					<a href="slot" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Slot</span></a>
-				</li>
-				<li class="nav-item">
-					<a href="informasi-karyawan" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Informasi Karyawan</span></a>
-				</li>
+					<li class="nav-item">
+						<a href="cabang" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layers"></i></span><span class="pcoded-mtext">Data Cabang</span></a>
+					</li>
+					<li class="nav-item">
+						<a href="users" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Data Users</span></a>
+					</li>
+					<li class="nav-item">
+						<a href="slot" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Data Slot</span></a>
+					</li>
+					<li class="nav-item">
+						<a href="informasi-karyawan" class="nav-link "><span class="pcoded-micon"><i class="feather icon-credit-card"></i></span><span class="pcoded-mtext">Informasi Karyawan</span></a>
+					</li>
 
-			</ul>
+				</ul>
+			<?php } ?>
 
 		</div>
 	</div>

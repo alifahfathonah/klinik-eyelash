@@ -437,6 +437,41 @@ if (isset($_SESSION['status']) && $_SESSION['status'] != '') { ?>
 </script>
 
 <script type="text/javascript">
+  function deleteslot(id) {
+    var slotId = id;
+    Swal.fire({
+      title: 'Yakin Slot Jam Akan Di Hapus?',
+      text: "Slot Jam Akan Di Hapus",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ya, Hapus!'
+    }).then((result) => {
+      if (result.value) {
+        $.ajax({
+          type: 'POST',
+          url: 'functions/delete.php',
+          data: {
+            id_slot: slotId
+          },
+
+          success: function(response) {
+            Swal.fire(
+              'Berhasil',
+              'Slot Jam Berhasil Di Hapus',
+              'success',
+            ).then((result) => {
+              location.reload();
+            });
+          },
+        })
+      }
+    })
+  };
+</script>
+
+<script type="text/javascript">
   function deleteproduk(id) {
     var produkId = id;
     Swal.fire({

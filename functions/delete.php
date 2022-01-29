@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 // include database connection file
 require_once("../model/db.php");
@@ -9,10 +9,22 @@ if (isset($_POST['id_produk'])) {
 
 	$result = mysqli_query($link, "DELETE FROM tbl_produk WHERE id_produk = $id_produk");
 
-	if($result){
-		header("location: ../produk"); 
-	}else{
-		header("location: ../produk"); 
+	if ($result) {
+		header("location: ../produk");
+	} else {
+		header("location: ../produk");
+	}
+}
+
+if (isset($_POST['id_slot'])) {
+	$id_slot = $_POST['id_slot'];
+
+	$result = mysqli_query($link, "DELETE FROM tbl_slot WHERE id_slot = $id_slot");
+
+	if ($result) {
+		header("location: ../slot");
+	} else {
+		header("location: ../slot");
 	}
 }
 
@@ -21,10 +33,10 @@ if (isset($_POST['id_tipe'])) {
 
 	$result = mysqli_query($link, "DELETE FROM tbl_tipe WHERE id_tipe = $id_tipe");
 
-	if($result){
-		header("location: ../produk"); 
-	}else{
-		header("location: ../produk"); 
+	if ($result) {
+		header("location: ../produk");
+	} else {
+		header("location: ../produk");
 	}
 }
 
@@ -33,10 +45,10 @@ if (isset($_POST['id_cabang'])) {
 
 	$result = mysqli_query($link, "DELETE FROM tbl_cabang WHERE id_cabang = $id_cabang");
 
-	if($result){
-		header("location: ../cabang"); 
-	}else{
-		header("location: ../cabang"); 
+	if ($result) {
+		header("location: ../cabang");
+	} else {
+		header("location: ../cabang");
 	}
 }
 
@@ -45,10 +57,10 @@ if (isset($_POST['id_booking'])) {
 
 	$result = mysqli_query($link, "DELETE FROM events WHERE id = $id_booking");
 
-	if($result){
-		header("location: ../dashboard"); 
-	}else{
-		header("location: ../dashboard"); 
+	if ($result) {
+		header("location: ../dashboard");
+	} else {
+		header("location: ../dashboard");
 	}
 }
 
@@ -57,10 +69,10 @@ if (isset($_POST['id_users'])) {
 
 	$result = mysqli_query($link, "DELETE FROM users WHERE id_users = $id_users");
 
-	if($result){
+	if ($result) {
 		$delete_sk = mysqli_query($link, "DELETE FROM tbl_status_kerja WHERE id_users = $id_users");
-		header("location: ../users"); 
-	}else{
-		header("location: ../users"); 
+		header("location: ../users");
+	} else {
+		header("location: ../users");
 	}
 }

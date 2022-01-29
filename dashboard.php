@@ -4,6 +4,9 @@ require_once 'core/init.php';
 if (!isset($_SESSION['id'])) {
     header('Location: login');
 }
+if ($_SESSION['level'] != "1") {
+    header('Location: dashboard-pemasang');
+}
 
 $session_id = $_SESSION['id'];
 // $session_id = implode(', ', $session);
@@ -61,6 +64,7 @@ include 'views/header.php';
 if (isset($_GET['search'])) {
     $cari = $_GET['search'];
 }
+
 
 ?>
 <style>
